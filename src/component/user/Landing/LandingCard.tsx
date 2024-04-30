@@ -5,7 +5,7 @@ function LandingCard({ logo, heading, subtext }: LandingCardProps) {
   return (
     <div className="bg-gray-100 rounded-lg shadow-md p-6 w-80 mt-10"> {/* Adjust width here */}
       {/* Logo */}
-      {logo && <img src={logo} alt="Logo" className="w-16 mx-auto mb-6" />}
+      {logo && <img src={logo} alt="Logo" className="w-16 mx-auto mt-4 mb-8" />}
 
       {/* Heading */}
       <h2 className="text-xl font-bold text-center mb-5">{heading}</h2>

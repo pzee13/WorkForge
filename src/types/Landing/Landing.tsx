@@ -3,3 +3,9 @@ export interface LandingCardProps {
     heading: string;
     subtext:string
   }
+
+
+export interface SpaceTypeProps{
+    imageUrl:string;
+    text:string
+}
