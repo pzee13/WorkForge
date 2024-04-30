@@ -13,7 +13,7 @@ function LandingCard({ logo, heading, subtext }: LandingCardProps) {
       {/* Subtext */}
       <p className="text-sm text-gray-600 text-center">{subtext}</p>
     </div>
-  );
+   );
 }
-
+ 
 export default LandingCard;
