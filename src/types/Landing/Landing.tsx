@@ -19,3 +19,8 @@ export interface RectangularComponentProps {
     subText: string;
     images: string[];
   }
+
+export interface TwoText{
+  question:string;
+  answer:string
+}

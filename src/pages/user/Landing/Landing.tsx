@@ -17,6 +17,11 @@ import deskSpace from "../../../assets/images/icons8-desk-64.png"
 import trainingSpace from "../../../assets/images/icons8-training-100.png"
 import LandingPagecards from "../../../component/user/Landing/LandingPageCards";
 import { motion } from 'framer-motion';
+import Faq from "../../../component/user/Landing/Faq";
+import Footer from "../../../component/user/Footer/Footer";
+import SearchComponent from "../../../component/user/search/SearchComponent";
+import './Landing.css'
+
 
 const containerVariants = {
     hidden: { y: '100%', opacity: 0 },
@@ -28,7 +33,21 @@ export function Landing() {
   return (
     <>
       <Navbar />
-      <LandingImage image={landImage} />
+      <div className="relative">
+        {/* Landing Image */}
+        <LandingImage image={landImage} />
+        
+        {/* Black overlay */}
+        <div className="absolute inset-0 bg-black opacity-70"></div>
+        
+        {/* Search Component with mirror shadow effect */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 rounded-lg shadow-lg opacity-75">
+  <h1 className="text-3xl font-bold mb-4 text-white text-center font-lato">Search for Space</h1>
+  <SearchComponent />
+</div>
+
+      </div>
+   
       <motion.div
         variants={containerVariants}
         initial="hidden"
@@ -50,6 +69,7 @@ export function Landing() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }} 
+                className="flex justify-center" 
             >
             <div className="flex flex-col md:flex-row justify-around mt-8 md:mt-16">
                 {/* First Card */}
@@ -121,6 +141,7 @@ export function Landing() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }} 
+                className="flex justify-center" 
             >
                 <div className="flex flex-col md:flex-row justify-around mt-8 md:mt-16 mb-20">
                         {/* First Card */}
@@ -156,10 +177,27 @@ export function Landing() {
                 viewport={{ once: true }}
                 className="flex justify-center" 
             >
-                <LandingPagecards  headerText="Your Header Text"
-                    subText="Your Subtext"
+                <LandingPagecards  headerText="Work where ever you can "
+                    subText="With over several locations all over india we have offices, coworking spaces, and meeting rooms in every major town, city, and transport hub.
+                    Whether you work alone, you’re growing a start-up, or you’re running the world’s most successful corporation our network makes it possible to work near clients, colleagues, or family.."
                     images={[officeImage, meetImage, trainImage, deskImage]}/>
       </motion.div>
+
+      <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                
+            >
+                <div className="flex justify-center items-center mt-8 md:mt-20">
+                    <p className="text-3xl md:text-4xl font-lato font-bold">
+                        Most frequently asked questions 
+                    </p>
+                </div>
+                    <Faq question="hai" answer="hello" />
+        </motion.div>
+        <Footer />
     </>
   );
 }

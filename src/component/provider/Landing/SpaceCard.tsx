@@ -1,7 +1,7 @@
 
 import { LandingCardProps } from "../../../types/Landing/Landing";
 
-function LandingCard({ logo, heading, subtext }: LandingCardProps) {
+function SpaceCard({ logo, heading, subtext }: LandingCardProps) {
   return (
     <div className="bg-white rounded-lg  p-6 w-80 mt-10"> {/* Adjust width here */}
       {/* Logo */}
@@ -16,4 +16,4 @@ function LandingCard({ logo, heading, subtext }: LandingCardProps) {
    );
 }
  
-export default LandingCard;
+export default SpaceCard;

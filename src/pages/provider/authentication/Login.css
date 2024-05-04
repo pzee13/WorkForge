@@ -1,0 +1,9 @@
+button.login-button {
+    background-color: hsl(160, 100%, 15%);
+    color: white; /* Set the text color to white */
+  }
+  
+  .header-container {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); /* Adjust the values for the shadow effect */
+  }
+  

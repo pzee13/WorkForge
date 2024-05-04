@@ -1,0 +1,23 @@
+.search-container {
+    display: flex;
+    flex-direction: row;
+    background-color: #FFFFFF; /* Increased white color */
+    border: 2px solid #49735A;
+    border-radius: 8px;
+    padding: 16px;
+  }
+  
+  .search-container input,
+  .search-container select {
+    margin-right: 16px;
+  }
+  
+  .search-container button {
+    background-color: #49735A;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+  

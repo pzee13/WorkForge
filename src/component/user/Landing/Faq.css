@@ -1,0 +1,21 @@
+.faq {
+    margin-bottom: 20px; /* Adjust margin as needed */
+    margin-left: 50px; /* Adjust margin left as needed */
+    margin-right: 50px; /* Adjust margin right as needed */
+  }
+  
+  .question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .question-text {
+    font-weight: bold;
+    font-size: 25px;
+  }
+  
+  .toggle-sign {
+    cursor: pointer;
+  }
+  

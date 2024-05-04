@@ -1,0 +1,11 @@
+button.search-button{
+    background-color: hsl(160, 100%, 15%);
+    color: white; /* Set the text color to white */
+}
+
+.form-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Horizontal center alignment */
+    gap: 10px; /* Adjust the gap between form elements */
+  }
