@@ -1,133 +1,143 @@
 import { useState } from 'react';
 import './SignUp.css'
-import { validateEmail } from '../../../utils/validations/emailValidation';
-import { validateName } from '../../../utils/validations/nameValidation';
-import { validatePhone } from '../../../utils/validations/mobileValidation';
-import { validatePassword } from '../../../utils/validations/passwordValidation';
+import { useFormik } from "formik";
+import { setRegister,clearRegister } from '../../../slices/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import {useRegisterMutation,
+  useOtpVerificationMutation,
+  useSendOtpToEmailMutation,} from '../../../slices/userApiSlice';
+import { MyError,FormValues,OtpResponse } from '../../../utils/validations/commonVaild';
+import { validationSchema } from '../../../utils/validations/yupValidation'
 import { CustomModal } from '../../../component/common/Modal/CustomModal';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,Link } from 'react-router-dom'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { RootState } from '../../../app/store'
 import OtpInput from 'react-otp-input'
+
  
 function SignUp() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [mobile, setMobile] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [nameError, setNameError] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [mobileError, setMobileError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-  const [confirmPasswordError, setConfirmPasswordError] = useState('');
+
+
 
   const [otp, setOtp] = useState("");
-
+ 
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [sendOtpToEmail] = useSendOtpToEmailMutation();
+  const {registerInfo} = useSelector((state :RootState)=>state.auth);
+  const [otpVerification] = useOtpVerificationMutation()
+  const [registration] = useRegisterMutation()
 
-  function validate(field: string, value: string) {
-        if (field === "name") {
-            
-            
-            if(!validateName(value)){
-              setNameError("Name is invalid");
-            }else{
-              setNameError("");
-            }
-            setName(value);
-        }
+  const initialValues : FormValues= {
+    name: "",
+    email: "",
+    mobile: "",
+    password: "",
+    confirmPassword: "",
+    
+  };
 
-        if (field === "email") {
-              if(!validateEmail(value)){
-                setEmailError("Email is invalid");
-              }else{
-                setEmailError("");
-              }
-              setEmail(value);
-          }
-          
-        if (field === "phone") {
-            if(!validatePhone(value)){
-              setMobileError("Phone number is invalid");
-            }else{
-              setMobileError("");
-            }
-            setMobile(value);
-        }
-        if (field === "password") {
-            if(!validatePassword(value)){
-              setPasswordError("Password is invalid");
-            }else{
-              setPasswordError("");
-            }
-            setPassword(value);
-        }
-        if (field === "confirmPassword") {
-            if(value !== password){
-              setConfirmPasswordError("Password doesn't match");
-            }else{
-              setConfirmPasswordError("");
-            }
-            setConfirmPassword(value);
-        }
+
+
+  const { values, handleChange, handleSubmit, errors, touched } = useFormik({
+    initialValues:initialValues,
+    validationSchema:validationSchema,
+    onSubmit: async (values) =>{
+       dispatch(setRegister({...values}));
+       
+        try {
+          const { name, email } = values;
+              const response:OtpResponse = await sendOtpToEmail({ name ,email});
+              console.log(response)
+              setIsModalOpen(true);
+      } catch (error) {
+        setIsModalOpen(false);
+        dispatch(clearRegister());
+        toast.error((error as MyError)?.data?.message || (error as MyError)?.error );
+      }
     }
+  });
 
 
-    function handleSignupSubmit() {
-      if(!name ||!email || !mobile || !password){
-        setConfirmPasswordError("Please fill all the fields");
-    }else{
-      setConfirmPasswordError("");
-        alert("api called.....");
-        setIsModalOpen(true);
+  async function handleOTPVerification(){
+    try {
+      
+      const {email}:any = registerInfo;
+      const res:any = await otpVerification({otp,email});
+      if(res.data.success){
+            const {name,email,mobile,password,confirmPassword}:any = registerInfo;
+            const registrationRes:any = await registration({name,email,mobile,password,confirmPassword});
+            if(res.data.success){
+              setIsModalOpen(false);
+              toast.success(registrationRes.data.message)
+             navigate('/user/login');
+            }else{
+              console.log("hai")
+              toast.error('invalid otp');
+            }
+         }else{
+          console.log('otp verification failed');
+         }
+    } catch (error) {
+      setIsModalOpen(false);
+      toast.error((error as MyError)?.data?.message || (error as MyError)?.error );
     }
-  }
+}
 
-  function handleOTPVerification(){
-    navigate("/user/login");
-  }
+  
 
   return (
     <div className="flex flex-col h-screen overflow-hidden">
-      {/* Header Section */}
+    
       <div className="flex items-center justify-between p-4 shadow-lg bg-gray-50">
-        {/* Logo */}
+  
         <div className="flex items-center">
           <img src="/path/to/logo.png" alt="Logo" className="h-8 mr-2" />
           <h1 className="text-xl font-bold">YourApp</h1>
         </div>
-        {/* Login Link */}
-        <p className="text-sm">Already have an account? <a href="/login" className="text-blue-500">Login</a></p>
+       
+        <p className="text-sm">Already have an account? <Link to={'/login'}>Login</Link></p>
       </div>
-      {/* Main Content Section */}
+   
       <div className="flex-1 flex overflow-hidden">
-        {/* Form */}
+  
         <div className="flex-1 flex justify-center items-center ">
           <div className="w-full max-w-md shadow-md p-8 rounded-md">
             <h2 className="text-3xl font-bold text-center mb-6">Create Account</h2>
-            <form >
+            <form onSubmit={handleSubmit}>
               <div className="mb-4">
-                <input type="text" id="name" placeholder="Name" className="w-full px-3 py-2 bg-gray-100 rounded-full focus:outline-none" value={name} onChange={(e) => validate("name",e.target.value)} />
-                {nameError && <p className="text-red-500 mt-1">{nameError}</p>}
+                <input type="text" id="name" placeholder="Name" className="w-full px-3 py-2 bg-gray-100 rounded-full focus:outline-none" value={values.name} onChange={handleChange} />
+                {errors.name && touched.name && (
+                      <div className="text-red-500 text-sm">{errors.name}</div>
+                    )}
               </div>
               <div className="mb-4">
-                <input type="email" id="email" placeholder="Email" className="w-full px-3 py-2 bg-gray-100 rounded-full focus:outline-none" value={email} onChange={(e) => validate("email",e.target.value)} />
-                {emailError && <p className="text-red-500 mt-1">{emailError}</p>}
+                <input type="email" id="email" placeholder="Email" className="w-full px-3 py-2 bg-gray-100 rounded-full focus:outline-none" value={values.email} onChange={handleChange} />
+                {errors.email && touched.email && (
+                      <div className="text-red-500 text-sm">{errors.email}</div>
+                    )}
               </div>
               <div className="mb-4">
-                <input type="tel" id="mobile" placeholder="Mobile Number" className="w-full px-3 py-2 bg-gray-100 rounded-full focus:outline-none" value={mobile} onChange={(e) => validate("phone",e.target.value)} />
-                {mobileError && <p className="text-red-500 mt-1">{mobileError}</p>}
+                <input type="tel" id="mobile" placeholder="Mobile Number" className="w-full px-3 py-2 bg-gray-100 rounded-full focus:outline-none" value={values.mobile} onChange={handleChange} />
+                {errors.mobile && touched.mobile && (
+                      <div className="text-red-500 text-sm">{errors.mobile}</div>
+                    )}
               </div>
               <div className="mb-4">
-                <input type="password" id="password" placeholder="Password" className="w-full px-3 py-2 bg-gray-100 rounded-full focus:outline-none" value={password} onChange={(e) => validate("password",e.target.value)} />
-                {passwordError && <p className="text-red-500 mt-1">{passwordError}</p>}
+                <input type="password" id="password" placeholder="Password" className="w-full px-3 py-2 bg-gray-100 rounded-full focus:outline-none" value={values.password} onChange={handleChange} />
+                {errors.password && touched.password && (
+                      <div className="text-red-500 text-sm">{errors.password}</div>
+                    )}
               </div>
               <div className="mb-8">
-                <input type="password" id="confirmPassword" placeholder="Confirm Password" className="w-full px-3 py-2 bg-gray-100 rounded-full focus:outline-none" value={confirmPassword} onChange={(e) => validate("confirmPassword",e.target.value)} />
-                {confirmPasswordError && <p className="text-red-500 mt-1">{confirmPasswordError}</p>}
+                <input type="password" id="confirmPassword" placeholder="Confirm Password" className="w-full px-3 py-2 bg-gray-100 rounded-full focus:outline-none" value={values.confirmPassword} onChange={handleChange} />
+                {errors.confirmPassword && touched.confirmPassword && (
+                      <div className="text-red-500 text-sm">{errors.confirmPassword}</div>
+                    )}
               </div>
-              <button type="submit" className="w-full signup-button  text-white py-2 px-4 rounded-full " onClick={handleSignupSubmit}>Sign Up</button>
+              <button type="submit" className="w-full signup-button  text-white py-2 px-4 rounded-full " >Sign Up</button>
             </form>
           </div>
         </div>
@@ -144,7 +154,7 @@ function SignUp() {
                     <OtpInput
                         value={otp}
                         onChange={setOtp}
-                        numInputs={4}
+                        numInputs={6}
                         renderSeparator={<span>-</span>}
                         renderInput={(props) => <input {...props} 
                         style={{

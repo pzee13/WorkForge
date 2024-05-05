@@ -1,37 +1,61 @@
 import {  useEffect, useState } from "react";
 import { validateEmail } from '../../../utils/validations/emailValidation';
 import { validatePassword } from '../../../utils/validations/passwordValidation';
+import { validationSchema } from "../../../utils/validations/yupvalidation";
 import './SignUp.css';
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
 
 function Login() {
-  const [email, setEmail] = useState('');
+  const [data, setData] = useState('');
   const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState('');
+  const [dataError, setDataError] = useState('');
   const [passwordError, setPasswordError] = useState('');
 
-  function handleLoginSubmit(e) {
-    e.preventDefault();
 
-    // Validation logic here
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setDataError("");
+      setPasswordError("");
+    }, 5000); // Clear errors after 5 seconds
 
-    // Example validation for email
-    if (email.trim() === '') {
-      setEmailError('Please enter your email');
-      return;
-    } else {
-      setEmailError('');
+    // Cleanup function to clear timeout on unmount
+    return () => clearTimeout(timeoutId);
+  }, [dataError, passwordError]);
+
+  function validate(field: string, value: string) {
+    if (field === "data") {
+        if (value.trim() === "") {
+            setDataError("This field is required");
+        } else if (validateEmail(value)) {
+            
+            setDataError("");
+        } else {
+            setDataError("Invalid email or phone number");
+            
+        }
+        setData(value);
+    } else if (field === "password") {
+        if (!validatePassword(value)) {
+            setPasswordError("Password must be at least 6 characters long");
+        } else {
+          setPasswordError("");
+        }
+        setPassword(value);
     }
-
-    // Example validation for password
-    if (password.trim() === '') {
-      setPasswordError('Please enter your password');
-      return;
-    } else {
-      setPasswordError('');
-    }
-
-    // If all validations pass, you can proceed with login logic
   }
+
+  function handleLoginSubmit() {
+    if (!data) {
+      setDataError("Invalid email or phone number");
+    } else if (!validatePassword(password)) {
+      setPasswordError("Password must be at least 6 characters long");
+    } else {
+      alert("Login successful!"); // api of successful login
+    }
+}
 
   return (
     <div className="flex flex-col h-screen overflow-hidden">
@@ -53,14 +77,16 @@ function Login() {
   <h2 className="text-3xl font-bold text-center mb-8">Login</h2> {/* Increased space */}
   <form onSubmit={handleLoginSubmit}>
     <div className="mb-8"> {/* Increased space */}
-      <input type="email" id="email" placeholder="Email" className="w-full px-3 py-2 bg-gray-100 rounded-full focus:outline-none" value={email} onChange={(e) => setEmail(e.target.value)} />
-      {emailError && <p className="text-red-500 mt-1">{emailError}</p>}
+      <input type="email" id="email" placeholder="Email" className="w-full px-3 py-2 bg-gray-100 rounded-full focus:outline-none" value={data}
+                                onChange={(e) => validate("data", e.target.value)} />
+      {dataError && <p className="text-red-500 mt-1">{dataError}</p>}
     </div>
     <div className="mb-8"> {/* Increased space */}
-      <input type="password" id="password" placeholder="Password" className="w-full px-3 py-2 bg-gray-100 rounded-full focus:outline-none" value={password} onChange={(e) => setPassword(e.target.value)} />
+      <input type="password" id="password" placeholder="Password" className="w-full px-3 py-2 bg-gray-100 rounded-full focus:outline-none"  value={password}
+                                onChange={(e) => validate("password", e.target.value)} />
       {passwordError && <p className="text-red-500 mt-1">{passwordError}</p>}
     </div>
-    <button type="submit" className="w-full signup-button align-middle text-white py-2 px-4 rounded-full mb-8" style={{ width: '120px', height: '40px', margin: '20px auto', marginLeft: 'auto', marginRight: '10px' }}>Login</button> {/* Decreased width and height */}
+    <button type="submit" className="w-full signup-button align-middle text-white py-2 px-4 rounded-full mb-8" style={{ width: '120px', height: '40px', margin: '20px auto', marginLeft: 'auto', marginRight: '10px' }} >Login</button> {/* Decreased width and height */}
   </form>
 </div>
 
