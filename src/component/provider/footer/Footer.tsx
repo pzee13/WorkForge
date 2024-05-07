@@ -7,17 +7,17 @@ import { SiGmail } from "react-icons/si";
 import { IoLocationSharp } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
 import logo from '../../../assets/images/Set Space-logo/default.png'
-import './Footer.css'; // Import your CSS file for styling
+import './Footer.css'; 
 
 function Footer() {
   return (
     <footer className="footer bg-black">
-      {/* Left side logo */}
+      
       <div className="footer-logo">
         <img src={logo} alt="Logo" />
       </div>
 
-      {/* Right side sections */}
+      
       <ul className="footer-container flex gap-12 flex-wrap">
                 
                 <li className="pt-8">

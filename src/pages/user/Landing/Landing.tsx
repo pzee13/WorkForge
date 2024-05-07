@@ -34,13 +34,13 @@ export function Landing() {
     <>
       <Navbar />
       <div className="relative">
-        {/* Landing Image */}
+      
+
         <LandingImage image={landImage} />
         
-        {/* Black overlay */}
         <div className="absolute inset-0 bg-black opacity-70"></div>
         
-        {/* Search Component with mirror shadow effect */}
+        
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 rounded-lg shadow-lg opacity-75">
   <h1 className="text-3xl font-bold mb-4 text-white text-center font-lato">Search for Space</h1>
   <SearchComponent />
@@ -72,25 +72,25 @@ export function Landing() {
                 className="flex justify-center" 
             >
             <div className="flex flex-col md:flex-row justify-around mt-8 md:mt-16">
-                {/* First Card */}
+                
                 <LandingCard
                 logo={clock}
                 heading="Flexible Time"
                 subtext="Description of Card 1"
                 />
-                {/* Second Card */}
+             
                 <LandingCard
                 logo={workIcon}
                 heading="Wide range of spaces"
                 subtext="Description of Card 2"
                 />
-                {/* Third Card */}
+                
                 <LandingCard
                 logo={beverages}
                 heading="Unlimited beverages"
                 subtext="Description of Card 3"
                 />
-                {/* Fourth Card */}
+                
                 <LandingCard
                 logo={assistance}
                 heading="24/7 assistance"
@@ -123,13 +123,13 @@ export function Landing() {
                 viewport={{ once: true }} 
             >
             <div className="flex flex-wrap justify-center">
-                        {/* Top row */}
+                       
                         <div className="flex justify-center space-x-4">
                             <SpaceTypeCard imageUrl={meetImage} text="Meeting room" />
                             <SpaceTypeCard imageUrl={deskImage} text="Desk Space" />
                         </div>
 
-                        {/* Bottom row */}
+                       
                         <div className="flex justify-center space-x-4">
                             <SpaceTypeCard imageUrl={trainImage} text="Training Room" />
                             <SpaceTypeCard imageUrl={officeImage} text="Office room" />
@@ -144,25 +144,25 @@ export function Landing() {
                 className="flex justify-center" 
             >
                 <div className="flex flex-col md:flex-row justify-around mt-8 md:mt-16 mb-20">
-                        {/* First Card */}
+                  
                         <LandingCard
                         logo={officeSpace}
                         heading="Office Space"
                         subtext="Description of Card 1"
                         />
-                        {/* Second Card */}
+               
                         <LandingCard
                         logo={trainingSpace}
                         heading="Training Room"
                         subtext="Description of Card 2"
                         />
-                        {/* Third Card */}
+                     
                         <LandingCard
                         logo={meetingRoom}
                         heading="Meeting Room"
                         subtext="Description of Card 3"
                         />
-                        {/* Fourth Card */}
+                      
                         <LandingCard
                         logo={deskSpace}
                         heading="Desk Space"
@@ -196,6 +196,7 @@ export function Landing() {
                     </p>
                 </div>
                     <Faq question="hai" answer="hello" />
+                    <Faq question="What is setspace" answer="Its a coworking space booking website" />
         </motion.div>
         <Footer />
     </>

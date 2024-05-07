@@ -14,6 +14,8 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { RootState } from '../../../app/store'
 import OtpInput from 'react-otp-input'
+import signUpImage from '../../../assets/images/Signup-user/coworking-sighnup.jpg'
+import logo from '../../../assets/images/Set Space-logo/default.png'
 
  
 function SignUp() {
@@ -69,7 +71,7 @@ function SignUp() {
       if(res.data.success){
             const {name,email,mobile,password,confirmPassword}:any = registerInfo;
             const registrationRes:any = await registration({name,email,mobile,password,confirmPassword});
-            if(res.data.success){
+            if(registrationRes.data.success){
               setIsModalOpen(false);
               toast.success(registrationRes.data.message)
              navigate('/user/login');
@@ -79,6 +81,7 @@ function SignUp() {
             }
          }else{
           console.log('otp verification failed');
+          toast.error('otp verification failed');
          }
     } catch (error) {
       setIsModalOpen(false);
@@ -94,11 +97,11 @@ function SignUp() {
       <div className="flex items-center justify-between p-4 shadow-lg bg-gray-50">
   
         <div className="flex items-center">
-          <img src="/path/to/logo.png" alt="Logo" className="h-8 mr-2" />
-          <h1 className="text-xl font-bold">YourApp</h1>
+          <img src={logo} alt="Logo" className="h-8 mr-2 ml-10" />
+          
         </div>
        
-        <p className="text-sm">Already have an account? <Link to={'/login'}>Login</Link></p>
+        <p className="text-sm">Already have an account? <Link to={'/user/login'} className='text-green-400'>Login</Link></p>
       </div>
    
       <div className="flex-1 flex overflow-hidden">
@@ -143,7 +146,7 @@ function SignUp() {
         </div>
         {/* Picture */}
         <div className="hidden lg:block bg-cover bg-center w-1/2">
-          <img src="/path/to/image.jpg" alt="Image" className="w-full h-full object-cover" />
+          <img src={signUpImage} alt="Image" className="w-full h-full object-cover" />
         </div>
       </div>
       <CustomModal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)}>

@@ -1,6 +1,6 @@
 button.signup-button {
     background-color: hsl(160, 100%, 15%);
-    color: white; /* Set the text color to white */
+    color: white; 
   }
 
   input::placeholder {

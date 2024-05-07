@@ -11,11 +11,13 @@ export interface UserInfo {
 interface InitialState {
     userInfo: UserInfo | null;
     registerInfo: UserInfo | null;
+    adminInfo: UserInfo | null;
   }
 
 
   const userInfoFromLocalStorage = localStorage.getItem("userInfo");
 const registerInfoFromLocalStorage = localStorage.getItem("registerInfo");
+const adminInfoFromLocalStorage = localStorage.getItem("adminInfo");
 
 
 
@@ -26,6 +28,10 @@ const initialState: InitialState = {
   
     registerInfo: registerInfoFromLocalStorage
       ? JSON.parse(registerInfoFromLocalStorage)
+      : null,
+
+      adminInfo: adminInfoFromLocalStorage
+      ? JSON.parse(adminInfoFromLocalStorage)
       : null,
 }  
 
@@ -53,7 +59,18 @@ const authSlice = createSlice({
       userLogout:(state) => {
         state.userInfo = null;
         localStorage.removeItem("userInfo")
+      },
+
+      setAdminCredentials: (state, action) => {
+        state.adminInfo = action.payload;
+        localStorage.setItem("adminInfo", JSON.stringify(action.payload));
+      },
+
+      adminLogout: (state) => {
+        state.adminInfo = null;
+        localStorage.removeItem("adminInfo")
       }
+  
       }
 })  
 
@@ -63,7 +80,9 @@ export const {
     setCredential,
     setRegister,
     clearRegister,
-    userLogout
+    userLogout,
+    setAdminCredentials,
+    adminLogout,
 } = authSlice.actions;
 
 export default authSlice.reducer;

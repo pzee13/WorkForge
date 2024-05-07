@@ -20,3 +20,9 @@ export interface MyError {
     message: string;
    
   }
+
+
+  export interface AdminLogins {
+    email: string;
+    password: string
+  }

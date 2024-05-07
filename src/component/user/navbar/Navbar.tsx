@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import logo from '../../../assets/images/Set Space-logo/default.png'
+import { Link } from 'react-router-dom'
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,7 +16,7 @@ function Navbar() {
         <img src={logo} alt="Logo" style={{ width: '150px', height: '50px', maxWidth: '100%', maxHeight: 'auto' }} />
       </div>
 
-      {/* Accordion button for mobile */}
+     
       <div className="md:hidden">
         <button onClick={toggleAccordion} className="block text-gray-800 hover:text-gray-600 focus:outline-none">
           <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -41,9 +42,9 @@ function Navbar() {
             <a href="#contacts" className="block mt-4 md:inline-block md:mt-0 text-gray-800 hover:text-gray-600 mr-4 font-lato">
               Contacts
             </a>
-            <a href="#login" className="block mt-4 md:inline-block md:mt-0 text-sm text-gray-800 hover:text-gray-600 font-lato">
+            <Link to={'/user/login'} className="block mt-4 md:inline-block md:mt-0 text-sm text-gray-800 hover:text-gray-600 font-lato">
               Login
-            </a>
+            </Link>
           </div>
         </div>
       ) : (
@@ -58,9 +59,9 @@ function Navbar() {
             <a href="#contacts" className="inline-block text-gray-800 hover:text-gray-600 mr-10 font-lato">
               Contacts
             </a>
-            <a href="#login" className="inline-block text-sm text-gray-800 hover:text-gray-600 font-lato">
+            <Link to={'/user/login'} className="inline-block text-sm text-gray-800 hover:text-gray-600 font-lato">
               Login
-            </a>
+            </Link>
           </div>
         </div>
       )}
