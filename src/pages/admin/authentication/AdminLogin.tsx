@@ -11,7 +11,6 @@ import { IoPersonOutline } from 'react-icons/io5';
 import LoginImage from '../../../assets/images/Admin login/login.png';
 import { useAdminLoginMutation } from "../../../slices/adminApiSlice";
 
-
 const AdminLogin: React.FC = () => {
     const dispatch = useDispatch();
     const [login] = useAdminLoginMutation();

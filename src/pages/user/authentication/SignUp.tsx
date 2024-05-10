@@ -17,7 +17,7 @@ import OtpInput from 'react-otp-input'
 import signUpImage from '../../../assets/images/Signup-user/coworking-sighnup.jpg'
 import logo from '../../../assets/images/Set Space-logo/default.png'
 
- 
+
 function SignUp() {
 
 

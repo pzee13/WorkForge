@@ -1,64 +1,44 @@
-import {  useEffect, useState } from "react";
-import { validateEmail } from '../../../utils/validations/emailValidation';
-import { validatePassword } from '../../../utils/validations/passwordValidation';
-import { loginValidation } from "../../../utils/validations/yupvalidation";
-import './SignUp.css';
+
+import { useFormik } from "formik";
+import { setCredential } from "../../../slices/authSlice"
+import { useLoginMutation } from '../../../slices/userApiSlice';
+import { loginValidation } from "../../../utils/validations/yupValidation";
+import { AdminLogins,MyError } from '../../../utils/validations/commonVaild';
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import logo from '../../../assets/images/Set Space-logo/default.png'
 import signUpImage from '../../../assets/images/Signup-user/coworking-sighnup.jpg'
 import { Link } from 'react-router-dom'
+import './SignUp.css';
 
 function Login() {
-  const [data, setData] = useState('');
-  const [password, setPassword] = useState('');
-  const [dataError, setDataError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  const dispatch = useDispatch();
+  const [login] = useLoginMutation();
+  const navigate = useNavigate();
+  
+  const initialValues: AdminLogins = {
+      email: "",
+      password: ""
+    };
 
-
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setDataError("");
-      setPasswordError("");
-    }, 5000); 
-
-    
-    return () => clearTimeout(timeoutId);
-  }, [dataError, passwordError]);
-
-  function validate(field: string, value: string) {
-    if (field === "data") {
-        if (value.trim() === "") {
-            setDataError("This field is required");
-        } else if (validateEmail(value)) {
-            
-            setDataError("");
-        } else {
-            setDataError("Invalid email or phone number");
-            
+    const { values, handleChange, handleSubmit, errors, touched } = useFormik({
+      initialValues: initialValues,
+      validationSchema: loginValidation,
+      onSubmit: async (values) => {
+        try {
+          console.log(values);
+          
+          const { password, email } = values; // Destructure values
+          const res = await login({ password, email }).unwrap();
+          dispatch(setCredential({ ...res.data}));
+          navigate('/user/home')
+          toast.success(res.message);
+        } catch (err) {
+          toast.error((err as MyError)?.data?.message || (err as MyError)?.error);
         }
-        setData(value);
-    } else if (field === "password") {
-        if (!validatePassword(value)) {
-            setPasswordError("Password must be at least 6 characters long");
-        } else {
-          setPasswordError("");
-        }
-        setPassword(value);
-    }
-  }
-
-  function handleLoginSubmit() {
-    if (!data) {
-      setDataError("Invalid email or phone number");
-    } else if (!validatePassword(password)) {
-      setPasswordError("Password must be at least 6 characters long");
-    } else {
-      alert("Login successful!"); 
-    }
-}
-
+      },
+    });
   return (
     <div className="flex flex-col h-screen overflow-hidden">
       {/* Header Section */}
@@ -81,16 +61,24 @@ function Login() {
           </div>
        
               <h2 className="text-3xl font-bold text-center mb-8">Login</h2> 
-              <form onSubmit={handleLoginSubmit} className="text-center">
+              <form onSubmit={handleSubmit} className="text-center">
                 <div className="mb-8"> 
-                  <input type="email" id="email" placeholder="Email" className="w-full px-3 py-2 bg-gray-100 rounded-full focus:outline-none" value={data}
-                                            onChange={(e) => validate("data", e.target.value)} />
-                  {dataError && <p className="text-red-500 mt-1">{dataError}</p>}
+                  <input type="email" id="email" placeholder="Email" className="w-full px-3 py-2 bg-gray-100 rounded-full focus:outline-none" 
+                  name="email"
+                  value={values.email}
+                  onChange={handleChange} />
+                  {errors.email && touched.email && (
+                    <div className="text-red-500">{errors.email}</div>
+                  )}
                 </div>
                 <div className="mb-8"> 
-                  <input type="password" id="password" placeholder="Password" className="w-full px-3 py-2 bg-gray-100 rounded-full focus:outline-none"  value={password}
-                                            onChange={(e) => validate("password", e.target.value)} />
-                  {passwordError && <p className="text-red-500 mt-1">{passwordError}</p>}
+                  <input type="password" id="password" placeholder="Password" className="w-full px-3 py-2 bg-gray-100 rounded-full focus:outline-none" 
+                    name="password"
+                    value={values.password}
+                    onChange={handleChange} />
+                  {errors.password && touched.password && (
+                    <div className="text-red-500">{errors.password}</div>
+                  )}
                 </div>
                 <button type="submit" className="w-full signup-button align-middle text-white py-2 px-4 rounded-full mb-8" style={{ width: '120px', height: '40px', margin: '20px auto', marginRight: '10px' }} >Login</button> 
               </form>

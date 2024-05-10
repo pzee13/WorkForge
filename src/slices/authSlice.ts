@@ -8,16 +8,26 @@ export interface UserInfo {
   password?: string;
 }
 
+export interface ProviderInfo {
+    _id?: string;
+    name: string;
+    email: string;
+    mobile?: string;
+    password?: string;
+  }
+
 interface InitialState {
     userInfo: UserInfo | null;
     registerInfo: UserInfo | null;
     adminInfo: UserInfo | null;
+    providerInfo : ProviderInfo | null;
   }
 
 
   const userInfoFromLocalStorage = localStorage.getItem("userInfo");
 const registerInfoFromLocalStorage = localStorage.getItem("registerInfo");
 const adminInfoFromLocalStorage = localStorage.getItem("adminInfo");
+const providerInfoFromLocalStorage = localStorage.getItem("providerInfo")
 
 
 
@@ -33,6 +43,10 @@ const initialState: InitialState = {
       adminInfo: adminInfoFromLocalStorage
       ? JSON.parse(adminInfoFromLocalStorage)
       : null,
+
+    providerInfo: providerInfoFromLocalStorage
+    ? JSON.parse(providerInfoFromLocalStorage)
+    : null,
 }  
 
 
@@ -69,6 +83,16 @@ const authSlice = createSlice({
       adminLogout: (state) => {
         state.adminInfo = null;
         localStorage.removeItem("adminInfo")
+      },
+
+      setProviderCredentials: (state ,action) =>{
+        state.providerInfo = action.payload;
+        localStorage.setItem("providerInfo", JSON.stringify(action.payload))
+      },
+
+      providerLogout: (state) => {
+        state.providerInfo = null;
+        localStorage.removeItem("providerInfo")
       }
   
       }
@@ -83,6 +107,8 @@ export const {
     userLogout,
     setAdminCredentials,
     adminLogout,
+    setProviderCredentials,
+    providerLogout
 } = authSlice.actions;
 
 export default authSlice.reducer;
