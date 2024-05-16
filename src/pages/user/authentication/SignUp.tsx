@@ -14,9 +14,9 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { RootState } from '../../../app/store'
 import OtpInput from 'react-otp-input'
-import signUpImage from '../../../assets/images/Signup-user/coworking-sighnup.jpg'
-import logo from '../../../assets/images/Set Space-logo/default.png'
-
+import signUpImage from '../../../assets/images/userLogin/fotor-ai-20240516113630.jpg'
+import logo from '../../../assets/images/Set Space-logo/realLogo/png/logo-no-background.png'
+import Spinner from '../../../component/user/Loader/Spinner'
 
 function SignUp() {
 
@@ -31,6 +31,7 @@ function SignUp() {
   const {registerInfo} = useSelector((state :RootState)=>state.auth);
   const [otpVerification] = useOtpVerificationMutation()
   const [registration] = useRegisterMutation()
+  const [isLoading, setIsLoading] = useState(false);
 
   const initialValues : FormValues= {
     name: "",
@@ -50,6 +51,7 @@ function SignUp() {
        dispatch(setRegister({...values}));
        
         try {
+          setIsLoading(true);
           const { name, email } = values;
               const response:OtpResponse = await sendOtpToEmail({ name ,email});
               console.log(response)
@@ -58,6 +60,8 @@ function SignUp() {
         setIsModalOpen(false);
         dispatch(clearRegister());
         toast.error((error as MyError)?.data?.message || (error as MyError)?.error );
+      }finally {
+        setIsLoading(false); 
       }
     }
   });
@@ -94,60 +98,72 @@ function SignUp() {
   return (
     <div className="flex flex-col h-screen overflow-hidden">
     
-      <div className="flex items-center justify-between p-4 shadow-lg bg-gray-50">
+      <div className="flex items-center justify-between navbar p-4 shadow-lg bg-">
   
         <div className="flex items-center">
           <img src={logo} alt="Logo" className="h-8 mr-2 ml-10" />
           
         </div>
        
-        <p className="text-sm">Already have an account? <Link to={'/user/login'} className='text-green-400'>Login</Link></p>
+        <p className="text-sm text-white">Already have an account? <Link to={'/user/login'} className='text-green-400'>Login</Link></p>
       </div>
    
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex-1 flex cont overflow-hidden">
   
-        <div className="flex-1 flex justify-center items-center ">
-          <div className="w-full max-w-md shadow-md p-8 rounded-md">
-            <h2 className="text-3xl font-bold text-center mb-6">Create Account</h2>
+        <div className="flex-1 flex justify-center  items-center dark-green-border">
+          <div className="w-full max-w-md shadow-md p-8 bg-white rounded-md dark-green-border">
+          <div className="flex justify-center items-center mb-4 ">
+             <img src={logo} alt="Logo" className="h-8 " />
+          </div>
+
+            <h2 className="text-2xl font-bold text-center mb-6">Create Account</h2>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
-                <input type="text" id="name" placeholder="Name" className="w-full px-3 py-2 bg-gray-100 rounded-full focus:outline-none" value={values.name} onChange={handleChange} />
+                <input type="text" id="name" placeholder="Name" className="w-full shadow-lg px-3 py-2 bg-gray-100 rounded-full focus:outline-none" value={values.name} onChange={handleChange} />
                 {errors.name && touched.name && (
                       <div className="text-red-500 text-sm">{errors.name}</div>
                     )}
               </div>
               <div className="mb-4">
-                <input type="email" id="email" placeholder="Email" className="w-full px-3 py-2 bg-gray-100 rounded-full focus:outline-none" value={values.email} onChange={handleChange} />
+                <input type="email" id="email" placeholder="Email" className="w-full shadow-lg px-3 py-2 bg-gray-100 rounded-full focus:outline-none" value={values.email} onChange={handleChange} />
                 {errors.email && touched.email && (
                       <div className="text-red-500 text-sm">{errors.email}</div>
                     )}
               </div>
               <div className="mb-4">
-                <input type="tel" id="mobile" placeholder="Mobile Number" className="w-full px-3 py-2 bg-gray-100 rounded-full focus:outline-none" value={values.mobile} onChange={handleChange} />
+                <input type="tel" id="mobile" placeholder="Mobile Number" className="w-full shadow-lg px-3 py-2 bg-gray-100 rounded-full focus:outline-none" value={values.mobile} onChange={handleChange} />
                 {errors.mobile && touched.mobile && (
                       <div className="text-red-500 text-sm">{errors.mobile}</div>
                     )}
               </div>
               <div className="mb-4">
-                <input type="password" id="password" placeholder="Password" className="w-full px-3 py-2 bg-gray-100 rounded-full focus:outline-none" value={values.password} onChange={handleChange} />
+                <input type="password" id="password" placeholder="Password" className="w-full shadow-lg px-3 py-2 bg-gray-100 rounded-full focus:outline-none" value={values.password} onChange={handleChange} />
                 {errors.password && touched.password && (
                       <div className="text-red-500 text-sm">{errors.password}</div>
                     )}
               </div>
               <div className="mb-8">
-                <input type="password" id="confirmPassword" placeholder="Confirm Password" className="w-full px-3 py-2 bg-gray-100 rounded-full focus:outline-none" value={values.confirmPassword} onChange={handleChange} />
+                <input type="password" id="confirmPassword" placeholder="Confirm Password" className="w-full shadow-lg px-3 py-2 bg-gray-100 rounded-full focus:outline-none" value={values.confirmPassword} onChange={handleChange} />
                 {errors.confirmPassword && touched.confirmPassword && (
                       <div className="text-red-500 text-sm">{errors.confirmPassword}</div>
                     )}
               </div>
-              <button type="submit" className="w-full signup-button  text-white py-2 px-4 rounded-full " >Sign Up</button>
+              <button type="submit" className="w-full signup-button shadow-lg text-white py-2 px-4 rounded-full " >Sign Up</button>
+              {isLoading ? <Spinner /> : null}
             </form>
           </div>
         </div>
         {/* Picture */}
-        <div className="hidden lg:block bg-cover bg-center w-1/2">
-          <img src={signUpImage} alt="Image" className="w-full h-full object-cover" />
+        <div className="hidden lg:block bg-cover bg-center w-1/2 relative" style={{ position: 'relative' }}> {/* Add relative positioning */}
+        {/* Apply a semi-transparent overlay */}
+        <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center text-white">
+          <div className="text-center">
+            <h1 className="text-6xl font-bold font-montserrat">Unlock Spaces</h1> {/* Adjust font size and style as needed */}
+            <h2 className="text-6xl font-bold mb-4 font-roboto">Elevate Experiences</h2> {/* Adjust font size and style as needed */}
+          </div>
         </div>
+        <img src={signUpImage} alt="Image" className="mb-20 w-full h-full shadow-lg" />
+      </div>
       </div>
       <CustomModal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)}>
                 <div className="flex flex-col items-center mt-10 px-6 gap-10">

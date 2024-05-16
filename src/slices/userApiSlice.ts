@@ -20,6 +20,14 @@ export const userApiSlice = apiSlice.injectEndpoints({
       }),
     }),
 
+    googleAuth: builder.mutation({
+      query: (data) => ({
+        url: `${USER_URL}/googleAuth`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+
     logout:builder.mutation({
       query:() => ({
         url:`${USER_URL}/logout`,
@@ -44,6 +52,30 @@ export const userApiSlice = apiSlice.injectEndpoints({
       }),
     }),
 
+    forgotPassword: builder.mutation({
+      query: (data) => ({
+        url: `${USER_URL}/forgotPassword`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+
+    validateAccesssToken: builder.mutation({
+      query: (data) => ({
+        url: `${USER_URL}/validateAccessToken`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+
+    resetPassword: builder.mutation({
+      query: (data) => ({
+        url: `${USER_URL}/resetPassword`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+
    
   }),
 });
@@ -54,4 +86,8 @@ export const {
   useOtpVerificationMutation,
   useSendOtpToEmailMutation,
   useLogoutMutation,
+  useGoogleAuthMutation,
+  useForgotPasswordMutation,
+  useValidateAccesssTokenMutation,
+  useResetPasswordMutation
 } = userApiSlice;

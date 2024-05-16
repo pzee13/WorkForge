@@ -1,6 +1,6 @@
 import Navbar from "../../../component/user/navbar/Navbar";
 import LandingImage from "../../../component/user/Landing/LandingImage";
-import landImage from "../../../assets/images/landinimage.jpg";
+import landImage from "../../../assets/images/LandingUser/fotor-ai-2024051614220.jpg";
 import LandingCard from "../../../component/user/Landing/LandingCard";
 import workIcon from "../../../assets/images/working_141927.png";
 import clock from "../../../assets/images/clock_2838773.png";
@@ -41,7 +41,7 @@ export function Landing() {
         <div className="absolute inset-0 bg-black opacity-70"></div>
         
         
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 rounded-lg shadow-lg opacity-75">
+        <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 rounded-lg shadow-lg opacity-75">
   <h1 className="text-3xl font-bold mb-4 text-white text-center font-lato">Search for Space</h1>
   <SearchComponent />
 </div>

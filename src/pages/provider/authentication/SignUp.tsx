@@ -14,7 +14,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { RootState } from '../../../app/store'
 import OtpInput from 'react-otp-input'
-import logo from '../../../assets/images/Set Space-logo/default.png'
+import logo from '../../../assets/images/Set Space-logo/realLogo/png/logo-no-background.png'
 import signUpImage from '../../../assets/images/Signup-user/coworking-sighnup.jpg'
 
  
@@ -89,25 +89,29 @@ function SignUp() {
   return (
     <div className="flex flex-col h-screen overflow-hidden">
       {/* Header Section */}
-      <div className="flex items-center justify-between p-4 shadow-lg bg-gray-50">
+      <div className="flex items-center justify-between p-4 navbar shadow-lg bg-gray-50">
         {/* Logo */}
         <div className="flex items-center">
-          <img src={logo} alt="Logo" className="h-8 mr-2" />
-          <h1 className="text-xl font-bold">YourApp</h1>
+          <img src={logo} alt="Logo" className="h-8 mr-2 ml-10" />
+          
         </div>
         {/* Login Link */}
         <p className="text-sm">Already have an account? <Link to='/provider/login' className="text-blue-500">Login</Link></p>
       </div>
       {/* Main Content Section */}
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex-1 flex overflow-hidden dark-green-border">
         {/* Picture */}
-        <div className="bg-cover bg-center w-1/2">
+        <div className="bg-cover bg-center w-1/2 dark-green-border">
         <img src={signUpImage} alt="Image" className="w-full h-full object-cover" />
         </div>
         {/* Form */}
-        <div className="flex-1 flex justify-center items-center ">
-          <div className="w-full max-w-md shadow-md p-8 rounded-md">
-            <h2 className="text-3xl font-bold text-center mb-6">Sign Up</h2>
+        <div className="flex-1 flex justify-center items-center dark-green-border">
+          <div className="w-full max-w-md shadow-md p-8 rounded-md dark-green-border">
+          <div className="flex items-center justify-center mb-2">
+            <img src={logo} alt="Logo" className="h-8" />
+         
+          </div>
+            <h2 className="text-2xl font-bold text-center mb-6">Be a Space Provider</h2>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <input type="text" id="name" placeholder="Name" className="w-full px-3 py-2 bg-gray-100 rounded-full focus:outline-none" value={values.name} onChange={handleChange} />

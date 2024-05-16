@@ -1,0 +1,13 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+
+  .dark-green-border {
+    border: 2px solid rgba(0, 100, 0, 0.3); /* Set the border color to dark green */
+    border-radius: 8px; /* Optional: Add border radius for rounded corners */
+  }
+  

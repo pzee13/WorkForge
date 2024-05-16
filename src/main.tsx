@@ -7,11 +7,13 @@ import { Provider } from "react-redux";
 import { store } from "./app/store.ts";
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <GoogleOAuthProvider clientId="1020050444313-ndub2q5u6i0h5tltji5odp60tq62vgr3.apps.googleusercontent.com">
+ 
     <React.StrictMode>
       <Provider store={store}>
+      <GoogleOAuthProvider clientId="345257050790-c1n9m6sl7skqar68m4d3c1c1dirlsh8u.apps.googleusercontent.com">
         <App />
+      </GoogleOAuthProvider>
       </Provider>
     </React.StrictMode>
-  </GoogleOAuthProvider>
+  
 )

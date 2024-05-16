@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { RootState } from "../../../app/store"
 import { useDispatch, useSelector } from 'react-redux';
-import logo from '../../../assets/images/Set Space-logo/default.png'
+import logo from '../../../assets/images/Set Space-logo/realLogo/png/logo-no-background.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { useLogoutMutation } from '../../../slices/userApiSlice';
 import { userLogout } from '../../../slices/authSlice';

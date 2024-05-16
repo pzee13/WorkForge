@@ -6,3 +6,89 @@ button.signup-button {
   input::placeholder {
     color: #49735A;
   }
+
+  .dark-green-border {
+    border: 2px solid rgba(0, 100, 0, 0.3); /* Set the border color to dark green */
+    border-radius: 8px; /* Optional: Add border radius for rounded corners */
+  }
+  
+  .input-with-icon {
+    position: relative;
+  }
+  
+  .input-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px; /* Adjust the distance of the icon from the right edge of the input field */
+    color: gray; /* Adjust the color of the icon */
+  }
+
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+.font-roboto {
+  font-family: 'Roboto', sans-serif;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+.font-montserrat {
+  font-family: 'Montserrat', sans-serif;
+}
+
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;/* Increase padding for larger content */
+  }
+  
+  .form-group {
+    margin-top: 20px; /* Increase margin-bottom to increase distance */
+  }
+  
+  .has-icon-left {
+    position: relative;
+  }
+  
+  .form-input {
+    padding: 10px; /* Adjust padding as needed */
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 5px; /* Add border radius */
+    text-align: center;
+  }
+  
+  .form-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .btn-submit {
+    background-color: #022302; /* Dark green color for submit button */
+    color: #fff; /* White text color */
+    padding: 10px 20px; /* Adjust padding as needed */
+    border: none;
+    border-radius: 5px; /* Add border radius */
+    cursor: pointer;
+  }
+  
+  .btn-submit:hover {
+    background-color: #1d361d; /* Darker green color on hover */
+  }
+
+
+  .cont{
+    background-color: #8fc78f
+  }
+  

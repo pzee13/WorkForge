@@ -9,7 +9,7 @@ const {BASE_URL} = process.env;
 export default defineConfig({
   plugins: [react()], 
   server:{
-    port:4000,
+    port:3000,
     
     proxy: {
       '/api':{

@@ -21,6 +21,7 @@ interface InitialState {
     registerInfo: UserInfo | null;
     adminInfo: UserInfo | null;
     providerInfo : ProviderInfo | null;
+    forgotEmailInfo: string | null;
   }
 
 
@@ -28,6 +29,7 @@ interface InitialState {
 const registerInfoFromLocalStorage = localStorage.getItem("registerInfo");
 const adminInfoFromLocalStorage = localStorage.getItem("adminInfo");
 const providerInfoFromLocalStorage = localStorage.getItem("providerInfo")
+const forgotEmailInfoFromLocalStorage = localStorage.getItem("forgotEmailInfo");
 
 
 
@@ -46,6 +48,10 @@ const initialState: InitialState = {
 
     providerInfo: providerInfoFromLocalStorage
     ? JSON.parse(providerInfoFromLocalStorage)
+    : null,
+
+    forgotEmailInfo: forgotEmailInfoFromLocalStorage
+    ? JSON.parse(forgotEmailInfoFromLocalStorage)
     : null,
 }  
 
@@ -73,6 +79,16 @@ const authSlice = createSlice({
       userLogout:(state) => {
         state.userInfo = null;
         localStorage.removeItem("userInfo")
+      },
+
+      setForgotEmail: (state, action) => {
+        state.forgotEmailInfo = action.payload;
+        localStorage.setItem("forgotEmailInfo", JSON.stringify(action.payload));
+      },
+  
+      clearForgotEmail: (state) => {
+        state.forgotEmailInfo = null;
+        localStorage.removeItem("forgotEmailInfo");
       },
 
       setAdminCredentials: (state, action) => {
@@ -108,7 +124,9 @@ export const {
     setAdminCredentials,
     adminLogout,
     setProviderCredentials,
-    providerLogout
+    providerLogout,
+    setForgotEmail,
+    clearForgotEmail
 } = authSlice.actions;
 
 export default authSlice.reducer;

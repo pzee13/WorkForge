@@ -22,9 +22,11 @@
     "@mui/x-data-grid": "^7.3.2",
     "@react-oauth/google": "^0.12.1",
     "@reduxjs/toolkit": "^2.2.3",
+    "aos": "^2.3.4",
     "dotenv": "^16.4.5",
     "formik": "^2.4.6",
     "framer-motion": "^11.1.7",
+    "jwt-decode": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.2.0",
@@ -36,6 +38,7 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
+    "@types/aos": "^3.0.7",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@types/react-modal": "^3.16.3",

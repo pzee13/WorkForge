@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { useFormik } from "formik";
 import { AdminLogins,MyError } from '../../../utils/validations/commonVaild';
 import { useDispatch } from "react-redux";
@@ -10,11 +10,13 @@ import {  RiLockPasswordLine } from 'react-icons/ri';
 import { IoPersonOutline } from 'react-icons/io5';
 import LoginImage from '../../../assets/images/Admin login/login.png';
 import { useAdminLoginMutation } from "../../../slices/adminApiSlice";
+import Spinner from '../../../component/user/Loader/Spinner'
 
 const AdminLogin: React.FC = () => {
     const dispatch = useDispatch();
     const [login] = useAdminLoginMutation();
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
     
     const initialValues: AdminLogins = {
         email: "",
@@ -27,7 +29,7 @@ const AdminLogin: React.FC = () => {
         onSubmit: async (values) => {
           try {
             console.log(values);
-            
+            setIsLoading(true);
             const { password, email } = values; // Destructure values
             const res = await login({ password, email }).unwrap();
             dispatch(setAdminCredentials({ ...res.data}));
@@ -35,6 +37,8 @@ const AdminLogin: React.FC = () => {
             toast.success(res.message);
           } catch (err) {
             toast.error((err as MyError)?.data?.message || (err as MyError)?.error);
+          }finally {
+            setIsLoading(false); 
           }
         },
       });
@@ -71,9 +75,10 @@ const AdminLogin: React.FC = () => {
             <div className="text-red-500">{errors.password}</div>
           )}
         </div>
-        <button className="w-64 ml-4 mt-4 py-2 px-4 text-center bg-transparent text-white rounded-lg border border-white border-solid hover:bg-white hover:text-black focus:outline-none">
+        <button type='submit' className="w-64 ml-4 mt-4 py-2 px-4 text-center bg-transparent text-white rounded-lg border border-white border-solid hover:bg-white hover:text-black focus:outline-none">
           Login
         </button>
+        {isLoading ? <Spinner /> : null}
       </form>
     </div>
   );

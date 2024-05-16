@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import logo from '../../../assets/images/Set Space-logo/default.png';
+import logo from '../../../assets/images/Set Space-logo/realLogo/png/logo-no-background.png'
 import { RootState } from "../../../app/store"
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom'

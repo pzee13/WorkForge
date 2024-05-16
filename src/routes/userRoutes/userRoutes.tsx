@@ -3,6 +3,8 @@ import { Landing } from '../../pages/user/Landing/Landing'
 import SignUp from '../../pages/user/authentication/SignUp'
 import Login from '../../pages/user/authentication/Login'
 import {UserHome} from '../../pages/user/home/UserHome'
+import { UserAuthRoute } from './UserAuthRoute'
+import { ResetPassword }  from '../../pages/user/authentication/ResetPassword'
 
 
 export function UserRoutes(){
@@ -11,7 +13,10 @@ export function UserRoutes(){
             <Route path='/' element={<Landing/>}/>
             <Route path='/register' element={<SignUp/>}/>
             <Route path='/login' element={<Login/>}/>
-            <Route path='/home' element={<UserHome />} />
+            <Route path='/*' element={<UserAuthRoute />} >
+                <Route path='home' element={<UserHome />} />
+            </Route>
+            <Route path='/resetPassword/:email/:token' element={<ResetPassword/>} />
         </Routes>
     )
 }

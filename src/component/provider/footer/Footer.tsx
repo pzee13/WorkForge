@@ -6,7 +6,7 @@ import { FaPhone } from "react-icons/fa6";
 import { SiGmail } from "react-icons/si";
 import { IoLocationSharp } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
-import logo from '../../../assets/images/Set Space-logo/default.png'
+import logo from '../../../assets/images/Set Space-logo/realLogo/png/logo-no-background.png'
 import './Footer.css'; 
 
 function Footer() {
