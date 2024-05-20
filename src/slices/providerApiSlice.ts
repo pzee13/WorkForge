@@ -43,6 +43,26 @@ export const providerApiSlice = apiSlice.injectEndpoints({
           body: data,
         }),
       }),
+
+
+      providerCreateSpace: builder.mutation({
+        query: (data) => ({
+          url: `${PROVIDER_URL}/createSpace`,
+          method: "POST",
+          body: data,
+        }),
+      }),
+
+
+      updateProviderProfile: builder.mutation({
+        query: (data) => ({
+          url: `${PROVIDER_URL}/updateProviderProfile`,
+          method: "PATCH",
+          body: data,
+        }),
+      }),
+
+
     }),
   });
   
@@ -51,6 +71,8 @@ export const providerApiSlice = apiSlice.injectEndpoints({
     useProviderRegisterMutation,
     useProviderLogoutMutation,
     useProviderOtpVerificationMutation,
-    useSendOtpToProviderEmailMutation
+    useSendOtpToProviderEmailMutation,
+    useProviderCreateSpaceMutation,
+    useUpdateProviderProfileMutation
   } = providerApiSlice;
   

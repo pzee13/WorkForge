@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import './SignUp.css'
 import { useFormik } from "formik";
 import { setRegister,clearRegister } from '../../../slices/authSlice';
@@ -25,6 +25,10 @@ function SignUp() {
   const [otp, setOtp] = useState("");
  
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [timer, setTimer] = useState(60); // 60 seconds
+  const [resendDisabled, setResendDisabled] = useState(false); // Control resend button state
+  const [otpError, setOtpError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [sendOtpToEmail] = useSendOtpToEmailMutation();
@@ -32,6 +36,24 @@ function SignUp() {
   const [otpVerification] = useOtpVerificationMutation()
   const [registration] = useRegisterMutation()
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (timer > 0 && resendDisabled) {
+      interval = setInterval(() => {
+        setTimer((prevTimer) => prevTimer - 1);
+      }, 1000);
+    } else {
+      setResendDisabled(false); // Enable resend button when timer expires
+    }
+
+    return () => clearInterval(interval);
+  }, [timer, resendDisabled]);
+
+  const startTimer = () => {
+    setResendDisabled(true); // Disable resend button
+    setTimer(60); // Reset timer
+  };
 
   const initialValues : FormValues= {
     name: "",
@@ -54,6 +76,7 @@ function SignUp() {
           setIsLoading(true);
           const { name, email } = values;
               const response:OtpResponse = await sendOtpToEmail({ name ,email});
+              startTimer();
               console.log(response)
               setIsModalOpen(true);
       } catch (error) {
@@ -81,18 +104,30 @@ function SignUp() {
              navigate('/user/login');
             }else{
               console.log("hai")
+              setOtpError('Invalid OTP');
               toast.error('invalid otp');
             }
          }else{
           console.log('otp verification failed');
+          setOtpError('OTP verification failed');
           toast.error('otp verification failed');
          }
     } catch (error) {
-      setIsModalOpen(false);
+      // setIsModalOpen(false);
+      setOtpError('Invalid OTP verification failed');
       toast.error((error as MyError)?.data?.message || (error as MyError)?.error );
     }
 }
 
+async function handleResendOTP() {
+  try {
+    const { name, email } = values; // Assuming values are accessible here
+    await sendOtpToEmail({ name, email });
+    startTimer(); // Start timer when OTP is resen
+  } catch (error) {
+    toast.error((error as MyError)?.data?.message || (error as MyError)?.error);
+  }
+}
   
 
   return (
@@ -111,12 +146,22 @@ function SignUp() {
       <div className="flex-1 flex cont overflow-hidden">
   
         <div className="flex-1 flex justify-center  items-center dark-green-border">
-          <div className="w-full max-w-md shadow-md p-8 bg-white rounded-md dark-green-border">
-          <div className="flex justify-center items-center mb-4 ">
-             <img src={logo} alt="Logo" className="h-8 " />
-          </div>
+        <div
+    className="absolute inset-0 bg-cover bg-center w-full h-full  z-0"
+    style={{ backgroundImage: `url(${signUpImage})`,
+    transform: "scaleX(-1)", }}
+  >
 
-            <h2 className="text-2xl font-bold text-center mb-6">Create Account</h2>
+<div className="absolute inset-0 bg-black opacity-50"></div>
+  </div>
+          
+  <div className="w-full max-w-md shadow-lg bg-white p-8 rounded-md z-10">
+    <div className="flex justify-center items-center mb-4 ">
+      <img src={logo} alt="Logo" className="h-8 " />
+    </div>
+    <h2 className="text-2xl font-bold text-center mb-8 text-green-950">
+      Create your Account
+    </h2>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <input type="text" id="name" placeholder="Name" className="w-full shadow-lg px-3 py-2 bg-gray-100 rounded-full focus:outline-none" value={values.name} onChange={handleChange} />
@@ -167,7 +212,7 @@ function SignUp() {
       </div>
       <CustomModal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)}>
                 <div className="flex flex-col items-center mt-10 px-6 gap-10">
-                    <h2 className="font-gillroy text-2xl font-semibold md:text-3xl">Matrify OTP Verification</h2>
+                    <h2 className="font-gillroy text-2xl font-semibold md:text-3xl">SetSpace OTP Verification</h2>
                     <p className="text-lg">Please enter the OTP (one time password) send to your registered phone number to complete the verification.</p>
                     <div className="h-[50px] w-full flex items-center justify-center">
                     <OtpInput
@@ -190,10 +235,17 @@ function SignUp() {
                         }}/>}
                     />
                     </div>
+                    {otpError && <div className="text-red-500">{otpError}</div>}
                     <div className="flex justify-between w-full">
-                        <p>Remaining Time: 01:00</p>
-                        <a href="#" className="text-green-900">Resend OTP?</a>
-                    </div>
+  <p>Remaining Time: {timer} sec</p>
+  <button
+    className="text-green-900" 
+    onClick={handleResendOTP} 
+    disabled={resendDisabled}
+  >
+    Resend OTP
+  </button>
+</div>
                     <div className="flex justify-between w-full gap-4">
                         <button 
                             className="w-1/2 px-5 py-3 rounded-md bg-[#49735A] text-white font-semibold hover:bg-[#dbdbdb]"

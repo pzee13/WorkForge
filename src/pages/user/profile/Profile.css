@@ -1,0 +1,63 @@
+/* styles.css */
+.bg-dark-green {
+    background-color: #49735A; /* Dark green color */
+  }
+  
+  .bg-pale-green {
+    background-color: #e0f7e0; /* Pale green color */
+  }
+  
+  .bg-dark-greens {
+    background-color: #064749; /* Dark green color */
+  }
+
+  .text-dark-green {
+    color: #064749; /* Dark green text color */
+  }
+  
+  .pagination button {
+    background: #49735A;
+    color: white;
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .pagination button.active {
+    background: #e0f7e0;
+    color: #49735A;
+  }
+  
+  .pagination button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .select-arrow {
+    font-size: 12px; /* Adjust size as needed */
+  }
+  
+  .bg-image {
+    position: relative;
+  }
+  
+  .bg-image:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../../assets/images/LandingUser/fotor-ai-2024051918853.jpg'); /* Replace 'path/to/your/image.jpg' with the path to your background image */
+    background-size: cover;
+    filter: blur(5px); /* Adjust blur intensity as needed */
+    z-index: 1;
+  }
+  
+  .overlay {
+    position: relative;
+    z-index: 2;
+  }
+  

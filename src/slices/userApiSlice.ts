@@ -60,12 +60,34 @@ export const userApiSlice = apiSlice.injectEndpoints({
       }),
     }),
 
+    updateProfile: builder.mutation({
+      query: (data) => ({
+        url: `${USER_URL}/updateProfile`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
+
     validateAccesssToken: builder.mutation({
       query: (data) => ({
         url: `${USER_URL}/validateAccessToken`,
         method: "POST",
         body: data,
       }),
+    }),
+
+    getSpaces: builder.mutation({
+      query: ({ page, perPage, spaceType, state, search }) => ({
+        url:`${USER_URL}/spaces`,
+        method:"GET",
+        params: {
+          page,
+          perPage,
+          spaceType,
+          state,
+          search,
+        }
+      })
     }),
 
     resetPassword: builder.mutation({
@@ -89,5 +111,7 @@ export const {
   useGoogleAuthMutation,
   useForgotPasswordMutation,
   useValidateAccesssTokenMutation,
-  useResetPasswordMutation
+  useResetPasswordMutation,
+  useGetSpacesMutation,
+  useUpdateProfileMutation
 } = userApiSlice;

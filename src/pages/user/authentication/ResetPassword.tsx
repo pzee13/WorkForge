@@ -66,7 +66,7 @@ export function ResetPassword() {
                         >
                             {({ isSubmitting }) => (
                                 <Form className="flex flex-col w-[80%] items-center md:items-start mt-12 md:mt-20">
-                                    <h1 className="heading font-semibold text-3xl font-gillroy">Matrify Reset Password</h1>
+                                    <h1 className="heading font-semibold text-3xl font-gillroy">SetSpace Reset Password</h1>
                                     <p className="text-sm py-5">Enter your new password below to regain access to your account.</p>
                                     <div className="flex flex-col gap-2 w-full">
                                         <label htmlFor="newPassword" className="text-sm font-semibold">New Password</label>
@@ -89,7 +89,7 @@ export function ResetPassword() {
                     </div>
                     <div
                         className="image-container h-[250px] md:h-full md:flex-1 flex justify-center items-center"
-                        style={{ backgroundImage: `url(${"/src/assets/images/security-amico.png"})`, backgroundSize: "contain" }}
+                        style={{ backgroundImage: `url(${"/src/assets/images/fotor2.jpg"})`, backgroundSize: "contain" }}
                     ></div>
                 </div>
             ) : (

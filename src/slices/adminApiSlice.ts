@@ -13,6 +13,21 @@ export const adminApiSlice = apiSlice.injectEndpoints({
       })
     }),
 
+    getSpaceRequests : builder.mutation({
+      query:() => ({
+        url:`${ADMIN_URL}/getSpaceRequests`,
+        method:"GET",
+      })
+    }),
+
+    updateSpaceStatus: builder.mutation({
+      query: ({ id, providerId, isAccepted }) => ({
+        url: `${ADMIN_URL}/updateSpaceStatus/${id}/${providerId}`,
+        method: "PATCH",
+        body: { isAccepted }, // Assuming isAccepted is the only field to update
+      }),
+    }),
+
 
     logoutAdmin : builder.mutation({
         query: () =>({
@@ -28,4 +43,6 @@ export const adminApiSlice = apiSlice.injectEndpoints({
   export const {
     useAdminLoginMutation,
     useLogoutAdminMutation,
+    useGetSpaceRequestsMutation,
+    useUpdateSpaceStatusMutation
 }= adminApiSlice;

@@ -3,25 +3,36 @@ import { setProviderCredentials } from "../../../slices/authSlice"
 import { useProviderLoginMutation } from '../../../slices/providerApiSlice';
 import { loginValidation } from "../../../utils/validations/yupValidation";
 import { AdminLogins,MyError } from '../../../utils/validations/commonVaild';
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import logo from '../../../assets/images/Set Space-logo/realLogo/png/logo-no-background.png'
 import { Link } from 'react-router-dom'
 import LoginPic from '../../../assets/images/loginFormPic.jpg';
 import Spinner from '../../../component/user/Loader/Spinner'
+import { RootState } from '../../../app/store';
 import './Login.css'
-
+ 
 function Login() {
   const dispatch = useDispatch();
   const [login] = useProviderLoginMutation();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const { providerInfo } = useSelector((state:RootState) => state.auth);
+
+  const [loginError,setLoginError] = useState("")
+
+    useEffect(()=>{
+      if(providerInfo){
+          navigate('/provider/home')
+      }
+    },[navigate, providerInfo])
   
   const initialValues: AdminLogins = {
-      email: "",
-      password: ""
+      password: "",
+      email: ""
+
     };
 
     const { values, handleChange, handleSubmit, errors, touched } = useFormik({
@@ -33,10 +44,12 @@ function Login() {
           setIsLoading(true);
           const { password, email } = values; // Destructure values
           const res = await login({ password, email }).unwrap();
-          dispatch(setProviderCredentials({ ...res.data}));
+          console.log("res",res,"resdata",{...res.data})
+          dispatch(setProviderCredentials({...res.data}));
           navigate('/provider/home')
           toast.success(res.message);
         } catch (err) {
+          setLoginError("Invalid email or password")
           toast.error((err as MyError)?.data?.message || (err as MyError)?.error);
         }finally {
           setIsLoading(false); 
@@ -87,6 +100,7 @@ function Login() {
                     <div className="text-red-500">{errors.password}</div>
                   )}
               </div>
+              {loginError && <div className="text-red-500 text-center">{loginError}</div>}
               <button type="submit" className="w-full login-button text-white py-2 px-4 rounded-md ">Login</button>
               {isLoading ? <Spinner /> : null}
             </form>

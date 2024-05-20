@@ -62,9 +62,9 @@ function Navbar() {
             <a href="#home" className="block mt-4 md:inline-block md:mt-0 text-gray-800 hover:text-gray-600 mr-4 font-lato">
               Home
             </a>
-            <a href="#workspace" className="block mt-4 md:inline-block md:mt-0 text-gray-800 hover:text-gray-600 mr-4 font-lato">
+            <Link to={'/user/spaces'} className="block mt-4 md:inline-block md:mt-0 text-gray-800 hover:text-gray-600 mr-4 font-lato">
               Workspace
-            </a>
+            </Link>
             <a href="#contacts" className="block mt-4 md:inline-block md:mt-0 text-gray-800 hover:text-gray-600 mr-4 font-lato">
               Contacts
             </a>
@@ -74,13 +74,13 @@ function Navbar() {
           </div>
           ) : (
             <div className="text-sm md:flex-grow">
-            <a href="#home" className="block mt-4 md:inline-block md:mt-0 text-gray-800 hover:text-gray-600 mr-4 font-lato">
+            <a href="#" className="block mt-4 md:inline-block md:mt-0 text-gray-800 hover:text-gray-600 mr-4 font-lato">
               Home
             </a>
-            <a href="#workspace" className="block mt-4 md:inline-block md:mt-0 text-gray-800 hover:text-gray-600 mr-4 font-lato">
+            <a href="#" className="block mt-4 md:inline-block md:mt-0 text-gray-800 hover:text-gray-600 mr-4 font-lato">
               Workspace
             </a>
-            <a href="#contacts" className="block mt-4 md:inline-block md:mt-0 text-gray-800 hover:text-gray-600 mr-4 font-lato">
+            <a href="#" className="block mt-4 md:inline-block md:mt-0 text-gray-800 hover:text-gray-600 mr-4 font-lato">
               Contacts
             </a>
             <Link to={'/user/login'} className="block mt-4 md:inline-block md:mt-0 text-sm text-gray-800 hover:text-gray-600 font-lato">
@@ -96,9 +96,9 @@ function Navbar() {
             <a href="#home" className="inline-block text-gray-800 hover:text-gray-600 mr-10 font-lato">
               Home
             </a>
-            <a href="#workspace" className="inline-block text-gray-800 hover:text-gray-600 mr-10 font-lato">
+            <Link to={'/user/spaces'}  className="inline-block text-gray-800 hover:text-gray-600 mr-10 font-lato">
               Workspace
-            </a>
+            </Link>
             <a href="#contacts" className="inline-block text-gray-800 hover:text-gray-600 mr-10 font-lato">
               Contacts
             </a>

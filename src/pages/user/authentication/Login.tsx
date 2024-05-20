@@ -28,6 +28,8 @@ function Login() {
   const [forgotPassword] = useForgotPasswordMutation() 
   const [isForgotModalOpen, setIsForgotModalOpen] = useState(false);
 
+  const [loginError,setLoginError] = useState("")
+
   const initialValues: AdminLogins = {
       email: "",
       password: ""
@@ -46,6 +48,7 @@ function Login() {
           navigate('/user/home')
           toast.success(res.message);
         } catch (err) {
+          setLoginError("Invalid Email or Password")
           toast.error((err as MyError)?.data?.message || (err as MyError)?.error);
         }finally {
         setIsLoading(false); // Set loading state to false when login process ends
@@ -125,7 +128,7 @@ function Login() {
                                   )}
                 </div>
                 <div className="mb-4  items-center input-with-icon"> 
-                  <input 
+                  <input  
                     type="password" 
                     id="password" 
                     placeholder="Password" 
@@ -143,7 +146,7 @@ function Login() {
                 <div className="text-right">
                 <button type="button" className="text-green-400" onClick={openForgotModal}>Forgot Password?</button>
                 </div>
-                
+                {loginError && <div className="text-red-500 text-center">{loginError}</div>}
                 <button 
                   type="submit" 
                   className="w-full items-center signup-button align-middle text-white py-2 px-4 rounded-full mb-8 relative" 

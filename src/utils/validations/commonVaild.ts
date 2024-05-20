@@ -11,18 +11,42 @@ export interface MyError {
     mobile: string;
     password: string;
     confirmPassword: string;
-    
   }
   
 
   export interface OtpResponse {
     success: boolean;
     message: string;
-   
   }
 
 
   export interface AdminLogins {
     email: string;
     password: string
+  }
+
+
+  export interface UpdateUser {
+    name:string;
+    mobile : string;
+  }
+
+
+
+  export interface AddSpaceForm{
+    spaceName:string,
+    spaceType:string,
+    state:string,
+    district:string,
+    city:string,
+    areaName:string,
+    buildingName:string,
+    description:string,
+    floor:string,
+    images:File[] | null,
+    chargePerHour:number,
+    availableSpaces:number,
+    contactNumber:string,
+    facilities:string[]|null,
+    rentalAgreement:File | null,
   }

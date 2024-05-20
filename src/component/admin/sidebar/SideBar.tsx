@@ -13,7 +13,7 @@ import {
 } from "@mui/icons-material";
 import { CSSObject } from "@emotion/react";
 import { useMemo, useState } from "react";
-
+import FiberNewIcon from "@mui/icons-material/FiberNew";
 import DashBoard from "../../../pages/admin/dashboard/DashBoard";
 import Users from '../../../pages/admin/users/Users'
 
@@ -21,6 +21,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 
 
 import { Open } from "../../../types/props";
+import ProviderRequest from "../../../pages/admin/providers/ProviderRequest";
 
 
 
@@ -95,6 +96,12 @@ function SideBar({ open, setOpen }: Open) {
         icon: <PeopleAlt />,
         link: "users",
         component: <Users {...{setSelectedLink,link:'users'}}/>,
+      },
+      {
+        title: "Space Requests",
+        icon: <FiberNewIcon />,
+        link: "getSpaceRequests",
+        component: <ProviderRequest {...{setSelectedLink,link:'getSpaceRequests'}}/>,
       },
       
     ],
