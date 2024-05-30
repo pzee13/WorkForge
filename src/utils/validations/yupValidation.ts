@@ -42,14 +42,6 @@ export const validationSchema = Yup.object({
       .required("Please enter name"),
     spaceType: Yup.string()
       .required("Please select space type"),
-    state: Yup.string()
-      .required("Please select state"),
-    district: Yup.string()
-      .required("Please select district"),
-    city: Yup.string()
-      .required("Please select city"),
-    areaName: Yup.string()
-      .required("Please enter area name"),
     buildingName: Yup.string()
       .required("Please enter building name"),
     description: Yup.string()

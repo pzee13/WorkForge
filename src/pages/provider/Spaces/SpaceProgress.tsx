@@ -2,10 +2,10 @@ import { TiTick } from "react-icons/ti";
 
 function SpaceProgress() {
   return (
-    <div className="flex justify-center mt-10">
+    <div className="flex justify-center mt-20">
     <div className="w-3/5 flex gap-3 items-center">
       <div className="flex flex-col items-center">
-        <div className="rounded-full h-7 w-7 bg-blue-600 flex justify-center items-center text-xs text-white">
+        <div className="rounded-full h-7 w-7 bg-customGreen flex justify-center items-center text-xs text-white">
          <TiTick size={15}/>
         </div>
         <div className="font-semibold mt-1">Location</div>

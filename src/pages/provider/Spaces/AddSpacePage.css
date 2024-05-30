@@ -1,0 +1,20 @@
+/* src/pages/provider/Spaces/AddSpacePage.css */
+.page-layout {
+    display: flex;
+
+    padding: 40px; /* Add some padding for the gap */
+}
+
+.content {
+    flex-grow: 1;
+    padding: 20px; /* Add some padding for the gap */
+}
+
+.sidebar {
+    margin-top: 50px; /* Gap between Navbar and Sidebar */
+    margin-bottom: 20px; /* Gap between Sidebar and Footer */
+    border-radius: 10px; /* Border radius for the sidebar */
+    background-color: #064749;
+    overflow: hidden; /* Ensure the border radius is visible */
+    box-shadow: 0 4px 8px rgba(255, 201, 201, 0.5); /* Optional: Add some shadow for better appearance */
+}

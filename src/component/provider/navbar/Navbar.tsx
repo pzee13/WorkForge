@@ -55,15 +55,15 @@ function Navbar() {
         <a href="#" className="mr-6 md:mr-20">
           Home
         </a>
-        <a href="#" className="mr-6 md:mr-20">About</a>
+        <Link to="/provider/profile" className="mr-6 md:mr-20">Profile</Link>
       </div>
       <div className="flex justify-center items-center">
         <img src={logo} alt="Logo" className="max-w-12 mr-6 md:mr-20" />
       </div>
       <div className="flex items-center justify-center">
-        <a href="#" className="mr-6 md:mr-20">
+        <Link to='/provider/addSpace' className="mr-6 md:mr-20">
           Spaces
-        </a>
+        </Link>
         {providerInfo?(
            <button onClick={handleLogout}>Logout</button>
          ):(

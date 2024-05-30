@@ -115,9 +115,9 @@ function Navbar() {
             <a href="#workspace" className="inline-block text-gray-800 hover:text-gray-600 mr-10 font-lato">
               Workspace
             </a>
-            <a href="#contacts" className="inline-block text-gray-800 hover:text-gray-600 mr-10 font-lato">
-              Contacts
-            </a>
+            <Link to={'/user/profile'} className="inline-block text-gray-800 hover:text-gray-600 mr-10 font-lato">
+              Profile
+            </Link>
             <Link to={'/user/login'} className="inline-block text-sm text-gray-800 hover:text-gray-600 font-lato">
               Login
             </Link>

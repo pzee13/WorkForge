@@ -5,17 +5,17 @@ export interface WorkSpace{
     spaceType:string;
     state:string;
     district:string;
-    city:string;
+    country:string;
     areaName:string;
     buildingName:string;
     description:string;
     floor:string;
-    images:string[] | null;
+    images:string[];
     chargePerHour:number;
     availableSpaces:number;
     isAccepted?:boolean;
     contactNumber:string;
-    facilities:string[]|null;
+    facilities:string[];
     rentalAgreement:string;
     latitude:number,
     longitude:number,

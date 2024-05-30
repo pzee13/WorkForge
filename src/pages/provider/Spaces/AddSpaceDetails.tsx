@@ -8,38 +8,34 @@ import { useNavigate } from 'react-router-dom';
 import { storage } from '../../../app/firebase/config';
 import { AddSpaceForm } from '../../../utils/validations/commonVaild';
 import { spaceValidation } from '../../../utils/validations/yupValidation';
-import Footer from '../../../component/provider/footer/Footer';
-import Navbar from '../../../component/provider/navbar/Navbar';
 import SpaceProgress from './SpaceProgress';
 import { RootState } from "../../../app/store";
-import { TextField, Button, CircularProgress, IconButton } from '@mui/material';
+import { TextField, Button, CircularProgress, IconButton, Select, MenuItem, Checkbox, ListItemText, FormControl, InputLabel } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import InputField from '../../../component/common/inputField/InputField'; // Adjust the path as necessary
+import DeleteIcon from '@mui/icons-material/Delete';
+import './AddSpaceDetails.css'; // Assuming you have a CSS file for custom styles
+
+const FACILITIES = ["Wifi", "Toilet", "Parking", "Drinking Water"];
 
 function AddSpaceDetails() {
   const [createSpace] = useProviderCreateSpaceMutation();
   const { latitude, longitude } = useSelector((state: RootState) => state.location);
-  const { areaName,state,district } = useSelector((state: RootState) => state.location)
+  const { areaName, state, district, country } = useSelector((state: RootState) => state.address);
   const { providerInfo } = useSelector((state: RootState) => state.auth);
   const [isSubmit, setSubmit] = useState(false);
-  const [facilities, setFacilities] = useState<string[]>(['']);
+  const [facilities, setFacilities] = useState<string[]>([]);
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
   const [rentalAgreementPreview, setRentalAgreementPreview] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  const providerId = providerInfo?._id
+  const providerId = providerInfo?._id;
 
-  console.log("areaName:",areaName)
-
-  console.log("providerId", providerId)
   const formik = useFormik<AddSpaceForm>({
     initialValues: {
       spaceName: "",
       spaceType: "",
-      state: "",
-      district: "",
-      city: "",
-      areaName: "",
       buildingName: "",
       description: "",
       floor: "",
@@ -58,10 +54,6 @@ function AddSpaceDetails() {
         const {
           spaceName,
           spaceType,
-          state,
-          district,
-          city,
-          areaName,
           buildingName,
           description,
           floor,
@@ -98,7 +90,7 @@ function AddSpaceDetails() {
           spaceType,
           state,
           district,
-          city,
+          country,
           areaName,
           buildingName,
           description,
@@ -131,6 +123,14 @@ function AddSpaceDetails() {
     if (files) {
       const newImages = [...formik.values.images];
       newImages[index] = files[0];
+
+      // Ensure all images are unique
+      const uniqueImages = new Set(newImages.map(image => image.name));
+      if (uniqueImages.size !== newImages.length) {
+        toast.error('Each image must be unique.');
+        return;
+      }
+
       formik.setFieldValue('images', newImages); 
 
       const reader = new FileReader();
@@ -143,169 +143,173 @@ function AddSpaceDetails() {
     }
   };
 
+  const handleRemoveImage = (index: number) => {
+    const newImages = [...formik.values.images];
+    newImages.splice(index, 1);
+    formik.setFieldValue('images', newImages);
+
+    const newPreviews = [...imagePreviews];
+    newPreviews.splice(index, 1);
+    setImagePreviews(newPreviews);
+  };
+
   const handleRentalAgreementChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files) {
-      formik.setFieldValue('rentalAgreement', files[0]);
+      const file = files[0];
+      if (file.type !== "application/pdf") {
+        toast.error('Rental agreement must be a PDF file.');
+        return;
+      }
+
+      formik.setFieldValue('rentalAgreement', file);
 
       const reader = new FileReader();
       reader.onload = () => {
         setRentalAgreementPreview(reader.result as string);
       };
-      reader.readAsDataURL(files[0]);
+      reader.readAsDataURL(file);
     }
   };
 
-  const handleAddFacility = () => {
-    setFacilities([...facilities, '']);
-  };
-
-  const handleRemoveFacility = (index: number) => {
-    const newFacilities = facilities.filter((_, i) => i !== index);
-    setFacilities(newFacilities);
-  };
-
-  const handleFacilityChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    const newFacilities = [...facilities];
-    newFacilities[index] = e.target.value;
-    setFacilities(newFacilities);
-    formik.setFieldValue('facilities', newFacilities);
+  const handleFacilitiesChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    const value = event.target.value as string[];
+    setFacilities(value);
+    formik.setFieldValue('facilities', value);
   };
 
   return (
     <div>
-      <Navbar />
-      <SpaceProgress/>
+      <SpaceProgress />
       <div className="form-container">
         <form onSubmit={formik.handleSubmit}>
-          <TextField
-            fullWidth
-            id="spaceName"
-            name="spaceName"
-            label="Space Name"
-            value={formik.values.spaceName}
-            onChange={formik.handleChange}
-            error={formik.touched.spaceName && Boolean(formik.errors.spaceName)}
-            helperText={formik.touched.spaceName && formik.errors.spaceName}
-          />
-           <TextField
+          <div className="horizontal-inputs">
+            <InputField
+              id="spaceName"
+              label="Space Name"
+              type="text"
+              value={formik.values.spaceName}
+              onChange={formik.handleChange}
+              error={formik.errors.spaceName}
+              touched={formik.touched.spaceName}
+              placeholder="Enter space name"
+            />
+            <InputField
+              id="spaceType"
               label="Space Type"
-              variant="outlined"
-              {...formik.getFieldProps("spaceType")}
-              error={formik.touched.spaceType && !!formik.errors.spaceType}
-              helperText={formik.touched.spaceType && formik.errors.spaceType}
+              type="text"
+              value={formik.values.spaceType}
+              onChange={formik.handleChange}
+              error={formik.errors.spaceType}
+              touched={formik.touched.spaceType}
+              placeholder="Enter space type"
             />
-            <TextField
-              label="State"
-              variant="outlined"
-              {...formik.getFieldProps("state")}
-              error={formik.touched.state && !!formik.errors.state}
-              helperText={formik.touched.state && formik.errors.state}
-            />
-            <TextField
-              label="District"
-              variant="outlined"
-              {...formik.getFieldProps("district")}
-              error={formik.touched.district && !!formik.errors.district}
-              helperText={formik.touched.district && formik.errors.district}
-            />
-            <TextField
-              label="City"
-              variant="outlined"
-              {...formik.getFieldProps("city")}
-              error={formik.touched.city && !!formik.errors.city}
-              helperText={formik.touched.city && formik.errors.city}
-            />
-            <TextField
-              label="Area Name"
-              variant="outlined"
-              {...formik.getFieldProps("areaName")}
-              error={formik.touched.areaName && !!formik.errors.areaName}
-              helperText={formik.touched.areaName && formik.errors.areaName}
-            />
-            <TextField
-              label="Building Name"
-              variant="outlined"
-              {...formik.getFieldProps("buildingName")}
-              error={formik.touched.buildingName && !!formik.errors.buildingName}
-              helperText={formik.touched.buildingName && formik.errors.buildingName}
-            />
-            <TextField
-              label="Floor"
-              variant="outlined"
-              {...formik.getFieldProps("floor")}
-              error={formik.touched.floor && !!formik.errors.floor}
-              helperText={formik.touched.floor && formik.errors.floor}
-            />
-            <TextField
-              label="Charge Per Hour"
-              variant="outlined"
-              type="number"
-              {...formik.getFieldProps("chargePerHour")}
-              error={formik.touched.chargePerHour && !!formik.errors.chargePerHour}
-              helperText={formik.touched.chargePerHour && formik.errors.chargePerHour}
-            />
-            <TextField
-              label="Available Spaces"
-              variant="outlined"
-              type="number"
-              {...formik.getFieldProps("availableSpaces")}
-              error={formik.touched.availableSpaces && !!formik.errors.availableSpaces}
-              helperText={formik.touched.availableSpaces && formik.errors.availableSpaces}
-            />
-            <TextField
-              label="Contact Number"
-              variant="outlined"
-              {...formik.getFieldProps("contactNumber")}
-              error={formik.touched.contactNumber && !!formik.errors.contactNumber}
-              helperText={formik.touched.contactNumber && formik.errors.contactNumber}
-            />
-            <TextField
-              label="Description"
-              variant="outlined"
-              multiline
-              rows={4}
-              {...formik.getFieldProps("description")}
-              error={formik.touched.description && !!formik.errors.description}
-              helperText={formik.touched.description && formik.errors.description}
-            />
-          {/* Add other form fields similarly */}
-
-          <div>
-            <h4>Facilities</h4>
-            {facilities.map((facility, index) => (
-              <div key={index}>
-                <TextField
-                  fullWidth
-                  value={facility}
-                  onChange={(e) => handleFacilityChange(e, index)}
-                />
-                <IconButton onClick={() => handleRemoveFacility(index)}>
-                  <RemoveIcon />
-                </IconButton>
-              </div>
-            ))}
-            <Button onClick={handleAddFacility} startIcon={<AddIcon />}>
-              Add Facility
-            </Button>
           </div>
-
-          <div>
+          <div className="horizontal-inputs">
+            <InputField
+              id="buildingName"
+              label="Building Name"
+              type="text"
+              value={formik.values.buildingName}
+              onChange={formik.handleChange}
+              error={formik.errors.buildingName}
+              touched={formik.touched.buildingName}
+              placeholder="Enter building name"
+            />
+            <InputField
+              id="floor"
+              label="Floor"
+              type="text"
+              value={formik.values.floor}
+              onChange={formik.handleChange}
+              error={formik.errors.floor}
+              touched={formik.touched.floor}
+              placeholder="Enter floor"
+            />
+          </div>
+          <div className="horizontal-inputs">
+            <InputField
+              id="chargePerHour"
+              label="Charge Per Hour"
+              type="number"
+              value={formik.values.chargePerHour}
+              onChange={formik.handleChange}
+              error={formik.errors.chargePerHour}
+              touched={formik.touched.chargePerHour}
+              placeholder="Enter charge per hour"
+            />
+            <InputField
+              id="availableSpaces"
+              label="Available Spaces"
+              type="number"
+              value={formik.values.availableSpaces}
+              onChange={formik.handleChange}
+              error={formik.errors.availableSpaces}
+              touched={formik.touched.availableSpaces}
+              placeholder="Enter available spaces"
+            />
+          </div>
+          <InputField
+            id="contactNumber"
+            label="Contact Number"
+            type="text"
+            value={formik.values.contactNumber}
+            onChange={formik.handleChange}
+            error={formik.errors.contactNumber}
+            touched={formik.touched.contactNumber}
+            placeholder="Enter contact number"
+          />
+          <InputField
+            id="description"
+            label="Description"
+            type="textarea"
+            value={formik.values.description}
+            onChange={formik.handleChange}
+            error={formik.errors.description}
+            touched={formik.touched.description}
+            placeholder="Enter description"
+            multiline
+            rows={4}
+          />
+          <div className="facilities-container">
+            <FormControl fullWidth>
+              <InputLabel>Facilities</InputLabel>
+              <Select
+                multiple
+                value={facilities}
+                onChange={handleFacilitiesChange}
+                renderValue={(selected) => (selected as string[]).join(', ')}
+              >
+                {FACILITIES.map((facility) => (
+                  <MenuItem key={facility} value={facility}>
+                    <Checkbox checked={facilities.includes(facility)} />
+                    <ListItemText primary={facility} />
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
+          <div className="image-upload">
             <h4>Images</h4>
             {[...Array(4)].map((_, index) => (
-              <div key={index}>
+              <div key={index} className="image-upload-item">
                 <input
                   type="file"
                   onChange={(e) => handleImageChange(e, index)}
                 />
                 {imagePreviews[index] && (
-                  <img src={imagePreviews[index]} alt={`Preview ${index + 1}`} width="100" />
+                  <div className="image-preview">
+                    <img src={imagePreviews[index]} alt={`Preview ${index + 1}`} width="100" />
+                    <IconButton onClick={() => handleRemoveImage(index)}>
+                      <DeleteIcon />
+                    </IconButton>
+                  </div>
                 )}
               </div>
             ))}
           </div>
 
-          <div>
+          <div className="rental-agreement">
             <h4>Rental Agreement</h4>
             <input
               type="file"
@@ -321,9 +325,9 @@ function AddSpaceDetails() {
           </Button>
         </form>
       </div>
-      <Footer />
     </div>
   );
 }
 
 export default AddSpaceDetails;
+

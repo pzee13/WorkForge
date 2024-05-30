@@ -16,8 +16,9 @@ export function UserRoutes(){
             <Route path='/login' element={<Login/>}/>
             <Route path='/*' element={<UserAuthRoute />} >
                 <Route path='home' element={<UserHome />} />
-                <Route path="profile" element={<Profile/>} />
+                
             </Route>
+            <Route path="profile" element={<Profile/>} />
             <Route path='/resetPassword/:email/:token' element={<ResetPassword/>} />
             <Route path='/spaces' element={<Spaces/>} />
         </Routes>

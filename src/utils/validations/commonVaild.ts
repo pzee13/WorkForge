@@ -36,10 +36,6 @@ export interface MyError {
   export interface AddSpaceForm{
     spaceName:string,
     spaceType:string,
-    state:string,
-    district:string,
-    city:string,
-    areaName:string,
     buildingName:string,
     description:string,
     floor:string,

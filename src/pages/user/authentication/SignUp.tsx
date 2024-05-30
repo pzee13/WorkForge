@@ -89,6 +89,12 @@ function SignUp() {
     }
   });
 
+  const clearOtpError = () => {
+    setTimeout(() => {
+      setOtpError("");
+    }, 3000);
+  };
+
 
   async function handleOTPVerification(){
     try {
@@ -111,11 +117,13 @@ function SignUp() {
           console.log('otp verification failed');
           setOtpError('OTP verification failed');
           toast.error('otp verification failed');
+          clearOtpError();
          }
     } catch (error) {
       // setIsModalOpen(false);
       setOtpError('Invalid OTP verification failed');
       toast.error((error as MyError)?.data?.message || (error as MyError)?.error );
+      clearOtpError();
     }
 }
 
