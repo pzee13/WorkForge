@@ -28,6 +28,7 @@ export function LandingProvider() {
   return (
     <>
       <Navbar />
+    
       <div className="relative">
         <img src={PlandImage} alt="Plan Image" />
         <div className="absolute inset-0 bg-black opacity-70"></div>
@@ -38,7 +39,8 @@ export function LandingProvider() {
           </div>
         </div>
       </div>
-
+      <div className="flex justify-center dark:bg-white">
+                <div className="w-11/12 shadow-2xl">
       <motion.div
         variants={containerVariants}
         initial="hidden"
@@ -94,7 +96,10 @@ export function LandingProvider() {
                         />
                 </div>
             </motion.div>
+            </div>
+            </div>
             <Footer />
+            
     </>
   );
 }

@@ -3,6 +3,7 @@ import { apiSlice } from "../slices/apiSlice";
 import authReducer from '../slices/authSlice';
 import locationReducer from '../slices/space'
 import addressReducer from '../slices/address'
+import bookingReducer from '../slices/booking'
 
 
 export const store = configureStore({
@@ -10,6 +11,7 @@ export const store = configureStore({
       auth:authReducer,
       location:locationReducer,
       address:addressReducer,
+      booking:bookingReducer,
       [apiSlice.reducerPath]:apiSlice.reducer,
     },
     middleware:(getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),

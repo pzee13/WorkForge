@@ -1,9 +1,22 @@
+/* @font-face {
+  font-family: 'CustomFont';
+  src: url('assets/X_BAMBI.TTF') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+} */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   .font-lato {
+    font-family: 'Lato', sans-serif;
+  }
+  /* .font-adallyn {
+    font-family:'"Adallyn Serif"', serif;
+  } */
+  body {
     font-family: 'Lato', sans-serif;
   }
 }

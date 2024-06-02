@@ -77,9 +77,9 @@ function Navbar() {
             <a href="#" className="block mt-4 md:inline-block md:mt-0 text-gray-800 hover:text-gray-600 mr-4 font-lato">
               Home
             </a>
-            <a href="#" className="block mt-4 md:inline-block md:mt-0 text-gray-800 hover:text-gray-600 mr-4 font-lato">
+            <Link to={'/user/spaces'} className="block mt-4 md:inline-block md:mt-0 text-gray-800 hover:text-gray-600 mr-4 font-lato">
               Workspace
-            </a>
+            </Link>
             <a href="#" className="block mt-4 md:inline-block md:mt-0 text-gray-800 hover:text-gray-600 mr-4 font-lato">
               Contacts
             </a>
@@ -112,9 +112,9 @@ function Navbar() {
             <a href="#home" className="inline-block text-gray-800 hover:text-gray-600 mr-10 font-lato">
               Home
             </a>
-            <a href="#workspace" className="inline-block text-gray-800 hover:text-gray-600 mr-10 font-lato">
+            <Link to={'/user/spaces'}  className="inline-block text-gray-800 hover:text-gray-600 mr-10 font-lato">
               Workspace
-            </a>
+            </Link>
             <Link to={'/user/profile'} className="inline-block text-gray-800 hover:text-gray-600 mr-10 font-lato">
               Profile
             </Link>

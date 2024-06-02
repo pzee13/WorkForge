@@ -20,7 +20,7 @@ function LandingPageCards({ headerText, subText, images }: RectangularComponentP
 
       {/* Right side text */}
       <div className="p-4 w-1/2">
-        <h2 className="text-6xl font-semibold mb-2">{headerText}</h2>
+        <h2 className="text-6xl font-semibold mb-2 dark:text-gray-800">{headerText}</h2>
         <p className="text-gray-600">{subText}</p>
       </div>
     </div>

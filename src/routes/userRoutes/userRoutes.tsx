@@ -7,6 +7,7 @@ import { UserAuthRoute } from './UserAuthRoute'
 import { ResetPassword }  from '../../pages/user/authentication/ResetPassword'
 import Spaces from '../../pages/user/spaces/Spaces'
 import Profile from "../../pages/user/profile/Profile"
+import SpaceDetails from "../../pages/user/spaces/SpaceDetails"
 
 export function UserRoutes(){
     return(
@@ -21,6 +22,7 @@ export function UserRoutes(){
             <Route path="profile" element={<Profile/>} />
             <Route path='/resetPassword/:email/:token' element={<ResetPassword/>} />
             <Route path='/spaces' element={<Spaces/>} />
+            <Route path='/spaceDetails' element={<SpaceDetails/>} />
         </Routes>
     )
 }

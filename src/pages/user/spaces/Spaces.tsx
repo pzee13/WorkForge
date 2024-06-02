@@ -4,13 +4,17 @@ import Footer from "../../../component/user/Footer/Footer";
 import { useGetSpacesMutation } from "../../../slices/userApiSlice";
 import { IoSearchOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+// import { AddSpaceForms } from '../../../utils/validations/commonVaild';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMapMarkerAlt, faBuilding } from '@fortawesome/free-solid-svg-icons';
 import signUpImage from '../../../assets/images/LandingUser/fotor-ai-20240519165821.jpg';
+
 import './Spaces.css'; // Ensure to create a CSS file for additional styling if needed
 
 function Spaces() {
   const [showSearchInput, setShowSearchInput] = useState(false);
-  const [spaces, setSpaces] = useState([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [spaces, setSpaces] = useState([])
   const [totalPages, setTotalPages] = useState<number>(1);
   const itemsPerPage: number = 4;
   const [spaceTypeFilter, setSpaceTypeFilter] = useState<string>("");
@@ -73,11 +77,13 @@ function Spaces() {
   return (
     <>
       <Navbar />
-      <div className="relative">
+      <div className="flex justify-center dark:bg-gray-100">
+                <div className="w-11/12 shadow-2xl ">
+      <div className="relative rounded-md ">
         <img
           src={signUpImage}
           alt=""
-          className="h-80 w-full object-cover"
+          className="h-80 w-full object-cover rounded-md"
         />
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
@@ -92,13 +98,13 @@ function Spaces() {
         </div>
       </div>
 
-      <div className="py-4 px-8 flex items-center justify-between text-dark-green rounded-lg shadow-lg bg-pale-green">
+      <div className="py-4 px-8 flex items-center justify-between text-dark-green  shadow-lg bg-customGreen">
         <div className="flex items-center space-x-2">
           <select
             id="spaceType"
             value={spaceTypeFilter}
             onChange={handleSpaceTypeChange}
-            className=" bg-pale-green text-dark-green rounded-lg px-2 py-1 appearance-none focus:outline-none focus:border-none"
+            className=" bg-customGreen text-white rounded-lg px-2 py-1 appearance-none focus:outline-none focus:border-none"
           >
            <option value="" className="flex items-center">
   Space Type
@@ -114,7 +120,7 @@ function Spaces() {
             id="state"
             value={stateFilter}
             onChange={handleStateChange}
-            className=" bg-pale-green text-dark-green rounded-lg px-2 py-1 appearance-none focus:border-none focus:outline-none"
+            className=" bg-customGreen text-white rounded-lg px-2 py-1 appearance-none focus:border-none focus:outline-none"
           >
            <option value="" className="flex items-center">
   State
@@ -129,19 +135,19 @@ function Spaces() {
         </div>
         <div className="flex items-center">
           <button
-            className="text-dark-green font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline bg-pale-green"
+            className="text-customGreen font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline bg-white"
             onClick={handleSearchClick}
           >
-            {showSearchInput ? "" : <IoSearchOutline />}
+            {showSearchInput ? "X" : <IoSearchOutline />}
           </button>
         </div>
    
         {showSearchInput && (
-          <div className="bg-grey-100">
+          <div className="bg-grey-100 rounded-md">
             <input
               type="text"
               id="searchInput"
-              className="focus:outline-none transition border-b border-grey-600"
+              className="focus:outline-none transition  border-grey-600"
               placeholder="Search..."
               value={searchQuery}
               onChange={handleSearch}
@@ -150,29 +156,43 @@ function Spaces() {
         )}
       </div>
 
-      <div className="relative bg-image">
-        <div className="absolute inset-0 bg-black opacity-70 overlay "></div>
+      <div className="relative dark:bg-gray-100">
+        
         <div className="relative z-20">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:px-44 md:px-14 px-3">
-            {spaces.map((space) => (
-              <div
-                onClick={() => navigate("/spaceDetails", { state: { data: space } })}
-                key={space._id}
-                className="max-w-72 shadow-xl rounded-lg overflow-hidden mt-4 cursor-pointer mx-2 lg:my-16 group"
-              >
-                <img
-                  className="w-full h-60 object-cover"
-                  src={space.images[2]}
-                  alt="Space"
-                />
-                <div className="bg-pale-green text-center py-4 transition-transform duration-300 ">
-                  <h3 className="text-xl font-semibold text-dark-green">{space.spaceName}</h3>
-                  <p className="text-dark-green  text-sm">{space.spaceType}</p>
-                  <p className="text-xs  text-dark-green">{space.state}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  md:px-14 px-3">
+  {spaces.map((space) => (
+    <div
+      onClick={() => navigate("/user/spaceDetails", { state: { data: space } })}
+      key={space._id}
+      className="max-w-xs  rounded-md shadow-md dark:bg-gray-50 dark:text-gray-800 overflow-hidden mt-4 cursor-pointer mx-2 lg:my-16 group"
+    >
+      <img
+        className="w-full h-36 object-cover object-center rounded-t-md dark:bg-gray-500"
+        src={space.images[2]}
+        alt="Space"
+      />
+      <div className="flex flex-col justify-between p-6 space-y-8">
+        <div className="space-y-2">
+          <h2 className="text-2xl font-bold  text-dark-green text-center">{space.spaceName.toUpperCase()}</h2>
+          <p className="flex items-center text-dark-green text-sm justify-center ">
+                <FontAwesomeIcon icon={faBuilding} className="mr-2" />
+                {space.spaceType}
+              </p>
+          <p className="text-xs text-dark-green flex items-center justify-center ">
+                <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-2 h-5" />
+                {space.areaName}, {space.state}
+              </p>
+        </div>
+        <button 
+          type="button" 
+          className="flex items-center justify-center w-full p-3 font-semibold tracking-wide rounded-md dark:bg-customGreen dark:text-gray-50"
+          onClick={()=>navigate("/spaceDetails",{ state: { data: space } })} key={space._id}>
+          View Details
+        </button>
+      </div>
+    </div>
+  ))}
+</div>
 
           <div className="flex justify-center space-x-1 dark:text-gray-800 mt-4">
       <button
@@ -230,7 +250,8 @@ function Spaces() {
     </div>
         </div>
       </div>
-
+      </div>
+      </div>
       <Footer />
     </>
   );

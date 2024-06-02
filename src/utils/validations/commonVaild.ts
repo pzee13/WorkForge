@@ -46,3 +46,18 @@ export interface MyError {
     facilities:string[]|null,
     rentalAgreement:File | null,
   }
+
+
+  export interface AddSpaceForms{
+    spaceName:string,
+    spaceType:string,
+    buildingName:string,
+    description:string,
+    floor:string,
+    images:File,
+    chargePerHour:number,
+    availableSpaces:number,
+    contactNumber:string,
+    facilities:string,
+    rentalAgreement:File,
+  }
