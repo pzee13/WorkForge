@@ -23,7 +23,7 @@ const ImageContainer = ({ images }) => {
     };
 
     return (
-        <section className="py-6 dark:bg-gray-100 dark:text-gray-900">
+        <section className="py-6 dark:bg-gray-50 dark:text-gray-900">
             <div className="container mx-auto p-4">
                 <div className="grid grid-cols-2 gap-4">
                 <div className="relative overflow-hidden shadow-lg dark:bg-gray-500 h-96 rounded-lg">
@@ -42,14 +42,14 @@ const ImageContainer = ({ images }) => {
 
                     <div className="grid grid-rows-2 gap-2 h-96">
                         <div className="grid grid-cols-2 gap-2">
-                            <div className="relative overflow-hidden shadow-sm dark:bg-gray-500 rounded-lg">
+                            <div className="relative overflow-hidden shadow-sm dark:bg-gray-50 rounded-lg">
                                 <img
                                     src={displayedImages[1]}
                                     alt="Image 1"
                                     className="object-cover w-full h-full rounded-lg"
                                 />
                             </div>
-                            <div className="relative overflow-hidden shadow-sm dark:bg-gray-500 rounded-lg">
+                            <div className="relative overflow-hidden shadow-sm dark:bg-gray-50 rounded-lg">
                                 <img
                                     src={displayedImages[2]}
                                     alt="Image 2"
@@ -58,14 +58,14 @@ const ImageContainer = ({ images }) => {
                             </div>
                         </div>
                         <div className="grid grid-cols-2 gap-2">
-                            <div className="relative overflow-hidden shadow-sm dark:bg-gray-500 rounded-lg">
+                            <div className="relative overflow-hidden shadow-sm dark:bg-gray-50 rounded-lg">
                                 <img
                                     src={displayedImages[3]}
                                     alt="Image 3"
                                     className="object-cover w-full h-full rounded-lg"
                                 />
                             </div>
-                            <div className="relative overflow-hidden shadow-sm dark:bg-gray-500 rounded-lg">
+                            <div className="relative overflow-hidden shadow-sm dark:bg-gray-50 rounded-lg">
                                 <img
                                     src={displayedImages[0]}
                                     alt="Image 4"

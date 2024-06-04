@@ -1,69 +1,59 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export interface LocationState {
-  latitude: number;
-  longitude: number;
+export interface BookingState {
+  spaceId: string;
+  providerId: string;
+  userId: string;
+  bookingDate: Date;
+  moveInTime: string;
+  moveOutTime: string;
+  chargePerHour: number;
+  totalPrice: number;
+  payment: PaymentState;
 }
 
-export interface DetailsState {
-    areaName: string;
-    district: string;
-    state: string;
-    country: string;
-    spaceName:string,
-    spaceType:string,
-    buildingName:string,
-    description:string,
-    floor:string,
-    images:File | null,
-    chargePerHour:number,
-    availableSpaces:number,
-    contactNumber:string,
-    facilities:string[],
-    rentalAgreement:File | null,
+export interface PaymentState {
+  totalPaid: number;
+  paymentMethod: string;
+  paymentId: string;
+  isPaid: boolean;
+  paidDate: Date;
 }
 
-const initialLocationState: LocationState = {
-  latitude: 0,
-  longitude: 0,
-};
-
-const initialDetailsState: DetailsState = {
-    areaName: '',
-    district: '',
-    state: '',
-    country: '',
-    spaceName: '',
-    spaceType: '',
-    buildingName: '',
-    description: '',
-    floor: '',
-    images: null,
-    chargePerHour: 0,
-    availableSpaces: 0,
-    contactNumber: '',
-    facilities: [],
-    rentalAgreement: null,
+const initialBookingState: BookingState  = {
+  spaceId: '',
+  providerId: '',
+  userId: '',
+  bookingDate: new Date(),
+  moveInTime: '',
+  moveOutTime: '',
+  chargePerHour: 0,
+  totalPrice: 0,
+  payment: {
+    totalPaid: 0,
+    paymentMethod: '',
+    paymentId: '',
+    isPaid: false,
+    paidDate: new Date(),
+  },
 };
 
 export const bookingSlice = createSlice({
-  name: 'location',
-  initialState: {
-    ...initialLocationState,
-    details: initialDetailsState,
-  },
+  name: 'Booking',
+  initialState: initialBookingState,
   reducers: {
-    setLocation: (state, action: PayloadAction<LocationState>) => {
-      state.latitude = action.payload.latitude;
-      state.longitude = action.payload.longitude;
+    setBookingDetails: (state, action: PayloadAction<BookingState>) => {
+      return {
+        ...state,
+        ...action.payload,
+      };
     },
-    setSpaceDetails: (state, action: PayloadAction<DetailsState>) => {
-      state.details = action.payload;
+    setPayment: (state, action: PayloadAction<PaymentState>) => {
+      state.payment = action.payload;
     },
-   
   },
 });
 
-export const { setLocation, setSpaceDetails } = bookingSlice.actions;
+export const { setBookingDetails, setPayment } = bookingSlice.actions;
 
 export default bookingSlice.reducer;

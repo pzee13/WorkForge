@@ -162,7 +162,7 @@ function Spaces() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  md:px-14 px-3">
   {spaces.map((space) => (
     <div
-      onClick={() => navigate("/user/spaceDetails", { state: { data: space } })}
+      onClick={() => navigate("/user/spaces/spaceDetails", { state: { data: space } })}
       key={space._id}
       className="max-w-xs  rounded-md shadow-md dark:bg-gray-50 dark:text-gray-800 overflow-hidden mt-4 cursor-pointer mx-2 lg:my-16 group"
     >

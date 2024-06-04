@@ -34,7 +34,7 @@ import './Landing.css'
 const containerVariants = {
     hidden: { opacity: 0 },
     visible: { 
-        opacity: 1, 
+        opacity: 3, 
         transition: { 
             staggerChildren: 5, // Stagger the children for a smoother effect
             duration: 3, 
@@ -49,8 +49,8 @@ const itemVariants = {
         scale: 1, 
         opacity: 1,
         transition: {
-            scale: { stiffness: 1 }, // Very low stiffness for an extremely slow transition
-            duration: 5 // Increase duration for a slower transition
+            scale: { stiffness: 0 }, // Very low stiffness for an extremely slow transition
+            duration: 2 // Increase duration for a slower transition
         } 
     }
 };
@@ -63,9 +63,9 @@ export function Landing() {
     
       <div className="bg-white items-center">
       <Banner
-        heading="Up to\n50% Off"
+        heading="Up to 50% Off"
         subheading1="Plus free beverages! Use code:"
-        code="MAMBA"
+        code="SETSPACE"
         subheading2=""
         linkText="Book Now"
         linkUrl="/user/spaces"
@@ -86,8 +86,7 @@ export function Landing() {
 
       </div> */}
       <SearchComponent />
-      <div className="flex justify-center dark:bg-white">
-                <div className="w-11/12 ">
+     
     <motion.div variants={containerVariants} initial="hidden" animate="visible">
       <motion.div
         variants={itemVariants}
@@ -230,6 +229,15 @@ export function Landing() {
                     images={[officeImage, meetImage, trainImage, deskImage]}/>
       </motion.div> */}
 
+<motion.div
+                variants={itemVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }} 
+            
+                
+            >
+
       <section className="p-6 my-6 dark:bg-customGreen dark:text-gray-800">
 	<div className="container grid grid-cols-1 gap-6 mx-auto sm:grid-cols-2 xl:grid-cols-4">
 		<div className="flex p-4 space-x-4 rounded-lg md:space-x-6 dark:bg-gray-50 dark:text-gray-800">
@@ -336,6 +344,7 @@ export function Landing() {
 		</div>
 	</div>
 </section>
+</motion.div>
       <motion.div
                 variants={itemVariants}
                 initial="hidden"
@@ -371,22 +380,22 @@ export function Landing() {
 	<div className="container flex flex-col justify-center dark:bg-white p-4 mx-auto md:p-8">
 		<p className="p-2 text-sm font-medium tracking-wider text-center uppercase">How it works</p>
 		<h2 className="mb-12 text-4xl font-bold leading-none text-center sm:text-5xl">Frequently Asked Questions</h2>
-		<div className="flex flex-col bg-customGreen divide-y sm:px-8 lg:px-12 xl:px-32 dark:divide-gray-300">
+		<div className="flex flex-col divide-y sm:px-8 lg:px-12 xl:px-32 dark:divide-black">
 			<details>
-				<summary className="py-2 text-white outline-none cursor-pointer focus:underline">Optio maiores eligendi molestiae totam dolores similique?</summary>
-				<div className="px-4 pb-4 text-gray-100">
+				<summary className="py-2 text-customGreen outline-none cursor-pointer focus:underline">Optio maiores eligendi molestiae totam dolores similique?</summary>
+				<div className="px-4 pb-4 text-secondGreen">
 					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde neque in fugiat magni, quas animi enim veritatis deleniti ex. Impedit.</p>
 				</div>
 			</details>
 			<details>
-				<summary className="py-2 text-white outline-none cursor-pointer focus:underline">Modi dolorem veritatis culpa quos consequuntur beatae itaque excepturi perspiciatis?</summary>
-				<div className="px-4 pb-4 text-gray-100">
+				<summary className="py-2 text-customGreen outline-none cursor-pointer focus:underline">Modi dolorem veritatis culpa quos consequuntur beatae itaque excepturi perspiciatis?</summary>
+				<div className="px-4 pb-4 text-secondGreen">
 					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est aspernatur quae, eos explicabo odit minima libero veniam similique quibusdam doloribus facilis ipsa accusantium vel maiores corrupti! Libero voluptate a doloribus?</p>
 				</div>
 			</details>
 			<details>
-				<summary className="py-2 text-white outline-none cursor-pointer focus:underline">Magni reprehenderit possimus debitis?</summary>
-				<div className="px-4 pb-4 space-y-2 text-gray-100">
+				<summary className="py-2 text-customGreenoutline-none cursor-pointer focus:underline">Magni reprehenderit possimus debitis?</summary>
+				<div className="px-4 pb-4 space-y-2 text-secondGreen">
 					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut voluptates aspernatur dolores in consequatur doloremque inventore reprehenderit, consequuntur perspiciatis architecto.</p>
 					<p>Sed consectetur quod tenetur! Voluptatibus culpa incidunt veritatis velit quasi cupiditate unde eaque! Iure, voluptatibus autem eaque unde possimus quae.</p>
 				</div>
@@ -398,8 +407,7 @@ export function Landing() {
         </motion.div>
         </div>
 
-        </div>
-        </div>
+       
         <Footer />
     </>
   );

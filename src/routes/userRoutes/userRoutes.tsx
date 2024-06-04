@@ -22,7 +22,7 @@ export function UserRoutes(){
             <Route path="profile" element={<Profile/>} />
             <Route path='/resetPassword/:email/:token' element={<ResetPassword/>} />
             <Route path='/spaces' element={<Spaces/>} />
-            <Route path='/spaceDetails' element={<SpaceDetails/>} />
+            <Route path='/spaces/spaceDetails' element={<SpaceDetails/>} />
         </Routes>
     )
 }
