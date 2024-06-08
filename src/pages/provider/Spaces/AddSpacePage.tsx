@@ -1,18 +1,16 @@
-// src/pages/provider/Spaces/AddSpacePage.tsx
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import SpaceSidebar from '../../../component/provider/sideBar/SpaceSidebar';
 import Navbar from '../../../component/provider/navbar/Navbar';
 import Footer from '../../../component/provider/footer/Footer';
-import './AddSpacePage.css';
 
 const AddSpacePage: React.FC = () => {
     return (
         <>
             <Navbar />
-            <div className="page-layout">
+            <div className="flex flex-col md:flex-row h-[calc(100vh)]">
                 <SpaceSidebar />
-                <div className="content">
+                <div className="flex-1 overflow-y-auto p-4">
                     <Outlet />
                 </div>
             </div>

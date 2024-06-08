@@ -27,6 +27,31 @@ export const adminApiSlice = apiSlice.injectEndpoints({
       })
     }),
 
+    createSpaceType: builder.mutation({
+      query: (data) => ({
+        url: `${ADMIN_URL}/createSpaceType`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+
+    getSpaceTypes: builder.mutation({
+      query: () => ({
+        url: `${ADMIN_URL}/getSpaceTypes`,
+        method: "GET",
+  
+      }),
+    }),
+
+    updateSpaceType:builder.mutation({
+      query: (data) => ({
+        url: `${ADMIN_URL}/updateSpaceType`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
+    
+
     updateSpaceStatus: builder.mutation({
       query: ({ id, providerId, isAccepted }) => ({
         url: `${ADMIN_URL}/updateSpaceStatus/${id}/${providerId}`,
@@ -34,6 +59,8 @@ export const adminApiSlice = apiSlice.injectEndpoints({
         body: { isAccepted }, // Assuming isAccepted is the only field to update
       }),
     }),
+
+
 
     blockUser: builder.mutation({
       query: (data) => ({
@@ -60,5 +87,8 @@ export const adminApiSlice = apiSlice.injectEndpoints({
     useGetSpaceRequestsMutation,
     useUpdateSpaceStatusMutation,
     useGetUsersMutation,
-    useBlockUserMutation
+    useBlockUserMutation,
+    useCreateSpaceTypeMutation,
+    useGetSpaceTypesMutation,
+    useUpdateSpaceTypeMutation
 }= adminApiSlice;

@@ -13,9 +13,43 @@
   }
   
   .image-upload {
-    margin-top: 20px;
-  }
-  
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.image-upload h4 {
+  margin-bottom: 10px;
+}
+
+.image-upload-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.image-upload-item input[type="file"] {
+  padding: 8px 12px;
+  border: 2px dashed #ced4da;
+  border-radius: 4px;
+  background-color: #f8f9fa;
+}
+
+.image-preview {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.image-preview img {
+  margin-right: 10px;
+  border-radius: 4px;
+}
+
+.image-upload-item input[type="file"].dark {
+  border-color: #d1d5db;
+  color: #6b7280;
+  background-color: #f1f5f9;
+}
   .rental-agreement {
     margin-top: 20px;
   }

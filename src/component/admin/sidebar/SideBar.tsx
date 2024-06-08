@@ -10,12 +10,14 @@ import {
   ChevronLeft,
   Dashboard,
   PeopleAlt,
+  MeetingRoom, Business
 } from "@mui/icons-material";
 import { CSSObject } from "@emotion/react";
 import { useMemo, useState } from "react";
 import FiberNewIcon from "@mui/icons-material/FiberNew";
 import DashBoard from "../../../pages/admin/dashboard/DashBoard";
 import Users from '../../../pages/admin/users/Users'
+import SpaceTypes from "../../../pages/admin/spaces/SpaceTypes"
 
 import { Route, Routes, useNavigate } from "react-router-dom";
 
@@ -90,6 +92,12 @@ function SideBar({ open, setOpen }: Open) {
         icon: <Dashboard />,
         link: "dashboard",
         component: <DashBoard {...{setSelectedLink,link:'dashboard'}}/>,
+      },
+      {
+        title: "Space Types",
+        icon: <Business />,
+        link: "spaceTypes",
+        component: <SpaceTypes {...{setSelectedLink,link:'spaceTypes'}}/>,
       },
       {
         title: "Users",

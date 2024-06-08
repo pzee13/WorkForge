@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useProviderCreateSpaceMutation } from '../../../slices/providerApiSlice';
+import { useGetSpaceTypesMutation } from "../../../slices/adminApiSlice";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useNavigate } from 'react-router-dom';
 import { storage } from '../../../app/firebase/config';
@@ -10,19 +11,20 @@ import { AddSpaceForm } from '../../../utils/validations/commonVaild';
 import { spaceValidation } from '../../../utils/validations/yupValidation';
 import SpaceProgress from './SpaceProgress';
 import { RootState } from "../../../app/store";
-import { TextField, Button, CircularProgress, IconButton, Select, MenuItem, Checkbox, ListItemText, FormControl, InputLabel } from '@mui/material';
+import { TextField, Button, CircularProgress, IconButton, Select, MenuItem, Checkbox, ListItemText, FormControl, InputLabel, FormHelperText } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import InputField from '../../../component/common/inputField/InputField'; // Adjust the path as necessary
 import DeleteIcon from '@mui/icons-material/Delete';
 import './AddSpaceDetails.css'; // Assuming you have a CSS file for custom styles
-
+import { SpaceType } from "../../../types/Spaces/spaceType";
 const FACILITIES = ["Wifi", "Toilet", "Parking", "Drinking Water"];
 
 function AddSpaceDetails() {
   const [createSpace] = useProviderCreateSpaceMutation();
   const { latitude, longitude } = useSelector((state: RootState) => state.location);
   const { areaName, state, district, country } = useSelector((state: RootState) => state.address);
+  const [spaceTypes, setSpaceTypes] = useState<SpaceType[]>([]);
   const { providerInfo } = useSelector((state: RootState) => state.auth);
   const [isSubmit, setSubmit] = useState(false);
   const [facilities, setFacilities] = useState<string[]>([]);
@@ -84,10 +86,21 @@ function AddSpaceDetails() {
         await uploadBytes(rentalAgreementStorageRef, rentalAgreementFile);
         const rentalAgreementDownloadURL = await getDownloadURL(rentalAgreementStorageRef);
 
+        const selectedSpaceType = spaceTypes.find(st => st._id === spaceType);
+        if (!selectedSpaceType) {
+          throw new Error('Selected space type is invalid.');
+        }
+
+        const isMultipleBookingsAllowed = selectedSpaceType ? selectedSpaceType.availableSpace : true;
+
+        let adjustedAvailableSpaces = availableSpaces;
+        if (!selectedSpaceType.availableSpace) {
+          adjustedAvailableSpaces = 1;
+        }
         // Prepare the payload
         const payload = {
           spaceName,
-          spaceType,
+          spaceType: selectedSpaceType.spaceTypeName,
           state,
           district,
           country,
@@ -97,7 +110,7 @@ function AddSpaceDetails() {
           floor,
           images: imageDownloadURLs,
           chargePerHour,
-          availableSpaces,
+          availableSpaces:adjustedAvailableSpaces,
           contactNumber,
           facilities,
           rentalAgreement: rentalAgreementDownloadURL,       
@@ -178,8 +191,24 @@ function AddSpaceDetails() {
     formik.setFieldValue('facilities', value);
   };
 
+  const [getSpaceTypes] = useGetSpaceTypesMutation();
+
+  useEffect(() => {
+    const fetchSpaceTypes = async () => {
+      try {
+        const response = await getSpaceTypes("").unwrap(); // Change this line
+        setSpaceTypes(response.data); // Assuming the response contains the space types data
+      } catch (error) {
+        console.error("Error fetching space types:", error);
+        toast.error(error.data.message); // Set error message for display
+      }
+    };
+    fetchSpaceTypes();
+  }, [getSpaceTypes]);
+
   return (
-    <div>
+    <div className="flex justify-center mt-5">
+                <div className="w-9/12 shadow-2xl">
       <SpaceProgress />
       <div className="form-container">
         <form onSubmit={formik.handleSubmit}>
@@ -194,16 +223,31 @@ function AddSpaceDetails() {
               touched={formik.touched.spaceName}
               placeholder="Enter space name"
             />
-            <InputField
-              id="spaceType"
-              label="Space Type"
-              type="text"
-              value={formik.values.spaceType}
-              onChange={formik.handleChange}
-              error={formik.errors.spaceType}
-              touched={formik.touched.spaceType}
-              placeholder="Enter space type"
-            />
+             
+             <TextField
+  select
+  id="spaceType"
+  name="spaceType"
+  label="Space Type"
+  value={formik.values.spaceType}
+  onChange={formik.handleChange}
+  error={formik.touched.spaceType && Boolean(formik.errors.spaceType)}
+  helperText={formik.touched.spaceType && formik.errors.spaceType}
+  variant="outlined"
+  sx={{
+    width: '50%', // Adjust the width as needed
+    color: 'grey', // Change text color to gray
+  }}
+>
+              <MenuItem value="">
+                <em>Select Space Type</em>
+              </MenuItem>
+              {spaceTypes.map((spaceType) => (
+                <MenuItem key={spaceType._id} value={spaceType._id}>
+                  {spaceType.spaceTypeName}
+                </MenuItem>
+              ))}
+            </TextField>
           </div>
           <div className="horizontal-inputs">
             <InputField
@@ -325,9 +369,9 @@ function AddSpaceDetails() {
           </Button>
         </form>
       </div>
+      </div>
     </div>
   );
 }
 
 export default AddSpaceDetails;
-

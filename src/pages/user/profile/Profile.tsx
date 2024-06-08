@@ -5,6 +5,7 @@ import "./Profile.css"
 import landImage from "../../../assets/images/LandingUser/fotor-ai-2024051614220.jpg";
 import { MdModeEdit } from "react-icons/md";
 import { IoPersonSharp } from "react-icons/io5";
+import { Link, useNavigate } from 'react-router-dom'
 import { FaMobileAlt } from "react-icons/fa";
 import { MdOutlineMail} from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +16,7 @@ import { validationForUserUpdate } from "../../..//utils/validations/yupValidati
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import { setCredential } from "../../../slices/authSlice";
+
 
 
 
@@ -180,8 +182,47 @@ function Profile() {
 
 
 
-
-
+      <main className="flex min-h-[calc(100vh - var(--theme-spacing-16))] flex-1 flex-col gap-4 bg-muted/40 p-4 md:gap-8 md:p-10">
+  <div className="mx-auto grid w-full max-w-6xl gap-2">
+    <h1 className="text-3xl font-semibold">Settings</h1>
+  </div>
+  <div className="mx-auto grid w-full max-w-6xl items-start gap-6 md:grid-cols-[180px_1fr] lg:grid-cols-[250px_1fr]">
+    <nav className="grid gap-4 text-sm text-muted-foreground">
+      <div className="font-semibold text-primary">General</div>
+      <div>Security</div>
+      <div>Integrations</div>
+      <div>Support</div>
+      <div>Organizations</div>
+      <div>Advanced</div>
+    </nav>
+    <div className="grid gap-6">
+      <div>
+        <h2 className="text-lg font-semibold">Store Name</h2>
+        <p className="text-sm">Used to identify your store in the marketplace.</p>
+        <form>
+          <input type="text" placeholder="Store Name" className="input" />
+        </form>
+        <div className="border-t pt-4">
+          <button className="button">Save</button>
+        </div>
+      </div>
+      <div>
+        <h2 className="text-lg font-semibold">Plugins Directory</h2>
+        <p className="text-sm">The directory within your project, in which your plugins are located.</p>
+        <form className="flex flex-col gap-4">
+          <input type="text" placeholder="Project Name" defaultValue="/content/plugins" className="input" />
+          <div className="flex items-center space-x-2">
+            <input type="checkbox" id="include" defaultChecked className="checkbox" />
+            <label htmlFor="include" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Allow administrators to change the directory.</label>
+          </div>
+        </form>
+        <div className="border-t pt-4">
+          <button className="button">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
 
    
 

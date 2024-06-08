@@ -9,18 +9,9 @@ export interface BookingState {
   moveOutTime: string;
   chargePerHour: number;
   totalPrice: number;
-  payment: PaymentState;
 }
 
-export interface PaymentState {
-  totalPaid: number;
-  paymentMethod: string;
-  paymentId: string;
-  isPaid: boolean;
-  paidDate: Date;
-}
-
-const initialBookingState: BookingState  = {
+const initialBookingState: BookingState = {
   spaceId: '',
   providerId: '',
   userId: '',
@@ -29,31 +20,32 @@ const initialBookingState: BookingState  = {
   moveOutTime: '',
   chargePerHour: 0,
   totalPrice: 0,
-  payment: {
-    totalPaid: 0,
-    paymentMethod: '',
-    paymentId: '',
-    isPaid: false,
-    paidDate: new Date(),
-  },
 };
 
 export const bookingSlice = createSlice({
   name: 'Booking',
   initialState: initialBookingState,
   reducers: {
-    setBookingDetails: (state, action: PayloadAction<BookingState>) => {
-      return {
-        ...state,
-        ...action.payload,
-      };
-    },
-    setPayment: (state, action: PayloadAction<PaymentState>) => {
-      state.payment = action.payload;
+    setBooking: (state, action: PayloadAction<BookingState>) => {
+      state.spaceId = action.payload.spaceId;
+   
+      state.providerId = action.payload.providerId;
+   
+      state.userId = action.payload.userId;
+  
+      state.bookingDate = action.payload.bookingDate;
+    
+      state.moveInTime = action.payload.moveInTime;
+   
+      state.moveOutTime = action.payload.moveOutTime;
+   
+      state.chargePerHour = action.payload.chargePerHour;
+ 
+      state.totalPrice = action.payload.totalPrice;
     },
   },
 });
 
-export const { setBookingDetails, setPayment } = bookingSlice.actions;
+export const { setBooking } = bookingSlice.actions;
 
 export default bookingSlice.reducer;

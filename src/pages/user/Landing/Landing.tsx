@@ -22,14 +22,23 @@ import ContentSection from '../../../component/user/Landing/ContentSection'
 import Banner from "../../../component/common/Banner/Banner"
 import Footer from "../../../component/user/Footer/Footer";
 import SearchComponent from "../../../component/user/search/SearchComponent";
+import { World } from "../../../component/ui/Globe"
+import { useGetSpacesMutation } from "../../../slices/userApiSlice";
+import { useState,useEffect } from 'react'
+
+
+
+
 import './Landing.css'
 
 
-
+ 
 // const containerVariants = {
 //     hidden: { y: '50%', opacity: 0 },
 //     visible: { y: 0, opacity: 1, transition: { duration: 1, ease: 'easeOut' }}
 //   };
+
+
 
 const containerVariants = {
     hidden: { opacity: 0 },
@@ -55,12 +64,57 @@ const itemVariants = {
     }
 };
 
+interface Coordinate {
+    startLat: number;
+    startLng: number;
+    endLat: number;
+    endLng: number;
+    arcAlt: number;
+    color: string;
+}
+
 export function Landing() {
+
+    const [spaces, setSpaces] = useState([]);
+
+    const [coordinates, setCoordinates] = useState([]);
+
+    const [getSpaces] = useGetSpacesMutation();
+
+    useEffect(() => {
+        async function fetchSpaces() {
+          try {
+            const res = await getSpaces({}).unwrap()
+            setSpaces(res.data);
+            const coords = res.data.map((space, index) => ({
+                order: index + 1, // Set the order based on the index
+                startLat: 37.7749, // Set a default start latitude
+                startLng: -122.4194, // Set a default start longitude
+                endLat: space.latitude, // Use space's latitude as end latitude
+                endLng: space.longitude, // Use space's longitude as end longitude
+                arcAlt: 0.1, // Adjust as needed
+                color: "#064749", // Adjust as needed
+            }));
+            setCoordinates(coords);
+           
+          } catch (error) {
+            console.error("Error fetching spaces:", error);
+          }
+        }
+    
+        fetchSpaces();
+      }, [getSpaces]);
+
+
    
   return (
     <>
       <Navbar />
+
     
+       
+      
+
       <div className="bg-white items-center">
       <Banner
         heading="Up to 50% Off"
@@ -85,7 +139,7 @@ export function Landing() {
 </div>
 
       </div> */}
-      <SearchComponent />
+     
      
     <motion.div variants={containerVariants} initial="hidden" animate="visible">
       <motion.div
@@ -97,7 +151,7 @@ export function Landing() {
                 <div className="flex justify-center items-center mt-8 md:mt-20">
                     <p className="text-3xl md:text-5xl font-lato font-bold dark:text-gray-800">
                     Find a suitable place to work here
-                    </p>
+                    </p> 
                 </div>
                 <div className="flex justify-center items-center mt-4">
                     <p className="text-base md:text-lg font-lato text-gray-600">
@@ -163,7 +217,7 @@ export function Landing() {
                 variants={itemVariants}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true }} 
+                viewport={{ once: true }}
                 className="dark:bg-gray-100 mt-10"
             >
             <div className="flex flex-wrap justify-center">
@@ -233,12 +287,10 @@ export function Landing() {
                 variants={itemVariants}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true }} 
-            
-                
+                viewport={{ once: true }}
             >
 
-      <section className="p-6 my-6 dark:bg-customGreen dark:text-gray-800">
+      <section className="p-6 my-6 bg-customGreen dark:text-gray-800">
 	<div className="container grid grid-cols-1 gap-6 mx-auto sm:grid-cols-2 xl:grid-cols-4">
 		<div className="flex p-4 space-x-4 rounded-lg md:space-x-6 dark:bg-gray-50 dark:text-gray-800">
 			<div className="flex justify-center p-2 align-middle rounded-lg sm:p-4 dark:bg-customGreen">
@@ -297,6 +349,7 @@ export function Landing() {
 	</div>
 </section>
 
+
 <section className="p-6 dark:bg-customGreen dark:text-white mb-6">
 	<div className="container p-4 mx-auto text-center">
 		<h2 className="text-4xl font-bold">Trusted by the industry leaders</h2>
@@ -344,6 +397,7 @@ export function Landing() {
 		</div>
 	</div>
 </section>
+
 </motion.div>
       <motion.div
                 variants={itemVariants}
@@ -352,6 +406,29 @@ export function Landing() {
                 viewport={{ once: true }}
                 
             >
+
+<div className="">
+        <World
+        globeConfig={{
+          pointSize: 1,
+          atmosphereColor: "#",
+          showAtmosphere: true,
+          atmosphereAltitude: 7,
+          polygonColor: "rgba(6, 71, 73, 0.7)",
+          globeColor: "#86efac",
+          emissive: "#064749",
+          emissiveIntensity: 0.1,
+          shininess: 0.9,
+          arcTime: 2000,
+          arcLength: 0.9,
+          rings: 1,
+          maxRings: 1,
+        }}
+        data={coordinates}
+      />
+
+        </div>
+      
             {/* <section className="dark:bg-gray-100 dark:text-gray-800">
 	<div className="container flex flex-col justify-center p-4 mx-auto md:p-8">
 		<p className="p-2 text-sm font-medium tracking-wider text-center uppercase">How it works</p>

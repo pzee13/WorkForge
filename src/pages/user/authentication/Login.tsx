@@ -110,38 +110,47 @@ function Login() {
              <img src={logo} alt="Logo" className="h-8 " />
           </div>
        
-              <h2 className="text-2xl font-bold text-center mb-8 text-green-950">Sign in to your account</h2> 
+          <h1 className="my-3 text-4xl font-bold text-center text-customGreen">Sign in</h1>
+    <p className="text-sm dark:text-gray-600 text-center mb-2">Sign in to access your account</p>
               <form onSubmit={handleSubmit} className="text-center ">
-              <div className="mb-8  input-with-icon"> 
-                  <input 
-                    type="email" 
-                    id="email" 
-                    placeholder="Email" 
-                    className="w-full px-3 py-2 bg-gray-200 rounded-full focus:outline-none shadow-lg" 
-                    name="email" 
-                    value={values.email} 
-                    onChange={handleChange} 
-                  />
-                  <FaEnvelope className="input-icon mr-4" />
-                  {errors.email && touched.email && (
+              <div className="space-y-4">
+      <div>
+        <div className="flex justify-between">
+        <label htmlFor="email" className="block mb-2 text-sm">Email address</label>
+        </div>
+        <input 
+          type="email" 
+          name="email" 
+          id="email" 
+          placeholder="leroy@jenkins.com" 
+          className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800" 
+          value={values.email} 
+          onChange={handleChange} 
+        />
+         {errors.email && touched.email && (
                                     <div className="text-red-500">{errors.email}</div>
                                   )}
-                </div>
-                <div className="mb-4  items-center input-with-icon"> 
-                  <input  
-                    type="password" 
-                    id="password" 
-                    placeholder="Password" 
-                    className="w-full px-3 py-2 bg-gray-200 rounded-full focus:outline-none shadow-lg" 
-                    name="password" 
-                    value={values.password} 
-                    onChange={handleChange} 
-                  />
-                  <FaLock className="input-icon mr-4" />
-                  {errors.password && touched.password && (
+      </div>
+      <div>
+        <div className="flex justify-between mb-2">
+          <label htmlFor="password" className="text-sm">Password</label>
+          <button type="button" className="text-xs hover:underline dark:text-gray-600" onClick={openForgotModal}>Forgot password?</button>
+        </div>
+        <input 
+          type="password" 
+          name="password" 
+          id="password" 
+          placeholder="*****" 
+          className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800" 
+          value={values.password} 
+          onChange={handleChange} 
+        />
+            {errors.password && touched.password && (
                                     <div className="text-red-500 ">{errors.password}</div>
                                   )}
-                </div>
+      </div>
+      
+    </div>
 
                 <div className="text-right">
                 <button type="button" className="text-green-400" onClick={openForgotModal}>Forgot Password?</button>

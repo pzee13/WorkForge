@@ -110,10 +110,10 @@ const SpaceDetailsMap = ({ spaceName, availableSpaces, areaName, district, state
     return (
         <section className="dark:bg-gray-50 dark:text-gray-800">
         <div className="container flex flex-col mx-auto lg:flex-row">
-            <div className="w-full lg:w-1/2 flex items-center justify-center p-4 md:p-8 lg:p-12 dark:text-white font-extrabold order-2 lg:order-1">
-                <div className="flex flex-col justify-between h-full px-6 py-8 space-y-6 dark:bg-customGreen sm:p-8 lg:p-24 ">
-                    <div className="space-y-4">
-                        <h1 className="text-4xl font-extrabold text-white">{spaceName}</h1>
+            <div className="w-full lg:w-1/2 flex items-center justify-center p-4 md:p-8 lg:p-12 dark:text-customGreen font-extrabold order-2 lg:order-1">
+                <div className="flex flex-col justify-between h-full px-6 py-8 space-y-6 dark:bg-gray-100 sm:p-8 lg:p-24 ">
+                    <div className="space-y-8">
+                        <h1 className="text-4xl font-extrabold text-customGreen text-center">Details</h1>
                         <p className="leading-snug">Available Spaces: {availableSpaces}</p>
                         <p>Area Name: {areaName}</p>
                         <p>District: {district}</p>
