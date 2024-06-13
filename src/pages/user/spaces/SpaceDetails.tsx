@@ -9,9 +9,13 @@ import Navbar from "../../../component/user/navbar/Navbar";
 import Footer from "../../../component/user/Footer/Footer";
 import SpaceDetailsMap from "../../../component/common/Spaces/SpaceDetailsMap";
 import ImageContainer from '../../../component/common/ImageContainer';
+import { useBookSpaceMutation } from '../../../slices/userApiSlice';
 import Facilities from '../../../component/common/Spaces/Facilities'
 import { TextGenerateEffect } from "../../../component/ui/TextGenerateEffect";
 import SkeletonLoader from '../../../component/user/Loader/SkeletonLoader'
+import { MdTimeToLeave } from 'react-icons/md';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+
 
  interface BookingFormData {
     bookingDate: string;
@@ -22,11 +26,14 @@ import SkeletonLoader from '../../../component/user/Loader/SkeletonLoader'
 const SpaceDetails = () => {
     const location = useLocation();
     const navigate = useNavigate();
+    const [showModal, setShowModal] = useState(false); 
+    const [bookingDetails, setBookingDetails] = useState<any>(null)
     const dispatch = useDispatch();
     const { data } = location.state;
     const [loading, setLoading] = useState<boolean>(true); // Add loading state
     const { userInfo } = useSelector((state: RootState) => state.auth);
     const userID = userInfo ? userInfo._id : '';
+    const [bookSpace] = useBookSpaceMutation()
 
     useEffect(() => {
         // Simulate loading delay (remove this in production)
@@ -38,32 +45,77 @@ const SpaceDetails = () => {
         return () => clearTimeout(timeout);
     }, []); // Run effect only once on component mount
 
-    const { register, handleSubmit, watch } = useForm<BookingFormData>();
+    const { register, handleSubmit, watch, setError, clearErrors } = useForm<BookingFormData>();
+
+
+  
 
     const onSubmit: SubmitHandler<BookingFormData> = (formData) => {
         if (!userID) {
             // Handle the case where userID is undefined or null
             console.error("User ID is not available");
-            navigate('/user/login')
+            navigate('/login')
             return;
           }
+
+          const moveInHour = parseInt(formData.moveInTime, 10);
+          const moveOutHour = parseInt(formData.moveOutTime, 10);
+  
+          if (moveInHour >= moveOutHour) {
+              setError("moveOutTime", {
+                  type: "manual",
+                  message: "Move out time must be later than move in time"
+              });
+              return;
+          }
+  
+          clearErrors("moveOutTime");
+
         // Dispatch the setBooking action
-        dispatch(setBooking({
-            spaceId: data.spaceId,
+        const bookingData = {
+            spaceName:data.spaceName,
+            spaceId: data._id,
             providerId: data.providerId,
-            userId: userID, // Replace with the actual user ID
+            userId: userID,
             bookingDate: new Date(formData.bookingDate),
             moveInTime: formData.moveInTime,
             moveOutTime: formData.moveOutTime,
             chargePerHour: data.chargePerHour,
             totalPrice: calculateTotal(formData.moveInTime, formData.moveOutTime),
-        }));
+            areaName: data.areaName,
+            district: data.district,
+            state: data.state,
+            country: data.country,
+            contactNumber: data.contactNumber
+        };
+
+        dispatch(setBooking(bookingData));
+        
+        setBookingDetails(bookingData)
         // Navigate to the checkout page
-        navigate('checkout');
+        setShowModal(true)
+        
     }; 
+
+    const confirm = async () => {
+        try {
+            const response = await bookSpace(bookingDetails); // Pass the booking details to the mutation
+            // Handle the response as needed
+            console.log(response);
+            // After successful booking, navigate to the checkout page
+            navigate('/checkout');
+        } catch (error) {
+            // Handle any errors that occur during booking
+            console.error('Error booking space:', error);
+            // Optionally, show an error message to the user
+        }
+    };
+
 
     const moveInTime = watch("moveInTime", "09:00");
     const moveOutTime = watch("moveOutTime", "18:00");
+
+    
 
     // Function to calculate total cost
     const calculateTotal = (moveIn:string, moveOut:string) => {
@@ -81,6 +133,9 @@ const SpaceDetails = () => {
         hourOptions.push(`${i}:00`);
     }
 
+
+
+    
     const today = new Date();
     const tomorrow = new Date(today);
     tomorrow.setDate(today.getDate() + 1);
@@ -95,9 +150,10 @@ const SpaceDetails = () => {
     return (
         <>
             <Navbar />
+            
 
             <div className="bg-gray-50">
-                    <ImageContainer images={data.images} />
+                    <ImageContainer images={data.images} loading={loading} />
                 </div>
             
             <div className="flex justify-center dark:bg-gray-50">
@@ -113,7 +169,7 @@ const SpaceDetails = () => {
                             
                         </div>
                         
-                        <div className="flex flex-col max-w-md p-6 space-y-4 divide-y sm:w-96 sm:p-10 dark:divide-gray-300 dark:bg-customGreen dark:text-white">
+                        <div className="flex flex-col shadow-3xl rounded-lg max-w-md p-6 space-y-4 divide-y sm:w-96 sm:p-10 dark:divide-gray-300 dark:bg-customGreen dark:text-white">
                             <h2 className="text-2xl font-semibold">Booking Details</h2>
                             <form onSubmit={handleSubmit(onSubmit)}>
                                 <div className="pt-4 space-y-2">
@@ -181,6 +237,67 @@ const SpaceDetails = () => {
                             </form>
                         </div>
                     </div>
+
+       
+                    {showModal && (
+    <div className="fixed z-10 inset-0 overflow-y-auto">
+        <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div className="fixed inset-0 transition-opacity" aria-hidden="true">
+                <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+            </div>
+
+            <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+            <div className="inline-block align-bottom rounded-lg overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <div className="flex flex-col gap-4 p-6 rounded-md shadow-md sm:py-8 sm:px-12 dark:bg-gray-50 dark:text-gray-800">
+                    <h2 className="text-xl font-semibold">Booking Details</h2>
+                    <ul className="space-y-4">
+                        <li className="flex flex-col py-6 sm:flex-row sm:justify-between">
+                            <div className="flex w-full space-x-2 sm:space-x-4">
+                                <img className="flex-shrink-0 object-cover w-20 h-20 dark:border- rounded outline-none sm:w-32 sm:h-32 dark:bg-gray-500" src={data.images[0]} alt="Polaroid camera" />
+                                <div className="flex flex-col justify-between w-full pb-4">
+                                    <div className="flex justify-between w-full pb-2 space-x-2">
+                                        <div className="space-y-1">
+                                            <h3 className="text-lg font-semibold leading-snug">{bookingDetails.spaceName}</h3>
+                                            <p className="text-sm dark:text-gray-600">{bookingDetails.bookingDate.toDateString()}</p>
+                                        </div>
+                                        <div className="text-right">
+                                            <p className="text-lg font-semibold">{bookingDetails.chargePerHour}</p>
+                                           
+                                        </div>
+                                    </div>
+                                    <div className="flex text-sm divide-x">
+                                        <button type="button" className="flex items-center px-2 py-1 pl-0 space-x-1">
+                                            <AccessTimeIcon/>
+                                            <span>Move In Time:<strong>{bookingDetails.moveInTime}:00</strong></span>
+                                        </button>
+                                        <button type="button" className="flex items-center px-2 py-1 space-x-1">
+                                           <MdTimeToLeave/>
+                                            <span>Move Out Time:<strong>{bookingDetails.moveOutTime}:00</strong></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div className="space-y-1 text-right">
+                        <p>Total amount: <span className="font-semibold">₹{bookingDetails.totalPrice}</span></p>
+                        <p className="text-sm dark:text-gray-600"> including bevarges and facilities</p>
+                    </div>
+                    <div className="flex justify-end space-x-4">
+                        <button onClick={() => setShowModal(false)} type="button" className="px-6 py-2 border rounded-md dark:border-violet-600">
+                            Back to Details
+                        </button>
+                        <button onClick={confirm} type="button" className="px-6 py-2 border rounded-md dark:bg-customGreen dark:text-gray-50 dark:border-violet-600">
+                            <span className="sr-only sm:not-sr-only">Continue to </span> Checkout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+)}
+
                     
                  
                     <div>

@@ -52,8 +52,9 @@ export const validationSchema = Yup.object({
     floor: Yup.string()
       .required("Please enter floor"),
     images: Yup.array()
-      .min(1, "Please upload at least one image")
-      .of(Yup.mixed().required("Please upload image files")),
+      .of(Yup.mixed().required('An image is required'))
+      .length(4, 'Exactly 4 images are required')
+      .required('Images are required'),
     chargePerHour: Yup.number()
       .required("Please enter charge per hour")
       .positive("Charge per hour must be positive")

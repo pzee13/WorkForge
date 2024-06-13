@@ -32,7 +32,7 @@ button.signup-button {
     z-index: 1000;
   }
 
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+  /* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 .font-roboto {
   font-family: 'Roboto', sans-serif;
@@ -42,7 +42,7 @@ button.signup-button {
 
 .font-montserrat {
   font-family: 'Montserrat', sans-serif;
-}
+} */
 
 .color1{
   background-color: #E2F1E8

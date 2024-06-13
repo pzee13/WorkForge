@@ -16,6 +16,6 @@ export function UserAuthRoute(){
     //     }
     // }, [dispatch, navigate, userInfo]);
 
-    return userInfo ?<Outlet/> :  <Navigate to="/user/login" replace />
+    return userInfo ?<Outlet/> :  <Navigate to="/login" replace />
 }
 

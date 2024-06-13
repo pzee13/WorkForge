@@ -18,6 +18,7 @@ import FiberNewIcon from "@mui/icons-material/FiberNew";
 import DashBoard from "../../../pages/admin/dashboard/DashBoard";
 import Users from '../../../pages/admin/users/Users'
 import SpaceTypes from "../../../pages/admin/spaces/SpaceTypes"
+import Providers from "../../../pages/admin/providers/Providers"
 
 import { Route, Routes, useNavigate } from "react-router-dom";
 
@@ -104,6 +105,12 @@ function SideBar({ open, setOpen }: Open) {
         icon: <PeopleAlt />,
         link: "users",
         component: <Users {...{setSelectedLink,link:'users'}}/>,
+      },
+      {
+        title: "Providers",
+        icon: <PeopleAlt />,
+        link: "providers",
+        component: <Providers {...{setSelectedLink,link:'providers'}}/>,
       },
       {
         title: "Space Requests",

@@ -2,6 +2,7 @@ import { Route , Routes } from 'react-router-dom'
 import Login from '../../pages/provider/authentication/Login'
 import SignUp from '../../pages/provider/authentication/SignUp'
 import { LandingProvider } from '../../pages/provider/Landing/LandingProvider'
+import DefaultContent from '../../component/provider/default/DefaultContent'
 import { ProviderHome } from "../../pages/provider/Home/ProviderHome"
 import { ProviderAuthRoute } from './ProviderAuthRoute'
 import  AddLocation  from '../../pages/provider/Spaces/AddLocation'
@@ -21,6 +22,7 @@ export function ProviderRoutes(){
                 {/* <Route path='addLocation' element={<AddLocation/>} />
                 <Route path='addSpaceDetails' element={<AddSpaceDetails/>} /> */}
                  <Route path='addSpace' element={<AddSpacePage />}>
+                    <Route index element={<DefaultContent />} />
                     <Route path='addLocation' element={<AddLocation />} />
                     <Route path='addSpaceDetails' element={<AddSpaceDetails />} />
                 </Route>

@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface BookingState {
+  spaceName:string
   spaceId: string;
   providerId: string;
   userId: string;
@@ -9,9 +10,16 @@ export interface BookingState {
   moveOutTime: string;
   chargePerHour: number;
   totalPrice: number;
+  areaName: string;
+  district: string;
+  state: string;
+  country: string;
+  contactNumber:string
+ 
 }
 
 const initialBookingState: BookingState = {
+  spaceName:'',
   spaceId: '',
   providerId: '',
   userId: '',
@@ -20,6 +28,11 @@ const initialBookingState: BookingState = {
   moveOutTime: '',
   chargePerHour: 0,
   totalPrice: 0,
+  areaName: '',
+  district: '',
+  state: '',
+  country: '',
+  contactNumber:''
 };
 
 export const bookingSlice = createSlice({
@@ -27,6 +40,8 @@ export const bookingSlice = createSlice({
   initialState: initialBookingState,
   reducers: {
     setBooking: (state, action: PayloadAction<BookingState>) => {
+      state.spaceName = action.payload.spaceName;
+
       state.spaceId = action.payload.spaceId;
    
       state.providerId = action.payload.providerId;
@@ -42,6 +57,16 @@ export const bookingSlice = createSlice({
       state.chargePerHour = action.payload.chargePerHour;
  
       state.totalPrice = action.payload.totalPrice;
+
+      state.areaName = action.payload.areaName;
+
+      state.district = action.payload.district;
+
+      state.state = action.payload.state;
+
+      state.country = action.payload.country;
+
+      state.contactNumber = action.payload.contactNumber;
     },
   },
 });

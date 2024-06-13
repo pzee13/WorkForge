@@ -98,6 +98,39 @@ export const userApiSlice = apiSlice.injectEndpoints({
       }),
     }),
 
+    bookSpace: builder.mutation({
+      query: (data) => ({
+        url: `${USER_URL}/bookSpace`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+
+    preBookings: builder.mutation({
+      query: (data) => ({
+        url: `${USER_URL}/preBookings`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+
+    payment: builder.mutation({
+      query: (data) => ({
+        url: `${USER_URL}/payment`,
+        method: "POST",
+        body: data,
+      }),
+    }),
+
+    getSpaceTypes: builder.mutation({
+      query: () => ({
+        url: `${USER_URL}/getSpaceTypes`,
+        method: "GET",
+  
+      }),
+    }),
+   
+
    
   }),
 });
@@ -113,5 +146,9 @@ export const {
   useValidateAccesssTokenMutation,
   useResetPasswordMutation,
   useGetSpacesMutation,
-  useUpdateProfileMutation
+  useUpdateProfileMutation,
+  useBookSpaceMutation,
+  usePreBookingsMutation,
+  usePaymentMutation,
+  useGetSpaceTypesMutation
 } = userApiSlice;

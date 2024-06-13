@@ -14,7 +14,7 @@ declare module "@react-three/fiber" {
 
 extend({ ThreeGlobe });
 
-const RING_PROPAGATION_SPEED = 3;
+const RING_PROPAGATION_SPEED = 0.5;
 const aspect = 1.2;
 const cameraZ = 300;
 
@@ -73,13 +73,13 @@ export function Globe({ globeConfig, data }: WorldProps) {
       atmosphereAltitude: 0.1,
       polygonColor: "rgba(255,255,255,0.7)",
       globeColor: "#1d072e",
-      emissive: "#000000",
+      emissive: "#ff0000",
       emissiveIntensity: 0.1,
       shininess: 0.9,
-      arcTime: 2000,
+      arcTime: 5000,
       arcLength: 0.9,
-      rings: 1,
-      maxRings: 3,
+      rings:200,
+      maxRings: 10,
       ...globeConfig,
     };
   
@@ -180,20 +180,21 @@ export function Globe({ globeConfig, data }: WorldProps) {
           .arcStroke((e) => {
             return [0.32, 0.28, 0.3][Math.round(Math.random() * 2)];
           })
-          .arcDashLength(0.2) // Adjust the dash length for the ripple effect
-          .arcDashGap(10) // Adjust the gap between dashes for the ripple effect
-          .arcDashAnimateTime((e) => defaultProps.arcTime);
+          .arcDashLength(20) // Adjust the dash length for the ripple effect
+          .arcDashGap(0) // Adjust the gap between dashes for the ripple effect
+          .arcDashAnimateTime((e) => defaultProps.arcTime)
+        
       
         globeRef.current
           .pointsData(data)
           .pointColor((e) => (e as { color: string }).color)
           .pointsMerge(true)
-          .pointAltitude(0.0)
-          .pointRadius(2);
+          .pointAltitude(0.2)
+          .pointRadius(10);
       
         globeRef.current
           .ringsData([])
-          .ringColor((e: any) => (t: any) => e.color(t))
+          .ringColor((e: any) => (t: any) => `rgba(255, 0, 0, ${1 - t})`) 
           .ringMaxRadius(defaultProps.maxRings)
           .ringPropagationSpeed(RING_PROPAGATION_SPEED)
           .ringRepeatPeriod(
@@ -201,7 +202,7 @@ export function Globe({ globeConfig, data }: WorldProps) {
           );
       };
 
-      
+
     useEffect(() => {
       if (!globeRef.current || !globeData) return;
   

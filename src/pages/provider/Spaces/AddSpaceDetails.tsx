@@ -34,6 +34,15 @@ function AddSpaceDetails() {
 
   const providerId = providerInfo?._id;
 
+  useEffect(() => {
+    console.log('Latitude:', latitude);
+    console.log('Longitude:', longitude);
+    console.log('Area Name:', areaName);
+    console.log('State:', state);
+    console.log('District:', district);
+    console.log('Country:', country);
+  }, [latitude, longitude, areaName, state, district, country]);
+
   const formik = useFormik<AddSpaceForm>({
     initialValues: {
       spaceName: "",
@@ -118,6 +127,8 @@ function AddSpaceDetails() {
           longitude,
           providerId: providerId,
         };
+
+        
 
         // Submit form
         await createSpace(payload).unwrap();

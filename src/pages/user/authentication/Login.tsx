@@ -45,7 +45,7 @@ function Login() {
           const { password, email } = values; 
           const res = await login({ password, email }).unwrap();
           dispatch(setCredential({ ...res.data}));
-          navigate('/user/home')
+          navigate('/home')
           toast.success(res.message);
         } catch (err) {
           setLoginError("Invalid Email or Password")
@@ -99,7 +99,7 @@ function Login() {
          
         </div>
         {/* Sign Up Link */}
-        <p className="text-sm text-white">Don't have an account? <Link to={'/user/register'} className="text-green-500">Sign Up</Link></p>
+        <p className="text-sm text-white">Don't have an account? <Link to={'/register'} className="text-green-500">Sign Up</Link></p>
       </div>
       {/* Main Content Section */}
       <div className="flex-1 flex overflow-hidden">
@@ -188,7 +188,7 @@ function Login() {
                     const res = await googleAuth({ name, email, password}).unwrap();
                     dispatch(setCredential({ ...res.data }));
                     toast.success(res.message);
-                    navigate('/user/home')
+                    navigate('/home')
                   } catch (err) {
                     toast.error(
                       (err as MyError)?.data?.message ||

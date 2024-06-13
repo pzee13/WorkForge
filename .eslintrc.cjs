@@ -10,7 +10,6 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh'],
   rules: {
-
     camelcase: 'error',
     "@typescript-eslint/naming-convention": [
       "error",

@@ -1,0 +1,34 @@
+@keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  .flex-row-reverse {
+    animation: slideInRight 1s ease forwards;
+  }
+  
+  .lg\:flex-row-reverse {
+    animation: slideInRight 1s ease forwards;
+  }
+  
+  .lg\:flex-row-reverse:nth-child(odd) {
+    animation: slideInLeft 1s ease forwards;
+  }
+  

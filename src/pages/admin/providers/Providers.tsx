@@ -8,23 +8,23 @@ import {
 } from "@mui/x-data-grid";
 import moment from "moment";
 import { grey } from "@mui/material/colors";
-import UsersAction from "./UserAction";
+import ProviderAction from "./ProviderAction";
 import { Selected } from "../../../types/props";
-import { useGetUsersMutation } from "../../../slices/adminApiSlice";
+import { useGetProvidersMutation } from "../../../slices/adminApiSlice";
 import { IUser } from "../../../types/user/usertypes";
 
-const Users: React.FC<Selected> = ({ setSelectedLink, link }) => {
+const Providers: React.FC<Selected> = ({ setSelectedLink, link }) => {
   const [rowId, setRowId] = useState<string | null>(null);
-  const [users, setUsers] = useState<IUser[]>([]);
-  const [getUsersData] = useGetUsersMutation();
+  const [providers, setProviders] = useState<IUser[]>([]);
+  const [getProvidersData] = useGetProvidersMutation();
 
   useEffect(() => {
     setSelectedLink(link);
 
     async function fetchUser() {
       try {
-        const res = await getUsersData("").unwrap();
-        setUsers(res.data);
+        const res = await getProvidersData("").unwrap();
+        setProviders(res.data);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
@@ -60,7 +60,7 @@ const Users: React.FC<Selected> = ({ setSelectedLink, link }) => {
         width: 350,
         type: "actions",
         renderCell: (params: GridCellParams) => (
-          <UsersAction {...{ params, rowId, setRowId }} />
+          <ProviderAction {...{ params, rowId, setRowId }} />
         ),
       },
     ],
@@ -74,11 +74,11 @@ const Users: React.FC<Selected> = ({ setSelectedLink, link }) => {
         component="h4"
         sx={{ textAlign: "center", mt: 2, mb: 3 , }}
       >
-        Manage Users
+        Manage Providers
       </Typography>
       <DataGrid
         columns={columns}
-        rows={users}
+        rows={providers}
         getRowId={(row) => row._id}
         pageSizeOptions={[10, 25, 50, 75, 100]}
         getRowSpacing={(params) => ({
@@ -103,4 +103,4 @@ const Users: React.FC<Selected> = ({ setSelectedLink, link }) => {
   );
 };
 
-export default Users;
+export default Providers;

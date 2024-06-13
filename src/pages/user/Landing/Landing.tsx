@@ -1,6 +1,6 @@
 import Navbar from "../../../component/user/navbar/Navbar";
 import LandingImage from "../../../component/user/Landing/LandingImage";
-import landImage from "../../../assets/images/LandingUser/fotor-ai-2024051614220.jpg";
+import landImage from "../../../assets/images/LandingUser/My first design (1).png";
 import LandingCard from "../../../component/user/Landing/LandingCard";
 import workIcon from "../../../assets/images/LandingUser/logo/man-in-office-desk-with-computer.png";
 import clock from "../../../assets/images/LandingUser/logo/clock.png";
@@ -111,24 +111,26 @@ export function Landing() {
     <>
       <Navbar />
 
-    
+        
        
       
+      
 
-      <div className="bg-white items-center">
+      <div className="mt-20 bg-backgroundCol items-center">
       <Banner
         heading="Up to 50% Off"
         subheading1="Plus free beverages! Use code:"
         code="SETSPACE"
         subheading2=""
         linkText="Book Now"
-        linkUrl="/user/spaces"
+        linkUrl="/spaces"
       />
+      <LandingImage image={landImage} />
 
       {/* <div className="relative">
       
 
-        <LandingImage image={landImage} />
+       
         
         <div className="absolute inset-0 bg-black opacity-70"></div>
         
@@ -149,7 +151,7 @@ export function Landing() {
         viewport={{ once: true }}
         className="mb-10">
                 <div className="flex justify-center items-center mt-8 md:mt-20">
-                    <p className="text-3xl md:text-5xl font-lato font-bold dark:text-gray-800">
+                    <p className="text-3xl md:text-5xl font-lato font-bold text-gray-800">
                     Find a suitable place to work here
                     </p> 
                 </div>
@@ -202,7 +204,7 @@ export function Landing() {
                 
             >
                 <div className="flex  justify-center items-center mt-8 md:mt-20">
-                    <p className="text-3xl md:text-5xl font-lato font-bold dark:text-gray-800">
+                    <p className="text-3xl md:text-5xl font-lato font-bold text-gray-800">
                     Spaces we put forward to you
                     </p>
                 </div>
@@ -213,14 +215,8 @@ export function Landing() {
                     </p>
                 </div>
       </motion.div>
-      <motion.div
-                variants={itemVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="dark:bg-gray-100 mt-10"
-            >
-            <div className="flex flex-wrap justify-center">
+      
+           
                        
                         {/* <div className="flex justify-center space-x-4">
                             <SpaceTypeCard imageUrl={meetImage} text="Meeting room" />
@@ -234,8 +230,8 @@ export function Landing() {
                         </div> */}
 
                         <ContentSection />
-            </div>
-      </motion.div>
+            
+     
       {/* <motion.div
                 variants={containerVariants}
                 initial="hidden"
@@ -411,7 +407,7 @@ export function Landing() {
         <World
         globeConfig={{
           pointSize: 1,
-          atmosphereColor: "#",
+          atmosphereColor: "#000000",
           showAtmosphere: true,
           atmosphereAltitude: 7,
           polygonColor: "rgba(6, 71, 73, 0.7)",
@@ -453,8 +449,8 @@ export function Landing() {
 		</div>
 	</div>
 </section> */}
-                <section className="dark:bg-white dark:text-gray-800">
-	<div className="container flex flex-col justify-center dark:bg-white p-4 mx-auto md:p-8">
+                <section className="dark:bg-backgroundCol dark:text-gray-800">
+	<div className="container flex flex-col justify-center dark:bg-backgroundCol p-4 mx-auto md:p-8">
 		<p className="p-2 text-sm font-medium tracking-wider text-center uppercase">How it works</p>
 		<h2 className="mb-12 text-4xl font-bold leading-none text-center sm:text-5xl">Frequently Asked Questions</h2>
 		<div className="flex flex-col divide-y sm:px-8 lg:px-12 xl:px-32 dark:divide-black">

@@ -53,6 +53,13 @@ export const providerApiSlice = apiSlice.injectEndpoints({
         }),
       }),
 
+      getProvider : builder.mutation({
+        query:() =>({
+          url:`${PROVIDER_URL}/getProvider`,
+          method:"GET",
+        })
+      }),
+
 
       updateProviderProfile: builder.mutation({
         query: (data) => ({

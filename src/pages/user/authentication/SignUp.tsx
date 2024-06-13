@@ -107,7 +107,7 @@ function SignUp() {
             if(registrationRes.data.success){
               setIsModalOpen(false);
               toast.success(registrationRes.data.message)
-             navigate('/user/login');
+             navigate('/login');
             }else{
               console.log("hai")
               setOtpError('Invalid OTP');
@@ -148,7 +148,7 @@ async function handleResendOTP() {
           
         </div>
        
-        <p className="text-sm text-white">Already have an account? <Link to={'/user/login'} className='text-green-400'>Login</Link></p>
+        <p className="text-sm text-white">Already have an account? <Link to={'/login'} className='text-green-400'>Login</Link></p>
       </div>
    
       <div className="flex-1 flex cont overflow-hidden">

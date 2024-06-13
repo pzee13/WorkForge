@@ -27,6 +27,13 @@ export const adminApiSlice = apiSlice.injectEndpoints({
       })
     }),
 
+    getProviders : builder.mutation({
+      query:() =>({
+        url:`${ADMIN_URL}/getProviders`,
+        method:"GET",
+      })
+    }),
+
     createSpaceType: builder.mutation({
       query: (data) => ({
         url: `${ADMIN_URL}/createSpaceType`,
@@ -69,6 +76,13 @@ export const adminApiSlice = apiSlice.injectEndpoints({
       }),
     }),
 
+    blockProvider: builder.mutation({
+      query: (data) => ({
+        url: `${ADMIN_URL}/providers/unblock-block?id=${data}`,
+        method: "PATCH",
+      }),
+    }),
+
 
     logoutAdmin : builder.mutation({
         query: () =>({
@@ -90,5 +104,7 @@ export const adminApiSlice = apiSlice.injectEndpoints({
     useBlockUserMutation,
     useCreateSpaceTypeMutation,
     useGetSpaceTypesMutation,
-    useUpdateSpaceTypeMutation
+    useUpdateSpaceTypeMutation,
+    useGetProvidersMutation,
+    useBlockProviderMutation
 }= adminApiSlice;

@@ -2,8 +2,13 @@ import React from 'react';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
-const ImageContainer = ({ images }) => {
+const ImageContainer = ({ images,loading }) => {
+
+   
+
     if (!images || images.length === 0) {
         return <p>No images available</p>;
     }
@@ -23,7 +28,7 @@ const ImageContainer = ({ images }) => {
     };
 
     return (
-        <section className="py-6 dark:bg-gray-50 dark:text-gray-900">
+        <section className="py-6 mt-20 dark:bg-gray-50 dark:text-gray-900">
             <div className="container mx-auto p-4">
                 <div className="grid grid-cols-2 gap-4">
                 <div className="relative overflow-hidden shadow-lg dark:bg-gray-500 h-96 rounded-lg">

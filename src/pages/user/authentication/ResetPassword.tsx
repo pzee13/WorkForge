@@ -11,26 +11,29 @@ export function ResetPassword() {
     const [resetPassword] = useResetPasswordMutation();
     const dispatch = useDispatch();
     const params = useParams();
+    console.log(params.token)
     const navigate = useNavigate();
     const [validateToken] = useValidateAccesssTokenMutation()
+    console.log("hai",validateToken);
 
     useEffect(() => {
         const fetchTokenValidation = async () => {
-            console.log(params.token)
+            console.log("haiiiiiiiiiiiii")
+            console.log("params",params.token)
             if (params.token) {
                 try {
                     const response = await validateToken({ token:params.token }).unwrap();
-                    console.log(response)  
+                    console.log("response",response)  
                     if (response.success) {
                         console.log(response.success)
                         setUserId(response.user);
                     } else {
                         toast.error(response.message);
-                        navigate('/user/login'); // Redirect to the forgot password page
+                        navigate('/login'); // Redirect to the forgot password page
                     }
                 } catch (error) {
                     toast.error('Token validation failed');
-                    navigate('/user/login'); // Redirect to the forgot password page
+                    // navigate('/login'); // Redirect to the forgot password page
                 }
             }
         };
@@ -43,7 +46,7 @@ export function ResetPassword() {
             const response = await resetPassword({ id: userId, password: newPassword }).unwrap();
             if (response.success) {
                 toast.success('Password reset successful!');
-                navigate('/user/login');
+                navigate('/login');
             } else {
                 toast.error(response.message);
             }
