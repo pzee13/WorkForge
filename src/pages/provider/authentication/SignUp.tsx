@@ -8,7 +8,7 @@ import { useProviderRegisterMutation,
 import { useDispatch, useSelector } from 'react-redux';
 import { MyError,FormValues,OtpResponse } from '../../../utils/validations/commonVaild';
 import { validationSchema } from '../../../utils/validations/yupValidation'
-import { CustomModal } from '../../../component/common/Modal/CustomModal';
+import { CustomModal } from '../../../component/common/modal/CustomModal';
 import { useNavigate,Link } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

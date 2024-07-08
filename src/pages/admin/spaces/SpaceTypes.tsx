@@ -15,7 +15,7 @@ import {
     useCreateSpaceTypeMutation,
     useUpdateSpaceTypeMutation,
 } from "../../../slices/adminApiSlice";
-import { SpaceType } from "../../../types/Spaces/spaceType";
+import { SpaceType } from "../../../types/spaces/spaceType";
 
 const SpaceTypes: React.FC<Selected> = ({ setSelectedLink, link }) => {
   const [rowId, setRowId] = useState<string | null>(null);

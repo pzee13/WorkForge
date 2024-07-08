@@ -2,13 +2,16 @@ import { configureStore } from "@reduxjs/toolkit";
 import persistedReducer from './redux-persist-config';
 import { persistStore } from 'redux-persist'; // Import persistStore
 import  rtkQueryErrorLogger  from '../middleware/rtkQueryErrorLogger'
+import { userApiSlice } from '../slices/userApiSlice'; // General API slice
+import { providerApiSlice } from '../slices/providerApiSlice'; // Provider API slice
+import { adminApiSlice } from '../slices/adminApiSlice'; 
 
 export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false, // Disable serializable check as it conflicts with redux-persist
-    }).concat(rtkQueryErrorLogger),
+    }).concat(rtkQueryErrorLogger ,userApiSlice.middleware,providerApiSlice.middleware,adminApiSlice.middleware),
   devTools: true,
 });
 

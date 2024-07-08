@@ -6,12 +6,12 @@
 // import { SiGmail } from "react-icons/si";
 // import { IoLocationSharp } from "react-icons/io5";
 // import { MdEmail } from "react-icons/md";
-import logo from '../../../assets/images/Set Space-logo/realLogo/png/logo-no-background.png'
+import logo from '../../../assets/svgs/svg/png/logo-no-background.png'
 // import './Footer.css'; // Import your CSS file for styling
 
 function Footer() {
   return (
-    <footer className="px-4 divide-y dark:bg-accent dark:text-gray-800">
+    <footer className="px-4 divide-y dark:bg-accent1 dark:text-gray-800">
 	<div className="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
 		<div className="lg:w-1/3">
 			<a rel="noopener noreferrer" href="#" className="flex h-1/2 justify-center ">
@@ -23,7 +23,7 @@ function Footer() {
 		</div>
 		<div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
 			<div className="space-y-3">
-				<h3 className="tracking-wide uppercase dark:text-gray-900">Product</h3>
+				<h3 className="tracking-wide uppercase dark:text-white">Product</h3>
 				<ul className="space-y-1">
 					<li>
 						<a rel="noopener noreferrer" href="#">Features</a>
@@ -40,7 +40,7 @@ function Footer() {
 				</ul>
 			</div>
 			<div className="space-y-3">
-				<h3 className="tracking-wide uppercase dark:text-gray-900">Company</h3>
+				<h3 className="tracking-wide uppercase dark:text-white">Company</h3>
 				<ul className="space-y-1">
 					<li>
 						<a rel="noopener noreferrer" href="#">Privacy</a>
@@ -51,7 +51,7 @@ function Footer() {
 				</ul>
 			</div>
 			<div className="space-y-3">
-				<h3 className="uppercase dark:text-gray-900">Developers</h3>
+				<h3 className="uppercase dark:text-white">Developers</h3>
 				<ul className="space-y-1">
 					<li>
 						<a rel="noopener noreferrer" href="#">Public API</a>
@@ -65,7 +65,7 @@ function Footer() {
 				</ul>
 			</div>
 			<div className="space-y-3">
-				<div className="uppercase dark:text-gray-900">Social media</div>
+				<div className="uppercase dark:text-white">Social media</div>
 				<div className="flex justify-start space-x-3">
 					<a rel="noopener noreferrer" href="#" title="Facebook" className="flex items-center p-1">
 						<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 32 32" className="w-5 h-5 fill-current">
@@ -86,7 +86,7 @@ function Footer() {
 			</div>
 		</div>
 	</div>
-	<div className="py-6 text-sm text-center dark:text-gray-600">© 1968 Company Co. All rights reserved.</div>
+	<div className="py-6 text-sm text-center dark:text-white">© 1968 Company Co. All rights reserved.</div>
 </footer>
   );
 }

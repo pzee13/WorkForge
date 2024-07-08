@@ -6,12 +6,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandPointRight } from '@fortawesome/free-solid-svg-icons';
 import Instructions from '../../../assets/images/guide.png';
 import { motion } from 'framer-motion';
-import LandingPageCards from "../../../component/user/Landing/LandingPageCards";
+import LandingPageCards from "../../../component/user/landing/LandingPageCards";
 import imageA from '../../../assets/images/myhq-workspaces-Becc3eg9-l0-unsplash.jpg'
 import imageB from '../../../assets/images/rodeo-project-management-software-PYqzYhTNjho-unsplash.jpg'
 import imageC from '../../../assets/images/copernico-TSYQ5stQVjg-unsplash.jpg'
 import imageD from '../../../assets/images/johanna-adriaansen-XfC8MMTiEfw-unsplash.jpg'
-import SpaceCard from "../../../component/provider/Landing/SpaceCard";
+import SpaceCard from "../../../component/provider/landing/SpaceCard";
 import officeSpace from "../../../assets/images/icons8-company-100.png"
 import meetingRoom from "../../../assets/images/icons8-meeting-100.png"
 import deskSpace from "../../../assets/images/icons8-desk-64.png"

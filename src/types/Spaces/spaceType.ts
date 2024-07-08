@@ -5,3 +5,10 @@ export interface SpaceType{
     peopleAllowed: boolean;
     availableSpace: boolean;
 }
+
+export interface SpaceTypes {
+    imageSrc: string;
+    heading: string;
+    paragraph: string;
+   
+  }

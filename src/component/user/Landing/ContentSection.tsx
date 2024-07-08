@@ -29,12 +29,12 @@ const ContentSections = ({ imageSrc, heading, paragraph, isReverse, animationDel
       variants={variants}
       className={`flex flex-col overflow-hidden rounded-md shadow-2xl lg:flex-row ${isReverse ? 'lg:flex-row-reverse' : ''}`}
     >
-      <img src={imageSrc} alt="" className="h-80 dark:bg-gray-500 aspect-video" />
-      <div className="flex flex-col justify-center flex-1 p-6 dark:bg-gray-50">
-        <span className="text-xs uppercase dark:text-gray-600">Join, it's free</span>
-        <h3 className="text-3xl font-bold">{heading}</h3>
-        <p className="my-6 dark:text-gray-600">{paragraph}</p>
-        <button type="button" className="self-start">Action</button>
+      <img src={imageSrc} alt="" className="h-80 dark:bg-gray-500 bg-gradient-to-t shadow-2xl aspect-video" />
+      <div className="flex flex-col justify-center  flex-1 p-6 bg-gray-50 ">
+        <span className="text-xs uppercase dark:text-white">Join, it's free</span>
+        <h3 className="text-3xl font-bold text-customGreen">{heading}</h3>
+        <p className="my-6 dark:text-customGreen">{paragraph}</p>
+        <button type="button" className="self-start text-white">Action</button>
       </div>
     </motion.div>
   );
@@ -69,8 +69,8 @@ const ContentSection = () => {
   ];
 
   return (
-    <section className="p-4 lg:p-8 dark:bg-customGreen bg-opacity-50 dark:text-gray-800 shadow-2xl">
-      <div className="container mx-auto space-y-12">
+    <section className="p-4 lg:p-8  bg-opacity-50 dark:text-gray-800 shadow-5xl">
+      <div className="container mx-auto space-y-12 shadow-5xl">
         {sections.map((section, index) => (
           <ContentSections
             key={index}

@@ -1,0 +1,37 @@
+.scrollbar-hide {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
+  }
+
+
+  .custom-select {
+    appearance: none; /* Remove default appearance */
+    -webkit-appearance: none; /* Remove default appearance for older versions of Safari */
+    -moz-appearance: none; /* Remove default appearance for older versions of Firefox */
+    background-color: transparent; /* Set background to transparent */
+    border: 1px solid #ced4da; /* Add border to match input style */
+    padding: 8px; /* Add padding */
+    border-radius: 0px; /* Add border radius */
+    color: #495057; /* Set text color */
+    cursor: pointer; /* Set cursor style */
+  }
+  
+
+  .custom-select {
+    background-color: transparent;
+    color: #064749; /* Custom green color */
+  }
+  
+  .custom-option {
+    background-color: transparent;
+    color: #064749; /* Custom green color */
+  }
+
+  .custom-option:hover {
+    background-color: #064749; /* Custom green color */
+    color: white; /* Optional: Change text color on hover */
+  }
+  

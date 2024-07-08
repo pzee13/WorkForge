@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../../../component/provider/navbar/Navbar";
-import Footer from "../../../component/user/Footer/Footer";
+import Footer from "../../../component/user/footer/Footer";
 import "../../user/profile/Profile.css"
 import landImage from "../../../assets/images/LandingUser/fotor-ai-2024051614220.jpg";
 import { MdModeEdit } from "react-icons/md";
@@ -18,7 +18,7 @@ import { setProviderCredentials } from "../../../slices/authSlice";
 
 
 
-import Spinner from '../../../component/user/Loader/Spinner'
+import Spinner from '../../../component/user/loader/Spinner'
 
 
 function Profile() {

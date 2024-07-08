@@ -17,7 +17,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import InputField from '../../../component/common/inputField/InputField'; // Adjust the path as necessary
 import DeleteIcon from '@mui/icons-material/Delete';
 import './AddSpaceDetails.css'; // Assuming you have a CSS file for custom styles
-import { SpaceType } from "../../../types/Spaces/spaceType";
+import { SpaceType } from "../../../types/spaces/spaceType";
 const FACILITIES = ["Wifi", "Toilet", "Parking", "Drinking Water"];
 
 function AddSpaceDetails() {

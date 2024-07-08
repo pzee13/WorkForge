@@ -9,25 +9,34 @@ export default {
       colors: {
         customGreen2: '#064749',
         customGreen3:'#31473A',
-        customGreen:'#064749',
+        customGreen:'#023020',
         backgroundCol1:'#D0D0D0',
         backgroundCol:"#white",
-        customGreen1:"#404244",// Custom green color
+        customGreen1:"#404244",
+        secondGray:"#f3f3f3",// Custom green color
         alternate:'#003e29',
         secondary: "#86efac",
         accent: "#dcfce1",
+        accent1:"#090b19",
         neutral: "#14030c",
         base: "#f8fef7",
         info: "#22c55e",
         success: "#166534",
         warning: "#bf1d00",
         error: "#eb004b",
-        secondGreen:"#49735A"
+        secondGreen:"#49735A",
+        darkGreen:"	#023020"
       },
-      spacing: {
-        '72': '18rem',
-        '84': '21rem',
-        '96': '24rem',
+      // letterSpacing: {
+      //   custom: '3px', // Define your custom letter spacing here
+      // },
+      // spacing: {
+      //   '72': '18rem',
+      //   '84': '21rem',
+      //   '96': '24rem',
+      // },
+      letterSpacing: {
+        custom: '0.3rem',
       },
       // fontFamily: {
       //   'adallyn': ['"Adallyn Serif"', 'serif'],

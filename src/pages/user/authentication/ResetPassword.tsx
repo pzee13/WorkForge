@@ -1,6 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { toast } from "react-toastify";
 import { useEffect, useState } from 'react';
+import {resetPasswordValidation} from '../../../utils/validations/yupValidation'
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from 'react-router-dom';
 import { useValidateAccesssTokenMutation, useResetPasswordMutation } from '../../../slices/userApiSlice';
@@ -62,6 +63,7 @@ export function ResetPassword() {
                     <div className="form-container flex-1 flex justify-center bg-[#f4f4f4] rounded-t-[50px] md:rounded-none">
                         <Formik
                             initialValues={{ newPassword: '', confirmPassword: '' }}
+                            validationSchema={resetPasswordValidation}
                             onSubmit={(values, { setSubmitting }) => {
                                 handleResetPassword(userId, values.newPassword);
                                 setSubmitting(false);

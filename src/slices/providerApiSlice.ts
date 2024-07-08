@@ -69,6 +69,13 @@ export const providerApiSlice = apiSlice.injectEndpoints({
         }),
       }),
 
+      mySpaces:builder.mutation({
+        query:() =>({
+          url:`${PROVIDER_URL}/mySpaces`,
+          method:"GET",
+        })
+      })
+
 
     }),
   });
@@ -80,6 +87,7 @@ export const providerApiSlice = apiSlice.injectEndpoints({
     useProviderOtpVerificationMutation,
     useSendOtpToProviderEmailMutation,
     useProviderCreateSpaceMutation,
-    useUpdateProviderProfileMutation
+    useUpdateProviderProfileMutation,
+    useMySpacesMutation,
   } = providerApiSlice;
   

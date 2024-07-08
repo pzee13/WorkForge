@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TwoText } from '../../../types/Landing/Landing';
+import { TwoText } from '../../../types/landing/Landing';
 import './Faq.css'
 
 function Faq({ question, answer }: TwoText) {

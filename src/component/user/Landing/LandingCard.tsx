@@ -1,10 +1,10 @@
 
-import { LandingCardProps } from "../../../types/Landing/Landing";
+import { LandingCardProps } from "../../../types/landing/Landing";
 import './LandingCard.css'
 
 function LandingCard({ logo, heading, subtext }: LandingCardProps) {
   return (
-    <div className="bg-customGreen  bg-opacity-50  rounded-lg  p-6 w-80"> {/* Adjust width here */}
+    <div className="  bg-opacity-50  rounded-lg  p-6 w-80"> {/* Adjust width here */}
       {/* Logo */}
       {logo && <img src={logo} alt="Logo" className="w-16 mx-auto  mb-8 card" />}
 

@@ -6,13 +6,13 @@ import { useDispatch,useSelector } from 'react-redux';
 import { RootState } from "../../../app/store";
 import { setBooking } from '../../../slices/booking';
 import Navbar from "../../../component/user/navbar/Navbar";
-import Footer from "../../../component/user/Footer/Footer";
-import SpaceDetailsMap from "../../../component/common/Spaces/SpaceDetailsMap";
+import Footer from "../../../component/user/footer/Footer";
+import SpaceDetailsMap from "../../../component/common/spaces/SpaceDetailsMap";
 import ImageContainer from '../../../component/common/ImageContainer';
 import { useBookSpaceMutation } from '../../../slices/userApiSlice';
-import Facilities from '../../../component/common/Spaces/Facilities'
+import Facilities from '../../../component/common/spaces/Facilities'
 import { TextGenerateEffect } from "../../../component/ui/TextGenerateEffect";
-import SkeletonLoader from '../../../component/user/Loader/SkeletonLoader'
+import SkeletonLoader from '../../../component/user/loader/SkeletonLoader'
 import { MdTimeToLeave } from 'react-icons/md';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 

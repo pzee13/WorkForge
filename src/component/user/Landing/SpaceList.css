@@ -1,0 +1,23 @@
+.scrollable-section {
+    overflow-x: auto;
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For IE/Edge */
+  }
+  
+  .scrollable-section::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for WebKit */
+  }
+
+
+  .hover-scroll {
+    overflow-x: auto;
+    
+  }
+
+  .hover-scroll:hover {
+    overflow-x: auto;
+  }
+
+  .hover-scroll::-webkit-scrollbar {
+    display: none; /* Optional: hide scrollbar */
+  }

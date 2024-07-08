@@ -1,5 +1,5 @@
 import { Route , Routes, Navigate  } from 'react-router-dom'
-import { Landing } from '../../pages/user/Landing/Landing'
+import { Landing } from '../../pages/user/landing/Landing'
 import SignUp from '../../pages/user/authentication/SignUp'
 import Login from '../../pages/user/authentication/Login'
 import {UserHome} from '../../pages/user/home/UserHome'
@@ -8,10 +8,10 @@ import { ResetPassword }  from '../../pages/user/authentication/ResetPassword'
 import Spaces from '../../pages/user/spaces/Spaces'
 import Profile from "../../pages/user/profile/Profile"
 import SpaceDetails from "../../pages/user/spaces/SpaceDetails"
-import Checkout from "../../pages/user/Payment/Checkout"
+import Checkout from "../../pages/user/payment/Checkout"
 import { RootState } from "../../app/store";
 import { useSelector} from "react-redux";
-import  ErrorPage  from '../../pages/user/ErrorPages/ErrorPage'
+import  ErrorPage  from '../../pages/user/errorPages/ErrorPage'
 
 
 export function UserRoutes(){
