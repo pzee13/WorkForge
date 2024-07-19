@@ -1,7 +1,7 @@
 import { Route , Routes, Navigate  } from 'react-router-dom'
 import Login from '../../pages/provider/authentication/Login'
 import SignUp from '../../pages/provider/authentication/SignUp'
-import { LandingProvider } from '../../pages/provider/landing/LandingProvider'
+import { LandingProvider } from '../../pages/provider/Landing/LandingProvider'
 import DefaultContent from '../../component/provider/default/DefaultContent'
 import { ProviderHome } from "../../pages/provider/home/ProviderHome"
 import { ProviderAuthRoute } from './ProviderAuthRoute'

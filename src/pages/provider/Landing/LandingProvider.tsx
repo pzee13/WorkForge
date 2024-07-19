@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandPointRight } from '@fortawesome/free-solid-svg-icons';
 import Instructions from '../../../assets/images/guide.png';
 import { motion } from 'framer-motion';
-import LandingPageCards from "../../../component/user/landing/LandingPageCards";
+import LandingPageCards from "../../../component/user/Landing/LandingPageCards";
 import imageA from '../../../assets/images/myhq-workspaces-Becc3eg9-l0-unsplash.jpg'
 import imageB from '../../../assets/images/rodeo-project-management-software-PYqzYhTNjho-unsplash.jpg'
 import imageC from '../../../assets/images/copernico-TSYQ5stQVjg-unsplash.jpg'

@@ -14,7 +14,7 @@ import './Spaces.css'; // Ensure to create a CSS file for additional styling if 
 import { SpaceType } from "../../../types/spaces/spaceType";
 import { WorkSpace } from "../../../types/spaces/space"
 // import dropImage from '../../../assets/images/Set Space-logo/down-chevron.png'
-import SpaceCard from "../../../component/user/landing/SpaceCard"
+import SpaceCard from "../../../component/user/Landing/SpaceCard"
 
 
 function Spaces() { 

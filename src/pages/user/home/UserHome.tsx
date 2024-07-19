@@ -5,15 +5,15 @@ import { RootState } from '../../../app/store'
 import { useSelector } from 'react-redux';
 import homePageImage from '../../../assets/images/LandingUser/img2.png';
 // import image1 from "../../../assets/svgs/image.svg"
-import SpaceList from "../../../component/user/landing/SpaceList"
+import SpaceList from "../../../component/user/Landing/SpaceList"
 import { useGetSpacesMutation,useGetSpaceTypesMutation } from "../../../slices/userApiSlice";
-import LandingPageCard from '../../../component/user/landing/LandingPageCard'; 
-import RatedSpaces from '../../../component/user/landing/RatedSpaces';
+import LandingPageCard from '../../../component/user/Landing/LandingPageCard'; 
+import RatedSpaces from '../../../component/user/Landing/RatedSpaces';
 import officeSpace from "../../../assets/images/office room.jpg"
 import meetingRoom from "../../../assets/images/meeting room.jpg";
 import trainingSpace from "../../../assets/images/Training room.jpg";
 import increase from "../../../assets/svgs/increase.png";
-import LocationCard from '../../../component/user/landing/LocationCard'
+import LocationCard from '../../../component/user/Landing/LocationCard'
 // import bgstyle from "../../../assets/svgs/pngwing.com.png"
 import deskSpace from "../../../assets/images/deskSpace.jpg";
 import './UserHome.css'
@@ -28,7 +28,7 @@ import ahmedabadImage from "../../../assets/images/States/ahmedabad.jpg";
 import jaipurImage from "../../../assets/images/States/Jaipur.jpg";
 import kochiImage from "../../../assets/images/States/Kochi.jpg";
 
-import Faq from "../../../component/user/landing/Faq";
+import Faq from "../../../component/user/Landing/Faq";
 
 
 export function UserHome() {
