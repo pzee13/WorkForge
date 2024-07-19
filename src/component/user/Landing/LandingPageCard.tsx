@@ -1,6 +1,6 @@
 import React from 'react';
 import TypeCard from './TypeCard'
-import { SpaceTypes} from "../../../types/spaces/spaceType"
+import { SpaceTypes} from "../../../types/Spaces/spaceType"
 import SpaceIcon from '../../../assets/images/LandingUser/coworking-space.png'
 
 

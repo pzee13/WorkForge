@@ -18,7 +18,7 @@ import InputField from '../../../component/common/inputField/InputField'; // Adj
 import DeleteIcon from '@mui/icons-material/Delete';
 import { SelectChangeEvent } from '@mui/material';
 import './AddSpaceDetails.css'; // Assuming you have a CSS file for custom styles
-import { SpaceType } from "../../../types/spaces/spaceType";
+import { SpaceType } from "../../../types/Spaces/spaceType";
 const FACILITIES = ["Wifi", "Toilet", "Parking", "Drinking Water"];
 
 function AddSpaceDetails() {

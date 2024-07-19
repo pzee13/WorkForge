@@ -15,7 +15,7 @@ import {
     useCreateSpaceTypeMutation,
     useUpdateSpaceTypeMutation,
 } from "../../../slices/adminApiSlice";
-import { SpaceType } from "../../../types/spaces/spaceType";
+import { SpaceType } from "../../../types/Spaces/spaceType";
 import { styled } from "@mui/material/styles";
 
 

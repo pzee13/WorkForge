@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import {WorkSpace} from '../../../types/spaces/space'
+import {WorkSpace} from '../../../types/Spaces/space'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import SpaceMap from "../../../component/common/spaces/SpaceMap";

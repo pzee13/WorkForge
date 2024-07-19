@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { WorkSpace } from "../../../types/spaces/space"
+import { WorkSpace } from "../../../types/Spaces/space"
 
 const truncateText = (text:string, wordLimit:number) => {
   const words = text.split(' ');

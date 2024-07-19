@@ -5,7 +5,7 @@ import moment from "moment";
 import { grey } from "@mui/material/colors";
 import { Selected } from "../../../types/props";
 import { useGetSpaceRequestsMutation, useUpdateSpaceStatusMutation } from "../../../slices/adminApiSlice";
-import { WorkSpace } from "../../../types/spaces/space";
+import { WorkSpace } from "../../../types/Spaces/space";
 import { styled } from "@mui/material/styles";
 import ViewSpaceDetails from "./ViewProviderRequest"; // You need to create this component
 

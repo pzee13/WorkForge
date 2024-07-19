@@ -11,8 +11,8 @@ import signUpImage from '../../../assets/images/LandingUser/imagehome123.jpg';
 import { useGetSpaceTypesMutation } from "../../../slices/userApiSlice";
 import { toast } from "react-toastify";
 import './Spaces.css'; // Ensure to create a CSS file for additional styling if needed
-import { SpaceType } from "../../../types/spaces/spaceType";
-import { WorkSpace } from "../../../types/spaces/space"
+import { SpaceType } from "../../../types/Spaces/spaceType";
+import { WorkSpace } from "../../../types/Spaces/space"
 // import dropImage from '../../../assets/images/Set Space-logo/down-chevron.png'
 import SpaceCard from "../../../component/user/Landing/SpaceCard"
 
