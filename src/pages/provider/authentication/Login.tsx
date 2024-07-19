@@ -129,7 +129,7 @@ import { useState,useEffect } from 'react'
 import logo from '../../../assets/images/Set Space-logo/realLogo/png/logo-no-background.png'
 import { Link } from 'react-router-dom'
 import LoginPic from '../../../assets/images/loginFormPic.jpg';
-import Spinner from '../../../component/user/loader/Spinner'
+import Spinner from '../../../component/user/Loader/Spinner'
 import { RootState } from '../../../app/store';
 import './Login.css'
  

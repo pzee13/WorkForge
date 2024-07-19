@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../../../component/user/navbar/Navbar";
-import Footer from "../../../component/user/footer/Footer";
+import Footer from "../../../component/user/Footer/Footer";
 import { useGetSpacesMutation } from "../../../slices/userApiSlice";
 // import { IoSearchOutline, IoChevronDown } from "react-icons/io5";
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

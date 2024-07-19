@@ -3,7 +3,7 @@ import { useGetBookingsMutation, useGetSpaceUserMutation } from '../../../slices
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../app/store';
 import Navbar from "../../../component/user/navbar/Navbar";
-import Footer from "../../../component/user/footer/Footer";
+import Footer from "../../../component/user/Footer/Footer";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import BookedSpaces from "../../../component/common/bookings/BookedSpaces";

@@ -10,7 +10,7 @@ import {  RiLockPasswordLine } from 'react-icons/ri';
 import { IoPersonOutline } from 'react-icons/io5';
 import LoginImage from '../../../assets/images/Admin login/login.png';
 import { useAdminLoginMutation } from "../../../slices/adminApiSlice";
-import Spinner from '../../../component/user/loader/Spinner'
+import Spinner from '../../../component/user/Loader/Spinner'
 
 const AdminLogin: React.FC = () => {
     const dispatch = useDispatch();

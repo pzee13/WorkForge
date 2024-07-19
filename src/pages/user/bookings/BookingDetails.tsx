@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useGetBookingsMutation , useGetSpaceUserMutation,useCancelBookingMutation } from '../../../slices/userApiSlice';
 import { WorkSpace } from "../../../types/Spaces/space"
-import SpaceMap from "../../../component/common/spaces/SpaceMap"
+import SpaceMap from "../../../component/common/Spaces/SpaceMap"
 import Navbar from "../../../component/user/navbar/Navbar";
-import Footer from "../../../component/user/footer/Footer";
+import Footer from "../../../component/user/Footer/Footer";
 // import {motion } from "framer-motion"
 
 interface Booking {

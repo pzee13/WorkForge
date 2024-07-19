@@ -4,9 +4,9 @@ import Login from '../../pages/user/authentication/Login'
 import {UserHome} from '../../pages/user/home/UserHome'
 import { UserAuthRoute } from './UserAuthRoute'
 import { ResetPassword }  from '../../pages/user/authentication/ResetPassword'
-import Spaces from '../../pages/user/spaces/Spaces'
+import Spaces from '../../pages/user/Spaces/Spaces'
 import Profile from "../../pages/user/profile/Profile"
-import SpaceDetails from "../../pages/user/spaces/SpaceDetails"
+import SpaceDetails from "../../pages/user/Spaces/SpaceDetails"
 import Checkout from "../../pages/user/Payment/Checkout"
 import { RootState } from "../../app/store";
 import { useSelector} from "react-redux";

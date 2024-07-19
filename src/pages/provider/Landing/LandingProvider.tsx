@@ -11,7 +11,7 @@ import imageA from '../../../assets/images/myhq-workspaces-Becc3eg9-l0-unsplash.
 import imageB from '../../../assets/images/rodeo-project-management-software-PYqzYhTNjho-unsplash.jpg'
 import imageC from '../../../assets/images/copernico-TSYQ5stQVjg-unsplash.jpg'
 import imageD from '../../../assets/images/johanna-adriaansen-XfC8MMTiEfw-unsplash.jpg'
-import SpaceCard from "../../../component/provider/landing/SpaceCard";
+import SpaceCard from "../../../component/provider/Landing/SpaceCard";
 import officeSpace from "../../../assets/images/icons8-company-100.png"
 import meetingRoom from "../../../assets/images/icons8-meeting-100.png"
 import deskSpace from "../../../assets/images/icons8-desk-64.png"

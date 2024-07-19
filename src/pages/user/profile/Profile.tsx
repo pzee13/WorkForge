@@ -1,6 +1,6 @@
 // import React, {ChangeEvent,useState,useRef } from "react";
 import Navbar from "../../../component/user/navbar/Navbar";
-import Footer from "../../../component/user/footer/Footer";
+import Footer from "../../../component/user/Footer/Footer";
 import "./Profile.css"
 // import landImage from "../../../assets/images/LandingUser/fotor-ai-2024051614220.jpg";
 // import { MdModeEdit } from "react-icons/md";

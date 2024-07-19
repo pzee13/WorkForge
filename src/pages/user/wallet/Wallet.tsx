@@ -1,5 +1,5 @@
 import Navbar from "../../../component/user/navbar/Navbar";
-import Footer from "../../../component/user/footer/Footer";
+import Footer from "../../../component/user/Footer/Footer";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../app/store";
 

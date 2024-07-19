@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Navbar from "../../../component/user/navbar/Navbar";
-import Footer from "../../../component/user/footer/Footer";
+import Footer from "../../../component/user/Footer/Footer";
 import { RootState } from "../../../app/store";
 import { useSelector } from 'react-redux';
 import { usePreBookingsMutation, usePaymentMutation } from '../../../slices/userApiSlice';

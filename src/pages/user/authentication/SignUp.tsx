@@ -17,7 +17,7 @@ import { RootState } from '../../../app/store'
 import OtpInput from 'react-otp-input'
 import signUpImage from '../../../assets/images/userLogin/fotor-ai-20240516113630.jpg'
 import logo from '../../../assets/images/Set Space-logo/realLogo/png/logo-no-background.png'
-import Spinner from '../../../component/user/loader/Spinner'
+import Spinner from '../../../component/user/Loader/Spinner'
 
 function SignUp() {
 
