@@ -1,6 +1,6 @@
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { UserRoutes } from './routes/userRoutes/UserRoutes'
+import { UserRoutes } from './routes/userRoute/UserRoutes'
 import { ProviderRoutes } from './routes/providerRoutes/ProviderRoutes'
 import  {AdminRoutes}  from './routes/adminRoutes/AdminRoutes';
 import { ToastContainer } from "react-toastify";
