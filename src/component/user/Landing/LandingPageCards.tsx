@@ -1,4 +1,4 @@
-import { RectangularComponentProps } from "../../../types/landing/Landing";
+import { RectangularComponentProps } from "../../../types/Landing/Landing";
 import './LandingPageCards.css'
 
 

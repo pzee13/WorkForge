@@ -1,5 +1,5 @@
 
-import { LandingCardProps } from "../../../types/landing/Landing";
+import { LandingCardProps } from "../../../types/Landing/Landing";
 import './LandingCard.css'
 
 function LandingCard({ logo, heading, subtext }: LandingCardProps) {

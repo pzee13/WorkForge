@@ -1,4 +1,4 @@
-import { SpaceTypeProps } from "../../../types/landing/Landing";
+import { SpaceTypeProps } from "../../../types/Landing/Landing";
 
 function SpaceTypeCard({ imageUrl, text }: SpaceTypeProps) {
   return (

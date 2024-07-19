@@ -1,5 +1,5 @@
 
-import { LandingCardProps } from "../../../types/landing/Landing";
+import { LandingCardProps } from "../../../types/Landing/Landing";
 
 function SpaceCard({ logo, heading, subtext }: LandingCardProps) {
   return (
