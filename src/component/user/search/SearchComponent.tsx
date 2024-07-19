@@ -71,14 +71,52 @@
 
 // export default SearchComponent;
 
-import React from 'react';
-import './SearchComponent.css'
+
+// import './SearchComponent.css'
+// import landImage from "../../../assets/images/LandingUser/LandingImage.jpg";
+
+// const SearchComponent = () => {
+//     return (
+//         <section className="section hero__section">
+           
+//             {/* Container for the search component */}
+//             <div className="search-container">
+//                 {/* Search box with location and space type */}
+//                 <div className="search-box">
+//                     <input type="text" placeholder="Location" />
+//                     <input type="text" placeholder="Space Type" />
+//                 </div>
+
+//                 {/* Your search filters and options go here */}
+//                 {/* For simplicity, I'll just include the select box */}
+//                 <div className="hero-filters-content">
+//                     <select className="your-select-class">
+//                         <option value="1">Option 1</option>
+//                         <option value="2">Option 2</option>
+//                         <option value="3">Option 3</option>
+//                     </select>
+//                 </div>
+//                 <button className="submit-button hero-filters__submit ray-button ray-button--primary" type="submit" tabIndex="0">Start</button>
+//             </div>
+
+//             <div className="hero__banner">
+//                 {/* Background image with black overlay */}
+//                 <div className="overlay"></div>
+//                 <img src={landImage} alt="Background Image" />
+//             </div>
+
+//         </section>
+//     );
+// }
+
+// export default SearchComponent;
+
+import './SearchComponent.css';
 import landImage from "../../../assets/images/LandingUser/LandingImage.jpg";
 
 const SearchComponent = () => {
     return (
         <section className="section hero__section">
-           
             {/* Container for the search component */}
             <div className="search-container">
                 {/* Search box with location and space type */}
@@ -96,7 +134,7 @@ const SearchComponent = () => {
                         <option value="3">Option 3</option>
                     </select>
                 </div>
-                <button className="submit-button hero-filters__submit ray-button ray-button--primary" type="submit" tabIndex="0">Start</button>
+                <button className="submit-button hero-filters__submit ray-button ray-button--primary" type="submit" tabIndex={0}>Start</button>
             </div>
 
             <div className="hero__banner">
@@ -104,10 +142,8 @@ const SearchComponent = () => {
                 <div className="overlay"></div>
                 <img src={landImage} alt="Background Image" />
             </div>
-
         </section>
     );
 }
 
 export default SearchComponent;
-

@@ -11,13 +11,14 @@ import { AddSpaceForm } from '../../../utils/validations/commonVaild';
 import { spaceValidation } from '../../../utils/validations/yupValidation';
 import SpaceProgress from './SpaceProgress';
 import { RootState } from "../../../app/store";
-import { TextField, Button, CircularProgress, IconButton, Select, MenuItem, Checkbox, ListItemText, FormControl, InputLabel, FormHelperText } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
+import { TextField, Button, CircularProgress, IconButton, Select, MenuItem, Checkbox, ListItemText, FormControl, InputLabel } from '@mui/material';
+// import AddIcon from '@mui/icons-material/Add';
+// import RemoveIcon from '@mui/icons-material/Remove';
 import InputField from '../../../component/common/inputField/InputField'; // Adjust the path as necessary
 import DeleteIcon from '@mui/icons-material/Delete';
+import { SelectChangeEvent } from '@mui/material';
 import './AddSpaceDetails.css'; // Assuming you have a CSS file for custom styles
-import { SpaceType } from "../../../types/Spaces/spaceType";
+import { SpaceType } from "../../../types/spaces/spaceType";
 const FACILITIES = ["Wifi", "Toilet", "Parking", "Drinking Water"];
 
 function AddSpaceDetails() {
@@ -100,7 +101,7 @@ function AddSpaceDetails() {
           throw new Error('Selected space type is invalid.');
         }
 
-        const isMultipleBookingsAllowed = selectedSpaceType ? selectedSpaceType.availableSpace : true;
+        // const isMultipleBookingsAllowed = selectedSpaceType ? selectedSpaceType.availableSpace : true;
 
         let adjustedAvailableSpaces = availableSpaces;
         if (!selectedSpaceType.availableSpace) {
@@ -196,13 +197,26 @@ function AddSpaceDetails() {
     }
   };
 
-  const handleFacilitiesChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+  const handleFacilitiesChange = (event: SelectChangeEvent<string[]>) => {
     const value = event.target.value as string[];
     setFacilities(value);
     formik.setFieldValue('facilities', value);
   };
 
   const [getSpaceTypes] = useGetSpaceTypesMutation();
+
+  // useEffect(() => {
+  //   const fetchSpaceTypes = async () => {
+  //     try {
+  //       const response = await getSpaceTypes("").unwrap(); // Change this line
+  //       setSpaceTypes(response.data); // Assuming the response contains the space types data
+  //     } catch (error) {
+  //       console.error("Error fetching space types:", error);
+  //       toast.error(error.data.message); // Set error message for display
+  //     }
+  //   };
+  //   fetchSpaceTypes();
+  // }, [getSpaceTypes]);
 
   useEffect(() => {
     const fetchSpaceTypes = async () => {
@@ -211,11 +225,20 @@ function AddSpaceDetails() {
         setSpaceTypes(response.data); // Assuming the response contains the space types data
       } catch (error) {
         console.error("Error fetching space types:", error);
-        toast.error(error.data.message); // Set error message for display
+  
+        // Type guard for RTK Query errors
+        if (error && typeof error === 'object' && 'data' in error) {
+          const typedError = error as { data: { message: string } };
+          toast.error(typedError.data.message); // Set error message for display
+        } else {
+          // Handle unexpected error types
+          toast.error("An unexpected error occurred"); // Fallback error message
+        }
       }
     };
     fetchSpaceTypes();
   }, [getSpaceTypes]);
+  
 
   return (
     <div className="flex justify-center mt-5">
@@ -323,8 +346,8 @@ function AddSpaceDetails() {
             error={formik.errors.description}
             touched={formik.touched.description}
             placeholder="Enter description"
-            multiline
-            rows={4}
+         
+            
           />
           <div className="facilities-container">
             <FormControl fullWidth>

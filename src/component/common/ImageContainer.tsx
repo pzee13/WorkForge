@@ -1,11 +1,15 @@
-import React from 'react';
+// import React from 'react';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Skeleton from 'react-loading-skeleton';
+// import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-const ImageContainer = ({ images,loading }) => {
+interface ImageContainerProps {
+    images: string[]; // Specify images as an array of strings
+}
+
+const ImageContainer:React.FC<ImageContainerProps> = ({ images }) => {
 
    
 

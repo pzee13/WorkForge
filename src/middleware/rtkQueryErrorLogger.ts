@@ -11,7 +11,7 @@ interface RejectedActionPayload {
   };
 }
 
-interface RejectedAction extends PayloadAction<unknown, string, { arg: unknown; requestId: string; requestStatus: 'rejected'; aborted: boolean; condition: boolean; } & ({ rejectedWithValue: true; } | ({ rejectedWithValue: false; } & {})), SerializedError> {
+interface RejectedAction extends PayloadAction<unknown, string, { arg: unknown; requestId: string; requestStatus: 'rejected'; aborted: boolean; condition: boolean; } & ({ rejectedWithValue: true; } | ({ rejectedWithValue: false; } & Record<string, never>)), SerializedError> {
   payload: RejectedActionPayload;
 }
 
@@ -30,8 +30,11 @@ const rtkQueryErrorLogger: Middleware = (api: MiddlewareAPI<Dispatch, RootState>
       // Clear session storage
       sessionStorage.clear();
 
+
       // Dispatch logout action
       api.dispatch(userLogout());
+
+
 
       // Redirect to login page or show a message
       toast.error('Your account has been blocked. Please contact support.');

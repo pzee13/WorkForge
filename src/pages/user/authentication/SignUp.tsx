@@ -6,9 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import {useRegisterMutation,
   useOtpVerificationMutation,
   useSendOtpToEmailMutation,} from '../../../slices/userApiSlice';
-import { MyError,FormValues,OtpResponse } from '../../../utils/validations/commonVaild';
+import { MyError,FormValues} from '../../../utils/validations/commonVaild';
 import { validationSchema } from '../../../utils/validations/yupValidation'
-import { CustomModal } from '../../../component/common/Modal/CustomModal';
+import { CustomModal } from '../../../component/common/modal/CustomModal';
 import { useNavigate,Link } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -16,7 +16,7 @@ import { RootState } from '../../../app/store'
 import OtpInput from 'react-otp-input'
 import signUpImage from '../../../assets/images/userLogin/fotor-ai-20240516113630.jpg'
 import logo from '../../../assets/images/Set Space-logo/realLogo/png/logo-no-background.png'
-import Spinner from '../../../component/user/Loader/Spinner'
+import Spinner from '../../../component/user/loader/Spinner'
 
 function SignUp() {
 
@@ -75,7 +75,7 @@ function SignUp() {
         try {
           setIsLoading(true);
           const { name, email } = values;
-              const response:OtpResponse = await sendOtpToEmail({ name ,email});
+              const response = await sendOtpToEmail({ name ,email});
               startTimer();
               console.log(response)
               setIsModalOpen(true);

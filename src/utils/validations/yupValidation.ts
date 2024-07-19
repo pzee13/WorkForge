@@ -5,8 +5,36 @@ export const loginValidation = Yup.object({
     email: Yup.string()
     .email("please enter valid email")
     .required("please enter email"),
-    password: Yup.string().required("Please enter password"),
+    password: Yup.string()
+      .min(8, "Password must be at least 8 characters")
+      .matches(/^[^\s]+$/, "Password cannot contain spaces")
+      .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
+      .matches(/[a-z]/, "Password must contain at least one lowercase letter")
+      .matches(/\d/, "Password must contain at least one digit")
+      .matches(
+        /[!@#$%^&*(),.?":{}|<>]/,
+        "Password must contain at least one special character"
+      )
+      .required("Please enter password"),
 })
+
+
+export const resetPasswordValidation = Yup.object({
+  newPassword: Yup.string()
+    .min(8, "Password must be at least 8 characters")
+    .matches(/^[^\s]+$/, "Password cannot contain spaces")
+    .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .matches(/[a-z]/, "Password must contain at least one lowercase letter")
+    .matches(/\d/, "Password must contain at least one digit")
+    .matches(
+      /[!@#$%^&*(),.?":{}|<>]/,
+      "Password must contain at least one special character"
+    )
+    .required("Please enter password"),
+    confirmPassword: Yup.string()
+    .oneOf([Yup.ref("newPassword")], "Password not matched")
+    .required("Please enter confirm password"),
+});
 
 export const validationSchema = Yup.object({
     name: Yup.string()
@@ -21,9 +49,12 @@ export const validationSchema = Yup.object({
       mobile: Yup.string()
       .matches(/^(?!(\d)\1{9})[5-9]\d{9}$/, "Invalid mobile number")
       .required("Please enter mobile"),
-    password: Yup.string()
-      .min(6, "Password must be at least 6 characters")
+      password: Yup.string()
+      .min(8, "Password must be at least 8 characters")
       .matches(/^[^\s]+$/, "Password cannot contain spaces")
+      .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
+      .matches(/[a-z]/, "Password must contain at least one lowercase letter")
+      .matches(/\d/, "Password must contain at least one digit")
       .matches(
         /[!@#$%^&*(),.?":{}|<>]/,
         "Password must contain at least one special character"

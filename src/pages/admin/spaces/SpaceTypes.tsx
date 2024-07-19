@@ -1,27 +1,46 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { toast } from "react-toastify";
-import {
-  DataGrid,
-  GridCellParams,
-  gridClasses,
-  GridColDef,
-} from "@mui/x-data-grid";
+// import {
+//   DataGrid,
+//   GridCellParams,
+//   gridClasses,
+//   GridColDef,
+// } from "@mui/x-data-grid";
 import moment from "moment";
-import { grey } from "@mui/material/colors";
+// import { grey } from "@mui/material/colors";
 import { Selected } from "../../../types/props";
 import {
     useGetSpaceTypesMutation,
     useCreateSpaceTypeMutation,
     useUpdateSpaceTypeMutation,
 } from "../../../slices/adminApiSlice";
-import { SpaceType } from "../../../types/Spaces/spaceType";
+import { SpaceType } from "../../../types/spaces/spaceType";
+import { styled } from "@mui/material/styles";
+
+
+
+const CustomBox = styled(Box)(() => ({
+  height: 400,
+  width: "95%",
+  padding: 2
+}));
+
+const CustomBoxes = styled(Box)(() => ({
+  overflowX: 'auto'
+}));
+
+const CustomBoxess = styled(Box)(() => ({
+  p: 6,
+  borderRadius: 2
+}));
+
 
 const SpaceTypes: React.FC<Selected> = ({ setSelectedLink, link }) => {
-  const [rowId, setRowId] = useState<string | null>(null);
+  // const [rowId, setRowId] = useState<string | null>(null);
   const [spaceTypes, setSpaceTypes] = useState<SpaceType[]>([]);
   const [showCreateForm, setShowCreateForm] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string>("");
+  // const [errorMessage, setErrorMessage] = useState<string>("");
   const [formMode, setFormMode] = useState<'create' | 'edit'>('create');
   const [formData, setFormData] = useState<SpaceType | null>(null);
 
@@ -40,7 +59,11 @@ const SpaceTypes: React.FC<Selected> = ({ setSelectedLink, link }) => {
         setSpaceTypes(response.data); // Assuming the response contains the space types data
       } catch (error) {
         console.error("Error fetching space types:", error);
-        toast(error.data.message); // Set error message for display
+        if (error instanceof Error) {
+          toast(error.message);
+      } else {
+          toast("An unknown error occurred.");
+      }
       }
     };
     fetchSpaceTypes();
@@ -72,7 +95,11 @@ const SpaceTypes: React.FC<Selected> = ({ setSelectedLink, link }) => {
 
     } catch (error) {
       console.error(`Error ${formMode === 'create' ? 'creating' : 'updating'} space type:`, error);
-      toast.error(error.data.message);
+      if (error instanceof Error) {
+        toast(error.message);
+    } else {
+        toast("An unknown error occurred.");
+    }
     }
   };
 
@@ -82,39 +109,39 @@ const SpaceTypes: React.FC<Selected> = ({ setSelectedLink, link }) => {
     setShowCreateForm(true);
   };
 
-  const columns: GridColDef[] = useMemo(
-    () => [
-      { field: "spaceTypeName", headerName: "Space Type Name", width: 170 },
-      { field: "description", headerName: "Description", width: 200 },
-      { field: "peopleAllowed", headerName: "Capacity for Mob", width: 200 },
-      { field: "availableSpace", headerName: "Multiple Bookings", width: 200 },
-      {
-        field: "createdAt",
-        headerName: "Created At",
-        width: 200,
-        renderCell: (params: GridCellParams) =>
-          moment(params.row.createdAt).format("DD-MM-YYYY"),
-      },
-      {
-        field: "actions",
-        headerName: "Actions",
-        width: 150,
-        renderCell: (params: GridCellParams) => (
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => handleEditClick(params.row)}
-          >
-            Edit
-          </Button>
-        ),
-      },
-    ],
-    []
-  );
+  // const columns: GridColDef[] = useMemo(
+  //   () => [
+  //     { field: "spaceTypeName", headerName: "Space Type Name", width: 170 },
+  //     { field: "description", headerName: "Description", width: 200 },
+  //     { field: "peopleAllowed", headerName: "Capacity for Mob", width: 200 },
+  //     { field: "availableSpace", headerName: "Multiple Bookings", width: 200 },
+  //     {
+  //       field: "createdAt",
+  //       headerName: "Created At",
+  //       width: 200,
+  //       renderCell: (params: GridCellParams) =>
+  //         moment(params.row.createdAt).format("DD-MM-YYYY"),
+  //     },
+  //     {
+  //       field: "actions",
+  //       headerName: "Actions",
+  //       width: 150,
+  //       renderCell: (params: GridCellParams) => (
+  //         <Button
+  //           variant="contained"
+  //           color="primary"
+  //           onClick={() => handleEditClick(params.row)}
+  //         >
+  //           Edit
+  //         </Button>
+  //       ),
+  //     },
+  //   ],
+  //   []
+  // );
 
   return (
-    <Box sx={{ width: "95%", margin: "auto", padding: 2 }}>
+    <CustomBox>
       <Typography
         variant="h4"
         component="h4"
@@ -122,11 +149,11 @@ const SpaceTypes: React.FC<Selected> = ({ setSelectedLink, link }) => {
       >
         Manage Space Types
       </Typography>
-      {errorMessage && (
+      {/* {errorMessage && (
         <Typography color="error" sx={{ textAlign: "center", mb: 3 }}>
           {errorMessage}
         </Typography>
-      )}
+      )} */}
       {!showCreateForm ? (
         <>
           <Button
@@ -141,7 +168,7 @@ const SpaceTypes: React.FC<Selected> = ({ setSelectedLink, link }) => {
           >
             Create New Type
           </Button>
-          <Box sx={{ overflowX: 'auto' }}>
+          <CustomBoxes>
             <table className="w-full p-6 text-s text-left whitespace-nowrap">
               <colgroup>
                 <col className="w-5" />
@@ -203,10 +230,10 @@ const SpaceTypes: React.FC<Selected> = ({ setSelectedLink, link }) => {
                 ))}
               </tbody>
             </table>
-          </Box>
+          </CustomBoxes>
         </>
       ) : (
-        <Box sx={{ p: 6, borderRadius: 2 }}>
+        <CustomBoxess>
           <form onSubmit={handleSubmit} className="container flex flex-col space-y-6">
             <Typography variant="h5" component="h5" sx={{ textAlign: "center", mb: 3 }}>
               {formMode === 'create' ? 'Create New Space Type' : 'Edit Space Type'}
@@ -274,10 +301,12 @@ const SpaceTypes: React.FC<Selected> = ({ setSelectedLink, link }) => {
               </button>
             </div>
           </form>
-        </Box>
+        </CustomBoxess>
       )}
-    </Box>
+    </CustomBox>
   );
 };
 
 export default SpaceTypes;
+
+

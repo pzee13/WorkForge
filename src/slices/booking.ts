@@ -9,6 +9,7 @@ export interface BookingState {
   moveInTime: string;
   moveOutTime: string;
   chargePerHour: number;
+  noOfSpaces:number;
   totalPrice: number;
   areaName: string;
   district: string;
@@ -27,6 +28,7 @@ const initialBookingState: BookingState = {
   moveInTime: '',
   moveOutTime: '',
   chargePerHour: 0,
+  noOfSpaces:0,
   totalPrice: 0,
   areaName: '',
   district: '',
@@ -55,6 +57,8 @@ export const bookingSlice = createSlice({
       state.moveOutTime = action.payload.moveOutTime;
    
       state.chargePerHour = action.payload.chargePerHour;
+
+      state.noOfSpaces = action.payload.noOfSpaces;
  
       state.totalPrice = action.payload.totalPrice;
 

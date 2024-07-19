@@ -1,0 +1,32 @@
+header {
+    transition: all 0.3s ease;
+  }
+  
+  /* Scrolled navbar */
+  .bg-white {
+    background-color: white;
+  }
+  
+  .text-gray-800 {
+    color: #2d3748;
+  }
+  
+  /* Default navbar (not scrolled) */
+  .bg-transparent {
+    background-color: transparent;
+  }
+  
+  .text-white {
+    color: white;
+  }
+  
+  /* Transform styles */
+  .will-change-transform {
+    will-change: transform;
+    transition: transform 0.3s ease;
+  }
+  
+  .navbar-scrolled {
+    transform: translateY(-5px) scale(0.79);
+    
+  }

@@ -10,7 +10,7 @@ const AddSpacePage: React.FC = () => {
             <Navbar />
             <div className="flex flex-col md:flex-row mt-20 h-[calc(100vh)]">
                 <SpaceSidebar />
-                <div className="flex-1 overflow-y-auto p-4">
+                <div className="flex-1 overflow-y-auto p-4 scrollbar-hide">
                     <Outlet />
                 </div>
             </div>

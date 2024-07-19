@@ -1,11 +1,11 @@
-import React, {ChangeEvent,useState,useRef } from "react";
+// import React, {ChangeEvent,useState,useRef } from "react";
 import Navbar from "../../../component/user/navbar/Navbar";
-import Footer from "../../../component/user/Footer/Footer";
+import Footer from "../../../component/user/footer/Footer";
 import "./Profile.css"
-import landImage from "../../../assets/images/LandingUser/fotor-ai-2024051614220.jpg";
-import { MdModeEdit } from "react-icons/md";
+// import landImage from "../../../assets/images/LandingUser/fotor-ai-2024051614220.jpg";
+// import { MdModeEdit } from "react-icons/md";
 import { IoPersonSharp } from "react-icons/io5";
-import { Link, useNavigate } from 'react-router-dom'
+// import { Link, useNavigate } from 'react-router-dom'
 import { FaMobileAlt } from "react-icons/fa";
 import { MdOutlineMail} from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,25 +20,25 @@ import { setCredential } from "../../../slices/authSlice";
 
 
 
-import Spinner from '../../../component/user/Loader/Spinner'
+// import Spinner from '../../../component/user/loader/Spinner'
 
 
 function Profile() {
 
-  const {userInfo} =useSelector((state:RootState)=> state.auth);
+  const { userInfo } =useSelector((state:RootState)=> state.auth);
 
 
-  const [isSubmit,setSubmit] = useState(false);
+  // const [isSubmit,setSubmit] = useState(false);
 
   const [updateUser] = useUpdateProfileMutation();
   const dispatch = useDispatch()
  
 
 
-  const initialValues: UpdateUser= {
-    name:userInfo?.name,
-    mobile: userInfo?.mobile,
-  }
+  const initialValues: UpdateUser = {
+    name: userInfo?.name ?? '',
+    mobile: userInfo?.mobile ?? '',
+};
 
 
   const {values,handleChange,handleSubmit,errors,touched} = useFormik({

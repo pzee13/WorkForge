@@ -1,4 +1,4 @@
-import { SpaceTypeProps } from "../../../types/Landing/Landing";
+import { SpaceTypeProps } from "../../../types/landing/Landing";
 
 function SpaceTypeCard({ imageUrl, text }: SpaceTypeProps) {
   return (
@@ -7,7 +7,7 @@ function SpaceTypeCard({ imageUrl, text }: SpaceTypeProps) {
       <img src={imageUrl} alt="Card" className="w-full h-auto rounded-lg" />
 
       {/* Text rectangle box */}
-      <div className="absolute bottom-0 right-0 bg-emerald-200 rounded-lg p-2 m-2 font-bold text-gray-700">
+      <div className="absolute bottom-0 right-0  rounded-lg p-2 m-2 font-bold text-gray-700">
         {text}
       </div>
     </div>

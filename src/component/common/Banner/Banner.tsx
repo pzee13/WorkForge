@@ -1,13 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Banner = ({ heading, subheading1, subheading2, linkText, linkUrl, code }) => {
+interface BannerProps {
+  heading: string;
+  subheading1: string;
+  subheading2: string;
+  linkText: string;
+  linkUrl: string;
+  code: string;
+}
+
+const Banner: React.FC<BannerProps> = ({ heading, subheading1, subheading2, linkText, linkUrl, code }) => {
   return (
     <div className="p-6 py-12 dark:bg-secondGreen dark:text-gray-50">
       <div className="container mx-auto">
         <div className="flex flex-col lg:flex-row items-center justify-between">
           <h2 className="text-center text-6xl tracking-tighter font-bold">
-            {heading.split('\n').map((text, index) => (
+            {heading.split('\n').map((text:string, index:number) => (
               <React.Fragment key={index}>
                 {text}
                 {index < heading.split('\n').length - 1 && <br className="sm:hidden" />}

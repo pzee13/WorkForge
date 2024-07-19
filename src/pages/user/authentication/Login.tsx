@@ -13,9 +13,9 @@ import signUpImage from '../../../assets/images/userLogin/LoginAi.jpg'
 import { Link } from 'react-router-dom'
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
-import Spinner from '../../../component/user/Loader/Spinner'
-import { FaEnvelope, FaLock } from 'react-icons/fa';
-import { CustomModal } from '../../../component/common/Modal/CustomModal';
+import Spinner from '../../../component/user/loader/Spinner'
+import { FaEnvelope } from 'react-icons/fa';
+import { CustomModal } from '../../../component/common/modal/CustomModal';
 
 import './SignUp.css';
 

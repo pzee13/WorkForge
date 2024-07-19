@@ -1,14 +1,17 @@
 import { useState, useEffect } from 'react';
 import Navbar from "../../../component/user/navbar/Navbar";
-import Footer from "../../../component/user/Footer/Footer";
+import Footer from "../../../component/user/footer/Footer";
 import { RootState } from "../../../app/store";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { usePreBookingsMutation, usePaymentMutation } from '../../../slices/userApiSlice';
 import { loadStripe, Stripe } from "@stripe/stripe-js";
+import { toast } from "react-toastify";
+import { MyError } from '../../../utils/validations/commonVaild'
 
-const public_stripe_key = process.env.STRIPE_PUBLIC_KEY;
+const PublicStripeKey: string = process.env.STRIPE_PUBLIC_KEY as string;
 
-console.log("pub", public_stripe_key);
+
+console.log("pub", PublicStripeKey);
 
 if (import.meta.env) {
     console.log(import.meta.env);
@@ -26,6 +29,7 @@ export interface Booking {
     moveInTime: string;
     moveOutTime: string;
     chargePerHour: number;
+    noOfSpaces:number;
     totalPrice: number;
     totalPaid?: number;
     paymentId?: string;
@@ -33,7 +37,7 @@ export interface Booking {
 }
 
 export default function Checkout() {
-    console.log("public_stripe_key", public_stripe_key);
+    console.log("PublicStripeKey", PublicStripeKey);
 
     const booking = useSelector((state: RootState) => state.booking);
 
@@ -42,7 +46,7 @@ export default function Checkout() {
     const [getPreBookings] = usePreBookingsMutation();
     const [bookingId, setBookingId] = useState(null);
     const [preBook, setPreBook] = useState<Booking | null>(null);
-    const [error, setError] = useState(null);
+    // const [error, setError] = useState(null);
     const [payment] = usePaymentMutation();
 
     const handleGetPreBookings = async () => {
@@ -55,6 +59,7 @@ export default function Checkout() {
                 bookingDate: booking.bookingDate,
                 moveInTime: booking.moveInTime,
                 moveOutTime: booking.moveOutTime,
+                noOfSpaces:booking.noOfSpaces,
                 totalPrice: booking.totalPrice,
             }).unwrap();
 
@@ -62,9 +67,9 @@ export default function Checkout() {
 
             setBookingId(result.data._id);
             setPreBook(result.data); // Updated to use the response data
-            setError(null);
+            // setError(null);
         } catch (err) {
-            setError(err);
+            toast.error((err as MyError)?.data?.message || (err as MyError)?.error);
         }
     };
 
@@ -77,7 +82,7 @@ export default function Checkout() {
     console.log("preeee",preBook)
 
     const handlePayment = async () => {
-        const stripePromise: Stripe | null = await loadStripe(public_stripe_key);
+        const stripePromise: Stripe | null = await loadStripe(PublicStripeKey);
 
         if (!stripePromise) {
             console.error("Failed to initialize Stripe");
@@ -93,7 +98,7 @@ export default function Checkout() {
         try {
             const res = await payment({
                 amount,
-                bookingId: bookingId as string,
+                bookingId: bookingId as unknown as string,
                 providerId: booking.providerId,
             }).unwrap();
 
@@ -147,8 +152,7 @@ export default function Checkout() {
 			<span className="font-bold tracking-wider uppercase dark:text-customGreen">Pricing</span>
 			<h2 className="text-4xl font-bold lg:text-5xl">Confirm and Pay</h2>
 		</div>
-		<div className="">
-		      <div className="">
+		<div >
 				<div className="flex flex-grow flex-col p-6 space-y-6 rounded shadow sm:p-8 dark:bg-gray-50">
 					<div className="space-y-2">
 						<h4 className="text-2xl font-bold">Total Price</h4>
@@ -193,7 +197,7 @@ export default function Checkout() {
 					</ul>
 					<button onClick={handlePayment}  className="inline-block w-full px-5 py-3 font-semibold tracking-wider text-center rounded dark:bg-customGreen dark:text-gray-50">Pay Now</button>
 				</div>
-			</div>
+		
 		</div>
 	</div>
 </section>

@@ -39,7 +39,7 @@ export interface MyError {
     buildingName:string,
     description:string,
     floor:string,
-    images:File[] | null,
+    images:File[] ,
     chargePerHour:number,
     availableSpaces:number,
     contactNumber:string,

@@ -1,6 +1,6 @@
-import { Navigate, Outlet,useNavigate } from "react-router-dom";
-import { useSelector,useDispatch } from "react-redux";
-import { useEffect } from 'react'
+import { Navigate, Outlet } from "react-router-dom";
+import { useSelector} from "react-redux";
+
 import { RootState } from "../../app/store";
 
 export function UserAuthRoute(){

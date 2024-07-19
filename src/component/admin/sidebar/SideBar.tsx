@@ -9,8 +9,7 @@ import { Box, IconButton, Theme, styled } from "@mui/material";
 import {
   ChevronLeft,
   Dashboard,
-  PeopleAlt,
-  MeetingRoom, Business
+  PeopleAlt, Business
 } from "@mui/icons-material";
 import { CSSObject } from "@emotion/react";
 import { useMemo, useState } from "react";

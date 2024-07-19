@@ -1,89 +1,91 @@
 import { useState } from 'react';
-import './SignUp.css'
+import './SignUp.css';
 import { useFormik } from "formik";
-import { setRegister,clearRegister } from '../../../slices/authSlice';
-import { useProviderRegisterMutation,
-  useSendOtpToProviderEmailMutation,
-  useProviderOtpVerificationMutation } from '../../../slices/providerApiSlice';
+import { setRegister, clearRegister } from '../../../slices/authSlice';
+import { useProviderRegisterMutation, useSendOtpToProviderEmailMutation, useProviderOtpVerificationMutation } from '../../../slices/providerApiSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { MyError,FormValues,OtpResponse } from '../../../utils/validations/commonVaild';
-import { validationSchema } from '../../../utils/validations/yupValidation'
-import { CustomModal } from '../../../component/common/Modal/CustomModal';
-import { useNavigate,Link } from 'react-router-dom'
+import { MyError } from '../../../utils/validations/commonVaild';
+import { validationSchema } from '../../../utils/validations/yupValidation';
+import { CustomModal } from '../../../component/common/modal/CustomModal';
+import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { RootState } from '../../../app/store'
-import OtpInput from 'react-otp-input'
-import logo from '../../../assets/images/Set Space-logo/realLogo/png/logo-no-background.png'
-import signUpImage from '../../../assets/images/Signup-user/coworking-sighnup.jpg'
+import { RootState } from '../../../app/store';
+import OtpInput from 'react-otp-input';
+import logo from '../../../assets/images/Set Space-logo/realLogo/png/logo-no-background.png';
+import signUpImage from '../../../assets/images/Signup-user/coworking-sighnup.jpg';
 
- 
+interface SignUpValues {
+  name: string;
+  email: string;
+  mobile: string;
+  password: string;
+  confirmPassword: string;
+}
+
 function SignUp() {
-
   const [otp, setOtp] = useState("");
- 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [sendOtpToEmail] = useSendOtpToProviderEmailMutation();
-  const {registerInfo} = useSelector((state :RootState)=>state.auth);
-  const [otpVerification] = useProviderOtpVerificationMutation()
-  const [registration] = useProviderRegisterMutation()
+  const { registerInfo } = useSelector((state: RootState) => state.auth);
+  const [otpVerification] = useProviderOtpVerificationMutation();
+  const [registration] = useProviderRegisterMutation();
 
-  const initialValues : FormValues= {
+  const initialValues: SignUpValues = {
     name: "",
     email: "",
     mobile: "",
     password: "",
     confirmPassword: "",
-    
   };
 
   const { values, handleChange, handleSubmit, errors, touched } = useFormik({
-    initialValues:initialValues,
-    validationSchema:validationSchema,
-    onSubmit: async (values) =>{
-       dispatch(setRegister({...values}));
-       
-        try {
-          const { name, email } = values;
-              const response:OtpResponse = await sendOtpToEmail({ name ,email});
-              console.log(response)
-              setIsModalOpen(true);
+    initialValues: initialValues,
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      dispatch(setRegister({ ...values }));
+      try {
+        const { name, email } = values;
+        const response = await sendOtpToEmail({ name, email });
+        console.log(response);
+        setIsModalOpen(true);
       } catch (error) {
         setIsModalOpen(false);
         dispatch(clearRegister());
-        toast.error((error as MyError)?.data?.message || (error as MyError)?.error );
+        toast.error((error as MyError)?.data?.message || (error as MyError)?.error);
       }
-    }
+    },
   });
 
-  
-  async function handleOTPVerification(){
+  async function handleOTPVerification() {
     try {
-      
-      const {email}:any = registerInfo;
-      const res:any = await otpVerification({otp,email});
-      if(res.data.success){
-            const {name,email,mobile,password,confirmPassword}:any = registerInfo;
-            const registrationRes:any = await registration({name,email,mobile,password,confirmPassword});
-            if(registrationRes.data.success){
-              setIsModalOpen(false);
-              toast.success(registrationRes.data.message)
-             navigate('/provider/login');
-            }else{
-              console.log("hai")
-              toast.error('invalid otp');
-            }
-         }else{
-          console.log('otp verification failed');
-          toast.error('otp verification failed');
-         }
+      if (registerInfo) {
+        const { email, name, mobile, password, confirmPassword } = registerInfo;
+        const res = await otpVerification({ otp, email });
+
+        if ('data' in res && res.data.success) {
+          const registrationRes = await registration({ name, email, mobile, password, confirmPassword });
+
+          if ('data' in registrationRes && registrationRes.data.success) {
+            setIsModalOpen(false);
+            toast.success(registrationRes.data.message);
+            navigate('/provider/login');
+          } else {
+            toast.error('Invalid OTP');
+          }
+        } else {
+          toast.error('OTP verification failed');
+        }
+      } else {
+        toast.error('Registration information is missing');
+      }
     } catch (error) {
       setIsModalOpen(false);
-      toast.error((error as MyError)?.data?.message || (error as MyError)?.error );
+      toast.error((error as MyError)?.data?.message || (error as MyError)?.error);
     }
-}
+  }
 
  
   return (

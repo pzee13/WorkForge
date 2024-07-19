@@ -2,13 +2,13 @@ import { styled} from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import CssBaseline from '@mui/material/CssBaseline';
+import CssBaseline from '@mui/material/CssBaseline'; 
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import {  useState } from 'react';
-import { RootState } from "../../../app/store"
-import { useDispatch, useSelector } from 'react-redux';
+// import { RootState } from "../../../app/store"
+import { useDispatch } from 'react-redux';
 import { useLogoutAdminMutation } from '../../../slices/adminApiSlice';
 import { adminLogout } from "../../../slices/authSlice"
 import {  useNavigate } from 'react-router-dom'
@@ -18,6 +18,10 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 
 import SideBar from '../sidebar/SideBar'
+
+const CustomBox = styled(Box)(({  }) => ({
+  display: 'flex'
+}));
 
 const drawerWidth = 240;
 
@@ -58,7 +62,7 @@ export default function Layout() {
   const [showModal, setShowModal] = useState(false); 
 
 
-  const { adminInfo } = useSelector((state:RootState) => state.auth);
+  // const { adminInfo } = useSelector((state:RootState) => state.auth);
   const [logOut] = useLogoutAdminMutation();
 
   const confirmLogout = async () => {
@@ -74,7 +78,7 @@ export default function Layout() {
 
   return (
 
-      <Box sx={{ display: 'flex' }}>
+      <CustomBox>
         <CssBaseline />
         <Navbar position="fixed" open={open}>
           <Toolbar>
@@ -129,7 +133,7 @@ export default function Layout() {
       )}
         </Navbar>
         <SideBar {...{open, setOpen}}/>
-      </Box>
+      </CustomBox>
 
   );
 }

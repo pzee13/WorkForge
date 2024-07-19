@@ -1,10 +1,10 @@
-import { RectangularComponentProps } from "../../../types/Landing/Landing";
+import { RectangularComponentProps } from "../../../types/landing/Landing";
 import './LandingPageCards.css'
 
 
 function LandingPageCards({ headerText, subText, images }: RectangularComponentProps) {
   return (
-    <div className="flex items-center landing-card">
+    <div className="flex items-center landing-card shadow-lg">
       {/* Left side content */}
       <div className="flex flex-col ">
         {images.slice(0, 2).map((image, index) => (

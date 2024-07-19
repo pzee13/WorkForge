@@ -11,13 +11,14 @@
 
 @layer base {
   .font-lato {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Raleway', sans-serif;
   }
   /* .font-adallyn {
     font-family:'"Adallyn Serif"', serif;
   } */
   body {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Raleway', sans-serif;
+    letter-spacing: 1px;
   }
 }
 

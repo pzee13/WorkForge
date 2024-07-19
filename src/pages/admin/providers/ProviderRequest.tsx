@@ -5,8 +5,15 @@ import moment from "moment";
 import { grey } from "@mui/material/colors";
 import { Selected } from "../../../types/props";
 import { useGetSpaceRequestsMutation, useUpdateSpaceStatusMutation } from "../../../slices/adminApiSlice";
-import { WorkSpace } from "../../../types/Spaces/space";
+import { WorkSpace } from "../../../types/spaces/space";
+import { styled } from "@mui/material/styles";
 import ViewSpaceDetails from "./ViewProviderRequest"; // You need to create this component
+
+
+const CustomBox = styled(Box)(() => ({
+  height: 400,
+  width: "95%",
+}));
 
 const ProviderRequest: React.FC<Selected> = ({ setSelectedLink, link }) => {
   const [spaces, setSpaces] = useState<WorkSpace[]>([]);
@@ -104,7 +111,7 @@ const ProviderRequest: React.FC<Selected> = ({ setSelectedLink, link }) => {
 
   return (
     <>
-      <Box sx={{ height: 400, width: "95%" }}>
+      <CustomBox>
         <Typography variant="h4" component="h4" sx={{ textAlign: "center", mt: 2, mb: 3 }}>
           New Space Requests
         </Typography>
@@ -128,7 +135,7 @@ const ProviderRequest: React.FC<Selected> = ({ setSelectedLink, link }) => {
             },
           }}
         />
-      </Box>
+      </CustomBox>
       {selectedSpace && <ViewSpaceDetails open={true} onClose={handleCloseModal} space={selectedSpace} />}
       <Dialog
         open={confirmationDialog.open}

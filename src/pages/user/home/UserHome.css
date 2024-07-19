@@ -1,0 +1,30 @@
+.scroll-container {
+    margin-top: 20px;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .scroll-content {
+    display: flex;
+    animation: scroll 20s linear infinite;
+  }
+  
+  .location-card {
+    flex: 0 0 auto;
+    width: 300px; /* Adjust based on your card width */
+    margin-right: 20px; /* Adjust for spacing between cards */
+  }
+  
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  /* Pause animation on hover */
+  .scroll-content:hover {
+    animation-play-state: paused;
+  }
