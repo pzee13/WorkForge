@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState,useEffect } from 'react';
 import './SignUp.css'
 import { useFormik } from "formik";
@@ -99,7 +100,7 @@ function SignUp() {
   async function handleOTPVerification(){
     try {
       
-      const {email}:any = registerInfo;
+      const {email} = registerInfo||{};
       const res:any = await otpVerification({otp,email});
       if(res.data.success){
             const {name,email,mobile,password,confirmPassword}:any = registerInfo;

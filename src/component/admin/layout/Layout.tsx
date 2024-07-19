@@ -19,7 +19,7 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 import SideBar from '../sidebar/SideBar'
 
-const CustomBox = styled(Box)(({  }) => ({
+const CustomBox = styled(Box)(() => ({
   display: 'flex'
 }));
 
