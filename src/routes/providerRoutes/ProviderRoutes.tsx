@@ -3,14 +3,14 @@ import Login from '../../pages/provider/authentication/Login'
 import SignUp from '../../pages/provider/authentication/SignUp'
 import { LandingProvider } from '../../pages/provider/Landing/LandingProvider'
 import DefaultContent from '../../component/provider/default/DefaultContent'
-import { ProviderHome } from "../../pages/provider/home/ProviderHome"
+import { ProviderHome } from "../../pages/provider/Home/ProviderHome"
 import { ProviderAuthRoute } from './ProviderAuthRoute'
-import  AddLocation  from '../../pages/provider/spaces/AddLocation'
-import  AddSpaceDetails  from '../../pages/provider/spaces/AddSpaceDetails'
-import AddSpacePage from '../../pages/provider/spaces/AddSpacePage'
+import  AddLocation  from '../../pages/provider/Spaces/AddLocation'
+import  AddSpaceDetails  from '../../pages/provider/Spaces/AddSpaceDetails'
+import AddSpacePage from '../../pages/provider/Spaces/AddSpacePage'
 import Profile from "../../pages/provider/profile/Profile"
-import SpacesPage from  '../../pages/provider/spaces/SpacesPage'
-import SpacePageDetails from  "../../pages/provider/spaces/SpacePageDetails"
+import SpacesPage from  '../../pages/provider/Spaces/SpacesPage'
+import SpacePageDetails from  "../../pages/provider/Spaces/SpacePageDetails"
 import { RootState } from "../../app/store";
 import { useSelector} from "react-redux";
 
